@@ -1,37 +1,32 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package ec.edu.espe.managmentsystem.model;
 
 import java.util.Scanner;
 
 /**
  *
- * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
+ * @author Oswaldo Tipan
  */
-public class Teacher {
-    private int id;
+public class Admin {
     private String name;
-    private int age;
-    private String address;
-    private String email;
-    private int phoneNumber;
     
-    private void checkTheListOfStudents(){
-        
-    }
-    
-    public void controlTeachersMenu(){
+    public void controlMainMenu(){
         
         Scanner optionIn = new Scanner(System.in);
         
-        int opc =0;
+        int opc=0;
         
         while(opc!=3){
             System.out.println("------- School Managment Software------\n");
-            System.out.println("1. Add new Teacher\n");
-            System.out.println("2. See Teachers' List\n");
-            System.out.println("3. Go Back\n");
-            System.out.println("Insert you option: ");
+            System.out.println("1. Manage Student system\n");
+            System.out.println("2. Manage Techer system\n");
+            System.out.println("3. Leave the system\n");
+            System.out.println("Insert your option: ");
             opc = optionIn.nextInt();
+            
             switch(opc){
                 case 1:
                     break;
@@ -45,5 +40,4 @@ public class Teacher {
             }
         }
     }
-   
 }
