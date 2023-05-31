@@ -7,5 +7,14 @@ package ec.edu.espe.managmentsystem.model;
  */
 public class Teacher {
     private int id;
-    private 
+    private String name;
+    private int age;
+    private String address;
+    private String email;
+    private int phoneNumber;
+    
+    private void checkTheListOfStudents(){
+        
+    }
+   
 }
