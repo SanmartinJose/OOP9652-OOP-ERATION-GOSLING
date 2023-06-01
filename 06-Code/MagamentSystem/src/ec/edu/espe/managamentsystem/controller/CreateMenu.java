@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
-class CreateMenu {
+public class CreateMenu {
     
      int optionMenu;
     public int createMenu(){
