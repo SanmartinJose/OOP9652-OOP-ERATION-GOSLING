@@ -22,7 +22,9 @@ public class Teacher {
     private int phoneNumber;
     HomeSchoolStudent homeSchoolStudent;
     
-    private void checkTheListOfStudents(){
+    
+    
+   public void adminStudents(){
         ArrayList<HomeSchoolStudent> homeSchoolStudentsA = new ArrayList<>();
         ArrayList<HomeSchoolStudent> homeSchoolStudentsB = new ArrayList<>();              
         CreateMenu createMenu = new CreateMenu();

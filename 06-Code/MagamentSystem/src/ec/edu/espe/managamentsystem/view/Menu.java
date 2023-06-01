@@ -9,6 +9,7 @@ import ec.edu.espe.managamentsystem.controller.PaymentRecord;
 import ec.edu.espe.managamentsystem.controller.RegisterStudent;
 import ec.edu.espe.managamentsystem.controller.StudentListWrite;
 import ec.edu.espe.managmentsystem.model.Payment;
+import ec.edu.espe.managmentsystem.model.Teacher;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -78,6 +79,7 @@ public class Menu {
             switch(option){
                 case 1:
                     cleanConsole();
+                    
                     break;
                 case 2:
                     cleanConsole();
@@ -101,7 +103,7 @@ public class Menu {
     public static void controlHolisticStudentsMenu() throws IOException{
         int option = 0;
         Scanner optionIn = new Scanner(System.in);
-
+        Teacher teacher = new Teacher();
         do{
             System.out.println("-------Administración de educación holística-----\n");
             System.out.println("1. Añadir nuevo estudiante\n");
@@ -113,6 +115,7 @@ public class Menu {
             switch(option){
                 case 1:
                     cleanConsole();
+                    teacher.adminStudents();
                     addNewHolisticStudent();
                     break;
                 case 2:
