@@ -1,7 +1,7 @@
 
 package ec.edu.espe.managmentsystem.model;
 
-import ec.edu.espe.managamentsystem.view.CreateMenu;
+
 import ec.edu.espe.managamentsystem.controller.RegisterStudent;
 import ec.edu.espe.managamentsystem.controller.StudentListWrite;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class Teacher {
         
         boolean finish = true;
         while(finish == true){
-            int optionMenu = createMenu.printMenu();
+            int optionMenu = createMenu.createMenu();
             switch (optionMenu){
                 case 1:
                     homeSchoolStudent = fileRead.readFile();
@@ -41,8 +41,8 @@ public class Teacher {
                     homeSchoolStudentsB.add(homeSchoolStudent);
                     break;
                 case 3:
-                    HomeSchoolCourse homeSchoolCourseA = new HomeSchoolCourse(1,"Math", homeSchoolStudentsA);
-                    HomeSchoolCourse homeSchoolCourseB = new HomeSchoolCourse(2, "A", homeSchoolStudentsB);
+                    HomeSchoolCourse homeSchoolCourseA = new HomeSchoolCourse(1,"A", homeSchoolStudentsA);
+                    HomeSchoolCourse homeSchoolCourseB = new HomeSchoolCourse(2, "B", homeSchoolStudentsB);
                     fileWritte.studentFileWritter(homeSchoolCourseA , homeSchoolCourseB);
                     break;
                 default:
