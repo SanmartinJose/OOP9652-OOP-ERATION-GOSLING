@@ -31,7 +31,7 @@ public class Menu {
                     optionIn.nextLine();
                     System.out.print("Ingrese el ID del estudiante: ");
                     String id = optionIn.nextLine();
-                    paymentRecord.monthlyValue(id);
+                    paymentRecord.monthlyValue();
                     break;
                 case 2:
                     optionIn.nextLine();

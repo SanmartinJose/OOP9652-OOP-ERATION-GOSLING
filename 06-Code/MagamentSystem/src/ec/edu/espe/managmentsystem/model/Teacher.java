@@ -1,7 +1,9 @@
 
 package ec.edu.espe.managmentsystem.model;
 
+import ec.edu.espe.managamentsystem.view.CreateMenu;
 import ec.edu.espe.managamentsystem.controller.RegisterStudent;
+import ec.edu.espe.managamentsystem.controller.StudentListWrite;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,36 +12,38 @@ import java.util.Scanner;
  * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
 public class Teacher {
+   
     private int id;
     private String name;
     private int age;
     private String address;
     private String email;
     private int phoneNumber;
+    HomeSchoolStudent homeSchoolStudent;
     
     private void checkTheListOfStudents(){
-        ArrayList<HomeSchoolStudent> chickens = new ArrayList<>();
-        ArrayList<HomeSchoolStudent> chickens2 = new ArrayList<>();              
+        ArrayList<HomeSchoolStudent> homeSchoolStudentsA = new ArrayList<>();
+        ArrayList<HomeSchoolStudent> homeSchoolStudentsB = new ArrayList<>();              
         CreateMenu createMenu = new CreateMenu();
-        RegisterStudent fileRead = new FileReader();
-        FileWritter fileWritte = new FileWritter();
+        RegisterStudent fileRead = new RegisterStudent();
+        StudentListWrite fileWritte = new StudentListWrite();
         
         boolean finish = true;
         while(finish == true){
-            int optionMenu = createMenu.createMenu();
+            int optionMenu = createMenu.printMenu();
             switch (optionMenu){
                 case 1:
-                    chicken = fileRead.readFile();
-                    chickens.add(chicken);
+                    homeSchoolStudent = fileRead.readFile();
+                    homeSchoolStudentsA.add(homeSchoolStudent);
                     break;
                 case 2:
-                    chicken = fileRead.readFile();
-                    chickens2.add(chicken);
+                    homeSchoolStudent = fileRead.readFile();
+                    homeSchoolStudentsB.add(homeSchoolStudent);
                     break;
                 case 3:
-                    Coop coop1 = new Coop(1, chickens);
-                    Coop coop2 = new Coop(2, chickens2);
-                    fileWritte.fileWritter(coop1, coop2);
+                    HomeSchoolCourse homeSchoolCourseA = new HomeSchoolCourse(1,"Math", homeSchoolStudentsA);
+                    HomeSchoolCourse homeSchoolCourseB = new HomeSchoolCourse(2, "A", homeSchoolStudentsB);
+                    fileWritte.studentFileWritter(homeSchoolCourseA , homeSchoolCourseB);
                     break;
                 default:
                     finish = false;

@@ -14,6 +14,19 @@ public class HomeSchoolCourse {
     private int id;
     private String name;
     private ArrayList<HomeSchoolStudent>homeschoolstudent;
+
+    public HomeSchoolCourse(int id, String name, ArrayList<HomeSchoolStudent> homeschoolstudent) {
+        this.id = id;
+        this.name = name;
+        this.homeschoolstudent = homeschoolstudent;
+    }
+
+    @Override
+    public String toString() {
+        return "HomeSchoolCourse{" + "id=" + id + ", name=" + name + ", homeschoolstudent=" + homeschoolstudent + '}';
+    }
+
+    
     /**
      * @return the id
      */
