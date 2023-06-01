@@ -1,53 +1,52 @@
+
 package ec.edu.espe.managmentsystem.model;
+
+import ec.edu.espe.managamentsystem.controller.PaymentRecord;
+import java.util.Scanner;
 
 /**
  *
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class Payment {
-    private String wayToPay;
-    private int totalValuePerMonth;
-    
-    public Payment(String wayToPay, int totalValuesPerMonth){
-        this.wayToPay = wayToPay;
-        this.totalValuePerMonth = totalValuesPerMonth;
-  
-    }
-    
-    /**
-     * @return the wayToPay
-     */
-    public String getWayToPay() {
-        return wayToPay;
-    }
+    public void Payment(){
+   PaymentRecord paymentRecord = new PaymentRecord("data/students.json", "data/debts.json");
+        Scanner scanner = new Scanner(System.in);
 
-    /**
-     * @param wayToPay the wayToPay to set
-     */
-    public void setWayToPay(String wayToPay) {
-        this.wayToPay = wayToPay;
-    }
+        int opcion;
+        boolean exit = false;
+        while(!exit) {
+            System.out.println("MENU");
+            System.out.println("1. Agregar Pago Mensual");
+            System.out.println("2. Actualizar Pago");
+            System.out.println("3. Mostrar Datos");
+            System.out.println("4. Salir");
+            System.out.print("Seleccione una opcion: ");
+            opcion = scanner.nextInt();
 
-    /**
-     * @return the totalValuePerMonth
-     */
-    public int getTotalValuePerMonth() {
-        return totalValuePerMonth;
-    }
-
-    /**
-     * @param totalValuePerMonth the totalValuePerMonth to set
-     */
-    public void setTotalValuePerMonth(int totalValuePerMonth) {
-        this.totalValuePerMonth = totalValuePerMonth;
-    }
-
-    /**
-     * @return the debts
-     */
-
-    @Override
-    public String toString() {
-        return "Payment{" + "wayToPay=" + wayToPay + ", totalValuePerMonth=" + totalValuePerMonth+ '}';
+            switch(opcion) {
+                case 1:
+                    scanner.nextLine();
+                    System.out.print("Ingrese el Nuevo Pago Mensual: ");
+                    paymentRecord.monthlyValue();
+                    break;
+                case 2:
+                    scanner.nextLine();
+                    System.out.print("Ingrese el ID del estudiante: ");
+                    String id = scanner.nextLine();
+                    paymentRecord.updatePayment(id);
+                    break;
+                case 3:
+                    paymentRecord.showDebts();
+                    break;
+                case 4:
+                    System.out.println("Saliendo del programa...");
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+                    break;
+            }
+        }
     }
 }
