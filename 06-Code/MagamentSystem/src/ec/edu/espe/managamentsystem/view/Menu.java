@@ -8,6 +8,7 @@ import ec.edu.espe.managamentsystem.controller.HolisticStudentWrite;
 import ec.edu.espe.managamentsystem.controller.PaymentRecord;
 import ec.edu.espe.managamentsystem.controller.RegisterStudent;
 import ec.edu.espe.managamentsystem.controller.StudentListWrite;
+import ec.edu.espe.managmentsystem.model.Payment;
 import java.util.Scanner;
 
 /**
@@ -34,19 +35,25 @@ public class Menu {
 
             switch (option) {
                 case 1:
+                    cleanConsole();
                     controlHomeSchoolMenu();
                     break;
                 case 2:
+                    cleanConsole();
                     controlHolisticStudentsMenu();
                     break;
                 case 3:
-                    controlPaymentsMenu();
+                    cleanConsole();
+                    Payment payment = new Payment();
+                    payment.Payment();
                     break;
                 case 4:
+                    cleanConsole();
                     System.out.println("Saliendo del programa...");
                     option =3;
                     break;
                 default:
+                    cleanConsole();
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
             }
@@ -69,15 +76,20 @@ public class Menu {
             
             switch(option){
                 case 1:
+                    cleanConsole();
                     break;
                 case 2:
+                    cleanConsole();
                     break;
                 case 3:
+                    cleanConsole();
                     break;
                 case 4:
+                    cleanConsole();
                     option=4;
                     break;
                 default:
+                    cleanConsole();
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
             }
@@ -99,42 +111,18 @@ public class Menu {
             
             switch(option){
                 case 1:
+                    cleanConsole();
                     addNewHolisticStudent();
                     break;
                 case 2:
+                    cleanConsole();
                     break;
                 case 3:
+                    cleanConsole();
                     option = 3;
                     break;
                 default:
-                    System.out.println("Opción inválida. Intente nuevamente.");
-                    break;
-            }
-            
-        }while(option!=3);
-    }
-    
-    public static void controlPaymentsMenu(){
-        int option = 0;
-        Scanner optionIn = new Scanner(System.in);
-
-        do{
-            System.out.println("-------Administración de pagos-----\n");
-            System.out.println("1. Agregar pagos\n");
-            System.out.println("2. Ver pagos realizados\n");
-            System.out.println("3. Regresar\n");
-            System.out.println("Selecciones una opción: ");
-            option = optionIn.nextInt();
-            
-            switch(option){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    option = 3;
-                    break;
-                default:
+                    cleanConsole();
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
             }
