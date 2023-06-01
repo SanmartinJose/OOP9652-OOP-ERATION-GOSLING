@@ -9,6 +9,7 @@ import ec.edu.espe.managamentsystem.controller.PaymentRecord;
 import ec.edu.espe.managamentsystem.controller.RegisterStudent;
 import ec.edu.espe.managamentsystem.controller.StudentListWrite;
 import ec.edu.espe.managmentsystem.model.Payment;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -17,7 +18,7 @@ import java.util.Scanner;
  */
 public class Menu {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         PaymentRecord paymentRecord = new PaymentRecord("data/students.json", "data/debts.json");
         
@@ -97,7 +98,7 @@ public class Menu {
         }while(option!=4);
     }
     
-    public static void controlHolisticStudentsMenu(){
+    public static void controlHolisticStudentsMenu() throws IOException{
         int option = 0;
         Scanner optionIn = new Scanner(System.in);
 
@@ -116,6 +117,7 @@ public class Menu {
                     break;
                 case 2:
                     cleanConsole();
+                    readHolisticStudents();
                     break;
                 case 3:
                     cleanConsole();
@@ -143,6 +145,12 @@ public class Menu {
         HolisticLegalGuardianRecord holisticLegalGuardianRecord = new HolisticLegalGuardianRecord();
         HolisticLegalGuardianWrite holisticLegalGuardianWrite = new HolisticLegalGuardianWrite();
         holisticLegalGuardianWrite.fileWritter(holisticLegalGuardianRecord.readFile());
+    }
+    
+    public static void readHolisticStudents() throws IOException{
+        HolisticStudentWrite holisticStudentWrite = new HolisticStudentWrite();
+        
+        holisticStudentWrite.fileReader();
     }
     
     public void addNewHomeShoolStudent(){
