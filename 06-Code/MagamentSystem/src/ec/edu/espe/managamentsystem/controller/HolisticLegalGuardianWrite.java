@@ -7,7 +7,9 @@ package ec.edu.espe.managamentsystem.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 
 /**
@@ -19,8 +21,12 @@ public class HolisticLegalGuardianWrite {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String gsonholisticLegalGuardian = gson.toJson(holisticLegalGuardian);
         System.out.println(gsonholisticLegalGuardian);
-        try(PrintWriter printWriter = new PrintWriter(new File("C:\\Users\\oswal\\Desktop\\MagamentSystem\\data\\holisticLegalGuardian.json"))){
-            printWriter.write(gsonholisticLegalGuardian);
+        try{
+            String ruta = "C:\\Users\\oswal\\Desktop\\Personal\\IngSoftware\\OOP\\projectFolder\\OOP9652-OOP-ERATION-GOSLING\\06-Code\\MagamentSystem\\data\\holisticLegalGuardian.json";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true)); 
+            writer.newLine();  //nueva linea!
+            writer.write(gsonholisticLegalGuardian); //Escribe palabra
+            writer.close();  //Cierra BufferedWriter 
         }catch(Exception e){
             e.printStackTrace();
         }

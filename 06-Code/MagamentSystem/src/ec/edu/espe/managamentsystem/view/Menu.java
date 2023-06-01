@@ -37,25 +37,20 @@ public class Menu {
 
             switch (option) {
                 case 1:
-                    cleanConsole();
                     controlHomeSchoolMenu();
                     break;
                 case 2:
-                    cleanConsole();
                     controlHolisticStudentsMenu();
                     break;
                 case 3:
-                    cleanConsole();
                     Payment payment = new Payment();
                     payment.Payment();
                     break;
                 case 4:
-                    cleanConsole();
                     System.out.println("Saliendo del programa...");
                     option =3;
                     break;
                 default:
-                    cleanConsole();
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
             }
@@ -66,44 +61,35 @@ public class Menu {
         
         int option = 0;
         Scanner optionIn = new Scanner(System.in);
-
+        Teacher teacher = new Teacher();
         do{
             System.out.println("-------Administración del HomeSchool-----\n");
             System.out.println("1. Administrar Estudiantes\n");
-            System.out.println("2. Administrar Profesores\n");
-            System.out.println("3. Aministar horarios\n");
-            System.out.println("4. Regresar\n");
+            System.out.println("2. Aministar horarios\n");
+            System.out.println("3. Regresar\n");
             System.out.println("Selecciones una opción: ");
             option = optionIn.nextInt();
             
             switch(option){
                 case 1:
-                    cleanConsole();
-                    
+                    teacher.adminStudents();
                     break;
                 case 2:
-                    cleanConsole();
                     break;
                 case 3:
-                    cleanConsole();
-                    break;
-                case 4:
-                    cleanConsole();
+                    System.out.println("Disponible solo para modo gráfico");
                     option=4;
                     break;
                 default:
-                    cleanConsole();
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
             }
-            
         }while(option!=4);
     }
     
     public static void controlHolisticStudentsMenu() throws IOException{
         int option = 0;
         Scanner optionIn = new Scanner(System.in);
-        Teacher teacher = new Teacher();
         do{
             System.out.println("-------Administración de educación holística-----\n");
             System.out.println("1. Añadir nuevo estudiante\n");
@@ -114,20 +100,15 @@ public class Menu {
             
             switch(option){
                 case 1:
-                    cleanConsole();
-                    teacher.adminStudents();
                     addNewHolisticStudent();
                     break;
                 case 2:
-                    cleanConsole();
                     readHolisticStudents();
                     break;
                 case 3:
-                    cleanConsole();
                     option = 3;
                     break;
                 default:
-                    cleanConsole();
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
             }
