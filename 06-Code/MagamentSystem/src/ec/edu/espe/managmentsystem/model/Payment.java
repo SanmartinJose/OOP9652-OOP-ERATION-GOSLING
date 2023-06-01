@@ -10,29 +10,7 @@ public class Payment {
     private String wayToPay;
     private int totalValuePerMonth;
     
-    public void controlStudentsMenu(){
-        
-        Scanner optionIn = new Scanner(System.in);
-        
-        int opc =0;
-        
-        while(opc!=2){
-            System.out.println("------- Pagos------\n");
-            System.out.println("1. Agregar un Nuevo Pago\n");
-            System.out.println("2. Agregar Deuda\n");
-            System.out.println("Ingrese una Opcion: ");
-            opc = optionIn.nextInt();
-            switch(opc){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                default:
-                    System.out.println("Insert a valid option");
-                    break;
-            }
-        }
-    }
+
     
     
     public Payment(String wayToPay, int totalValuesPerMonth){

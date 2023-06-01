@@ -6,8 +6,8 @@ package ec.edu.espe.managmentsystem.model;
 
 /**
  *
- * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
+ * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
-public class LogisticLegalGuardian {
+public class Debt {
     
 }

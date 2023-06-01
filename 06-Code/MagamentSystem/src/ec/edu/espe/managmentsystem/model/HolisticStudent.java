@@ -8,6 +8,6 @@ package ec.edu.espe.managmentsystem.model;
  *
  * @author PabloEZurita
  */
-public class LogisticsStudent {
+public class HolisticStudent {
     
 }

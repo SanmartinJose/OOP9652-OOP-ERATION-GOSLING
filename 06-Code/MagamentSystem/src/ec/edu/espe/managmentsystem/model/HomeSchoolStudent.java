@@ -16,32 +16,7 @@ public class HomeSchoolStudent {
     private String address; 
     private Date bornDate;
     
-    public void controlStudentsMenu(){
-        
-        Scanner optionIn = new Scanner(System.in);
-        
-        int opc =0;
-        
-        while(opc!=3){
-            System.out.println("------- School Managment Software------\n");
-            System.out.println("1. Add new Student\n");
-            System.out.println("2. See Students' List\n");
-            System.out.println("3. Go Back\n");
-            System.out.println("Insert you option: ");
-            opc = optionIn.nextInt();
-            switch(opc){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                default:
-                    System.out.println("Insert a valid option");
-                    break;
-            }
-        }
-    }
+
     
     public HomeSchoolStudent(int id, String name, String typeOfStudy, String address, Date bornDate) {
         this.id = id;
