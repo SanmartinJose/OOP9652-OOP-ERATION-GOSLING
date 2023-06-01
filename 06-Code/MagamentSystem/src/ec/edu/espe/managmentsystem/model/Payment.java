@@ -1,7 +1,5 @@
 package ec.edu.espe.managmentsystem.model;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
@@ -9,9 +7,6 @@ import java.util.Scanner;
 public class Payment {
     private String wayToPay;
     private int totalValuePerMonth;
-    
-
-    
     
     public Payment(String wayToPay, int totalValuesPerMonth){
         this.wayToPay = wayToPay;
