@@ -22,53 +22,45 @@ public class PaymentRecord {
         this.students = students;
         this.debts = debts;
     }
-    public void monthlyValue(String id){
-        try{
-            String idJsonContent = new String(Files.readAllBytes(Paths.get(getStudents())));
-            
-            JSONObject idJsonObject = new JSONObject(idJsonContent);
-            
-            JSONArray debts2 = idJsonObject.optJSONArray(id);
-            
-            if(debts2 == null){
-                debts2 = new JSONArray();
-                idJsonObject.put(id, debts2);
-            }
-            
-            FileWriter idFileWriter = new FileWriter(getStudents());
-            idFileWriter.write(idJsonObject.toString());
-            idFileWriter.close();
-            
-            String debtJsonContent = new String(Files.readAllBytes(Paths.get(getDebts())));
+    public void monthlyValue(){
+        try {
+        String idJsonContent = new String(Files.readAllBytes(Paths.get(getStudents())));
+        JSONObject idJsonObject = new JSONObject(idJsonContent);
+        JSONArray allIds = idJsonObject.names();
+        
+        String debtJsonContent = new String(Files.readAllBytes(Paths.get(getDebts())));
         JSONObject debtJsonObject = new JSONObject(debtJsonContent);
+        
+        Scanner sc = new Scanner(System.in);
+        double monthlyPayment = sc.nextDouble();
+        
+        for (int i = 0; i < allIds.length(); i++) {
+            String existingId = allIds.getString(i);
+            JSONArray existingDebts = debtJsonObject.optJSONArray(existingId);
             
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Ingrese el valor mensual a pagar: ");
-            double monthlyPayment = sc.nextDouble();
-            
-            for(String existingId : idJsonObject.keySet()){
-                JSONArray existingDebts = debtJsonObject.optJSONArray(existingId);
-                
-                if (existingDebts == null){
-                    existingDebts = new JSONArray();
-                    debtJsonObject.put(existingId, existingDebts);
-                }
-                JSONObject debtObject = new JSONObject();
-                debtObject.put("value", monthlyPayment);
-                debtObject.put("paid", 0.0);
-                existingDebts.put(debtObject);
-                
+            if (existingDebts == null) {
+                existingDebts = new JSONArray();
+                debtJsonObject.put(existingId, existingDebts);
             }
             
-          FileWriter debtFileWriter = new FileWriter(getDebts());
-          debtFileWriter.write(debtJsonObject.toString());
-          debtFileWriter.close();
-          
-            System.out.println("Deudas agragadas con exito");
-        }catch (IOException | JSONException e){
-            System.out.println("Error al agregar las deudas " + e.getMessage());
+            JSONObject debtObject = new JSONObject();
+            debtObject.put("value", monthlyPayment);
+            debtObject.put("paid", 0.0);
+            
+            existingDebts.remove(0);
+            
+            existingDebts.put(debtObject);
         }
+        
+        FileWriter debtFileWriter = new FileWriter(getDebts());
+        debtFileWriter.write(debtJsonObject.toString());
+        debtFileWriter.close();
+        
+        System.out.println("Deudas agregadas con exito");
+    } catch (IOException | JSONException e) {
+        System.out.println("Error al agregar las deudas: " + e.getMessage());
     }
+}
         
         public void updatePayment(String id) {
         try {
@@ -79,7 +71,6 @@ public class PaymentRecord {
         JSONArray debtsArray = debtJsonObject.optJSONArray(id);
 
         if (debtsArray != null && debtsArray.length() > 0) {
-            // Suponemos que solo hay una deuda para el ID
             Object debtObject = debtsArray.get(0);
 
             if (debtObject instanceof JSONObject) {
@@ -102,16 +93,46 @@ public class PaymentRecord {
                 debtFileWriter.write(debtJsonObject.toString());
                 debtFileWriter.close();
 
-                System.out.println("Pago registrado con éxito.");
+                System.out.println("Pago registrado con exito.");
             } else {
                 System.out.println("El objeto de deuda no es un JSONObject para el ID " + id);
             }
         } else {
-            System.out.println("No se encontró ninguna deuda para el ID " + id);
+            System.out.println("No se encontro ninguna deuda para el ID " + id);
         }
     } catch (IOException | JSONException e) {
         System.out.println("Error al actualizar el pago: " + e.getMessage());
     }
+}
+       public void showDebts() {
+    try {
+        String debtJsonContent = new String(Files.readAllBytes(Paths.get(getDebts())));
+        JSONObject debtJsonObject = new JSONObject(debtJsonContent);
+
+        System.out.println("Deudas registradas:");
+        for (String id : debtJsonObject.keySet()) {
+            if (!id.equals("ids")) {
+                JSONArray debtsArray = debtJsonObject.getJSONArray(id);
+                System.out.println("ID: " + id);
+                System.out.println("Deudas:");
+                for (int i = 0; i < debtsArray.length(); i++) {
+                    JSONObject debtObject = debtsArray.getJSONObject(i);
+                    double value = debtObject.getDouble("value");
+                    double paid = debtObject.getDouble("paid");
+                    double difference = value - paid;
+                    System.out.println("  - Valor Mensual: " + value);
+                    System.out.println("    Pagado: " + paid);
+                    System.out.println("    Diferencia: " + difference);
+                }
+                System.out.println();
+            }
+        }
+    } catch (IOException | JSONException e) {
+        System.out.println("Error al mostrar las deudas: " + e.getMessage());
+    }
+    Scanner sc = new Scanner(System.in);
+           System.out.println("Presione Enter para continuar");
+    sc.nextLine();
 }
 
     /**
