@@ -15,7 +15,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -41,30 +45,20 @@ public class HolisticStudentWrite {
     public void fileReader() throws FileNotFoundException, IOException{
         
         
-        String rutaArchivo = "C:\\Users\\oswal\\Desktop\\Personal\\IngSoftware\\OOP\\projectFolder\\OOP9652-OOP-ERATION-GOSLING\\06-Code\\MagamentSystem\\data\\holisticStudents.json";
+        String fileRoute = "C:\\Users\\oswal\\Desktop\\Personal\\IngSoftware\\OOP\\projectFolder\\OOP9652-OOP-ERATION-GOSLING\\06-Code\\MagamentSystem\\data\\holisticStudents.json";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
-        StringBuilder jsonStr = new StringBuilder();
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            jsonStr.append(linea);
-        }
-        String contenidoJSON = jsonStr.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String contenidoJSON = "...";
+        try {
+        String holisticStudents = new String(fileRoute);
+        JSONObject holisticStudent = new JSONObject(holisticStudents);
 
-        JSONObject jsonObject = new JSONObject(contenidoJSON);
-
-        String valorString = jsonObject.getString("claveString");
-        int valorInt = jsonObject.getInt("claveInt");
-        boolean valorBoolean = jsonObject.getBoolean("claveBoolean");
-        JSONObject objetoAnidado = jsonObject.getJSONObject("claveObjeto");
-
-        JSONArray jsonArray = jsonObject.getJSONArray("claveArray");
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject elementoArray = jsonArray.getJSONObject(i);
-        }
+        System.out.println("Estudiante de holistica:");
+            System.out.println(holisticStudent);
+        
+    }catch (JSONException e) {
+        System.out.println("Error al mostrar los estudiantes " + e.getMessage());
+    }
+    Scanner sc = new Scanner(System.in);
+           System.out.println("Presione Enter para continuar");
+    sc.nextLine();
     }
 }

@@ -104,7 +104,7 @@ public class PaymentRecord {
         System.out.println("Error al actualizar el pago: " + e.getMessage());
     }
 }
-       public void showDebts() {
+    public void showDebts() {
     try {
         String debtJsonContent = new String(Files.readAllBytes(Paths.get(getDebts())));
         JSONObject debtJsonObject = new JSONObject(debtJsonContent);
