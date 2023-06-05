@@ -1,6 +1,7 @@
 
 package ec.edu.espe.managamentsystem.view;
 
+import ec.edu.espe.managamentsystem.controller.GradesMenu;
 import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianRecord;
 import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianWrite;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentRecord;
@@ -23,7 +24,7 @@ public class Menu {
     
     public static void main(String[] args) throws IOException, FileNotFoundException, ParseException, org.json.simple.parser.ParseException {
         
-        PaymentRecord paymentRecord = new PaymentRecord("data/students.json", "data/debts.json");
+        PaymentRecord paymentRecord = new PaymentRecord("data/holisticStudents.json", "data/debts.json");
         
         Scanner optionIn = new Scanner(System.in);
         int option;
@@ -68,7 +69,8 @@ public class Menu {
             System.out.println("-------Administración del HomeSchool-----\n");
             System.out.println("1. Administrar Estudiantes\n");
             System.out.println("2. Aministar horarios\n");
-            System.out.println("3. Regresar\n");
+            System.out.println("3. Administrar notas\n");
+            System.out.println("4. Regresar\n");
             System.out.println("Selecciones una opción: ");
             option = optionIn.nextInt();
             
@@ -79,6 +81,9 @@ public class Menu {
                 case 2:
                     break;
                 case 3:
+                    GradesMenu.main();
+                    break;  
+                case 4:
                     System.out.println("Disponible solo para modo gráfico");
                     option=4;
                     break;

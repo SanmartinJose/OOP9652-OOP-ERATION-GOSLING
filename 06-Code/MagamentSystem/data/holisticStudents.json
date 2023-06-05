@@ -1,22 +1,10 @@
 {
   "students": [
     {
-      "address": "adwas",
-      "name": "",
+      "address": "SuCasa",
+      "name": "Jose",
       "id": 1,
-      "age": 21
-    },
-    {
-      "address": "adwas",
-      "name": "",
-      "id": 12,
-      "age": 12323
-    },
-    {
-      "address": "addwas",
-      "name": "",
-      "id": 67,
-      "age": 44
+      "age": 22
     }
   ]
 }
