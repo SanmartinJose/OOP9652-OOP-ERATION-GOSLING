@@ -22,7 +22,7 @@ public void studentFileWritter(HomeSchoolCourse homeschoolcourseA, HomeSchoolCou
         System.out.println(gsonhomeschoolcourseA);
         System.out.println(gsonhomeschoolcourseB);
         try{              
-        String ruta = "C:\\Users\\oswal\\Desktop\\Personal\\IngSoftware\\OOP\\projectFolder\\OOP9652-OOP-ERATION-GOSLING\\06-Code\\MagamentSystem\\data\\holisticStudents.json";
+        String ruta = "data\\holisticStudents.json";
         BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true)); 
         writer.newLine();
         writer.write(gsonhomeschoolcourseA);
