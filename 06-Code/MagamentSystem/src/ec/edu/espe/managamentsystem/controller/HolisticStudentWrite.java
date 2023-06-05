@@ -32,7 +32,7 @@ public class HolisticStudentWrite {
         String gsonholisticStudent = gson.toJson(holisticStudent);
         System.out.println(gsonholisticStudent);
         try{              
-        String ruta = "C:\\Users\\oswal\\Desktop\\Personal\\IngSoftware\\OOP\\projectFolder\\OOP9652-OOP-ERATION-GOSLING\\06-Code\\MagamentSystem\\data\\holisticStudents.json";
+        String ruta = "data\\holisticStudents.json";
         BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true)); 
         writer.newLine();  //nueva linea!
         writer.write(gsonholisticStudent); //Escribe palabra
@@ -45,14 +45,16 @@ public class HolisticStudentWrite {
     public void fileReader() throws FileNotFoundException, IOException{
         
         
-        String fileRoute = "C:\\Users\\oswal\\Desktop\\Personal\\IngSoftware\\OOP\\projectFolder\\OOP9652-OOP-ERATION-GOSLING\\06-Code\\MagamentSystem\\data\\holisticStudents.json";
+        String fileRoute = "data\\holisticStudents.json";
 
         try {
-        String holisticStudents = new String(fileRoute);
-        JSONObject holisticStudent = new JSONObject(holisticStudents);
-
-        System.out.println("Estudiante de holistica:");
-            System.out.println(holisticStudent);
+            
+        String holisticStudent = new String(fileRoute);
+        JSONObject holisticStudentObject = new JSONObject(holisticStudent);
+        //JSONArray debtsArray = JSONObject.getJSONArray(0);
+       
+        System.out.println("-------Estudiante de holistica:-------");
+        System.out.println(holisticStudentObject.getString("id"));
         
     }catch (JSONException e) {
         System.out.println("Error al mostrar los estudiantes " + e.getMessage());

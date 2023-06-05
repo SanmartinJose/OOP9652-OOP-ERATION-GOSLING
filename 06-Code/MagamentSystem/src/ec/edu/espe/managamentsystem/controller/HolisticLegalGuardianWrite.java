@@ -22,7 +22,7 @@ public class HolisticLegalGuardianWrite {
         String gsonholisticLegalGuardian = gson.toJson(holisticLegalGuardian);
         System.out.println(gsonholisticLegalGuardian);
         try{
-            String ruta = "C:\\Users\\oswal\\Desktop\\Personal\\IngSoftware\\OOP\\projectFolder\\OOP9652-OOP-ERATION-GOSLING\\06-Code\\MagamentSystem\\data\\holisticLegalGuardian.json";
+            String ruta = "data\\holisticLegalGuardian.json";
             BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true)); 
             writer.newLine();  //nueva linea!
             writer.write(gsonholisticLegalGuardian); //Escribe palabra
