@@ -18,14 +18,14 @@ public class HolisticStudentRecord {
         System.out.println("Id:");
         int id = readFile.nextInt();
         
+        System.out.println("Name:");
+        String name = readFile.next();
+        
         System.out.println("Age:");
         int age = readFile.nextInt();
         
-        System.out.println("Name:");
-        String name = readFile.nextLine();
-        
         System.out.println("Address:");
-        String address = readFile.nextLine();
+        String address = readFile.next();
         
         HolisticStudent holisticStudent = new HolisticStudent(id, age, name, address);
         return holisticStudent;

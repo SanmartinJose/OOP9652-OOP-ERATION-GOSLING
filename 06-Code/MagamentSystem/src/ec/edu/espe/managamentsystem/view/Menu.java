@@ -10,7 +10,9 @@ import ec.edu.espe.managamentsystem.controller.RegisterStudent;
 import ec.edu.espe.managamentsystem.controller.StudentListWrite;
 import ec.edu.espe.managmentsystem.model.Payment;
 import ec.edu.espe.managmentsystem.model.Teacher;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 /**
@@ -19,7 +21,7 @@ import java.util.Scanner;
  */
 public class Menu {
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ParseException, org.json.simple.parser.ParseException {
         
         PaymentRecord paymentRecord = new PaymentRecord("data/students.json", "data/debts.json");
         
@@ -87,7 +89,7 @@ public class Menu {
         }while(option!=4);
     }
     
-    public static void controlHolisticStudentsMenu() throws IOException{
+    public static void controlHolisticStudentsMenu() throws IOException, FileNotFoundException, ParseException, org.json.simple.parser.ParseException{
         int option = 0;
         Scanner optionIn = new Scanner(System.in);
         do{
@@ -131,7 +133,7 @@ public class Menu {
         holisticLegalGuardianWrite.fileWritter(holisticLegalGuardianRecord.readFile());
     }
     
-    public static void readHolisticStudents() throws IOException{
+    public static void readHolisticStudents() throws IOException, FileNotFoundException, ParseException, org.json.simple.parser.ParseException{
         HolisticStudentWrite holisticStudentWrite = new HolisticStudentWrite();
         
         holisticStudentWrite.fileReader();

@@ -9,8 +9,12 @@ import com.google.gson.GsonBuilder;
 import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 /**
  *
@@ -21,11 +25,31 @@ public class HolisticLegalGuardianWrite {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String gsonholisticLegalGuardian = gson.toJson(holisticLegalGuardian);
         System.out.println(gsonholisticLegalGuardian);
+    
+        JSONParser parser = new JSONParser();
+        
         try{
-            String ruta = "data\\holisticLegalGuardian.json";
-            BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true)); 
+            String route = "data\\holisticLegalGuardian.json";
+            String routeHelp = "data\\help.json";
+            
+            FileWriter writer2 = new FileWriter(routeHelp, false); 
+            writer2.write(gsonholisticLegalGuardian); 
+            writer2.close(); 
+            
+            Object arr = parser.parse(new FileReader(route));
+            Object arr2 = parser.parse(new FileReader(routeHelp));
+        
+            JSONObject si = (JSONObject) arr;
+            JSONObject si2 = (JSONObject) arr2;
+         
+            JSONArray array = (JSONArray) si.get("guardian");
+            
+            array.add(arr2);
+            String newArray =gson.toJson(arr);
+        
+            BufferedWriter writer = new BufferedWriter(new FileWriter(route, false)); 
             writer.newLine();  //nueva linea!
-            writer.write(gsonholisticLegalGuardian); //Escribe palabra
+            writer.write(newArray); //Escribe palabra
             writer.close();  //Cierra BufferedWriter 
         }catch(Exception e){
             e.printStackTrace();

@@ -77,12 +77,13 @@ public class HolisticStudentWrite {
             JSONObject si = (JSONObject) arr;
             JSONArray array = (JSONArray) si.get("students");
             
+            System.out.println("-------Estudiante de holistica:-------\n");
+            System.out.println("Id\tName\t\tAge\t\tAddress\n");
+            
             for(int i =0; i < array.size() ;i++){
                 JSONObject singleStudent = (JSONObject) array.get(i);
-                System.out.println(singleStudent);
+                System.out.println(singleStudent.get("id")+"\t"+singleStudent.get("name")+"\t\t"+singleStudent.get("age")+"\t\t"+singleStudent.get("address")+"\n");
             }
-       
-        System.out.println("-------Estudiante de holistica:-------");
         
     }catch (JSONException e) {
         System.out.println("Error al mostrar los estudiantes: " + e.getMessage());
