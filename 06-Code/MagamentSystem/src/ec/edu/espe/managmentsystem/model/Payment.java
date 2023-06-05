@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Payment {
     public void Payment(){
-   PaymentRecord paymentRecord = new PaymentRecord("data/students.json", "data/debts.json");
+   PaymentRecord paymentRecord = new PaymentRecord("data/holisticStudents.json", "data/debts.json");
         Scanner scanner = new Scanner(System.in);
 
         int opcion;
