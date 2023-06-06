@@ -73,23 +73,27 @@ public class HolisticStudentWrite {
         
         try {
             
-            Object arr = parser.parse(new FileReader(fileRoute));
-            JSONObject si = (JSONObject) arr;
-            JSONArray array = (JSONArray) si.get("students");
+            Object holisticStudentsObject = parser.parse(new FileReader(fileRoute));
+            JSONObject holisticStudentsJSONObject = (JSONObject) holisticStudentsObject;
+            JSONArray holisticStudentArray = (JSONArray) holisticStudentsJSONObject.get("students");
             
-            System.out.println("-------Estudiante de holistica:-------\n");
+            printHolisticStudents(holisticStudentArray);
+        
+        }catch (JSONException e) {
+            System.out.println("Error al mostrar los estudiantes: " + e.getMessage());
+        }
+        Scanner sc = new Scanner(System.in);
+               System.out.println("Presione Enter para continuar");
+        sc.nextLine();
+    }
+    
+    public void printHolisticStudents(ArrayList holisticStudentArray ){
+        System.out.println("-------Estudiante de holistica:-------\n");
             System.out.println("Id\tName\t\tAge\t\tAddress\n");
             
-            for(int i =0; i < array.size() ;i++){
-                JSONObject singleStudent = (JSONObject) array.get(i);
+            for(int i =0; i < holisticStudentArray.size() ;i++){
+                JSONObject singleStudent = (JSONObject) holisticStudentArray.get(i);
                 System.out.println(singleStudent.get("id")+"\t"+singleStudent.get("name")+"\t\t"+singleStudent.get("age")+"\t\t"+singleStudent.get("address")+"\n");
             }
-        
-    }catch (JSONException e) {
-        System.out.println("Error al mostrar los estudiantes: " + e.getMessage());
-    }
-    Scanner sc = new Scanner(System.in);
-           System.out.println("Presione Enter para continuar");
-    sc.nextLine();
     }
 }
