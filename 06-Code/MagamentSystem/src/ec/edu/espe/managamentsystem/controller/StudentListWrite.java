@@ -42,12 +42,12 @@ public void studentFileWritter(HomeSchoolCourse homeschoolcourseA, HomeSchoolCou
         org.json.JSONObject homeSchoolObject = new org.json.JSONObject(gsonhomeschoolcourse);
         org.json.JSONArray homeSchoolArray = homeSchoolObject.getJSONArray("homeschoolstudent");
   
-        System.out.println("-------Curso "+course+"--------------\n");
-        System.out.println("Id\tName\t\tAge\t\tAddress\t\tBornOnDate\n");
+        System.out.println("--------------------Curso "+course+"--------------------\n\n");
+        System.out.println("\tId\tName\t\tAge\t\tAddress\t\tBornOnDate\n");
             
         for(int i =0; i < homeSchoolArray.length() ;i++){
             JSONObject singleStudent = (JSONObject) homeSchoolArray.get(i);
-            System.out.println(singleStudent.get("id")+"\t"+singleStudent.get("name")+"\t\t"+singleStudent.get("age")+"\t\t"+singleStudent.get("address")+"\t\t"+ singleStudent.get("bornDate") + "\n");
+            System.out.println("\t"+singleStudent.get("id")+"\t"+singleStudent.get("name")+"\t\t"+singleStudent.get("age")+"\t\t"+singleStudent.get("address")+"\t\t"+ singleStudent.get("bornDate") + "\n");
         }
     }
 }

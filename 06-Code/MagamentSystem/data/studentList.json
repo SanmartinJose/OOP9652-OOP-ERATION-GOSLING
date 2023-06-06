@@ -1,3 +1,64 @@
+
 {
-    
+  "id": 1,
+  "name": "A",
+  "homeschoolstudent": [
+    {
+      "id": 1,
+      "age": 14039,
+      "name": "Oswaldo",
+      "typeOfStudy": "HomeSchool",
+      "address": "QUito",
+      "bornDate": "Dec 6, 20000, 12:00:00 AM"
+    }
+  ]
+}{
+  "id": 2,
+  "name": "B",
+  "homeschoolstudent": [
+    {
+      "id": 1,
+      "age": 13,
+      "name": "Jose",
+      "typeOfStudy": "Domingo",
+      "address": "Santo",
+      "bornDate": "Jul 23, 2009, 12:00:00 AM"
+    }
+  ]
+}
+{
+  "id": 1,
+  "name": "A",
+  "homeschoolstudent": [
+    {
+      "id": 2,
+      "age": 14,
+      "name": "Armando",
+      "typeOfStudy": "HomeSchool",
+      "address": "Sangolquí",
+      "bornDate": "Dec 4, 2008, 12:00:00 AM"
+    }
+  ]
+}{
+  "id": 2,
+  "name": "B",
+  "homeschoolstudent": []
+}
+{
+  "id": 1,
+  "name": "A",
+  "homeschoolstudent": [
+    {
+      "id": 1,
+      "age": 22,
+      "name": "Oswaldo",
+      "typeOfStudy": "HomeSchool",
+      "address": "dsd",
+      "bornDate": "Jul 1, 2000, 12:00:00 AM"
+    }
+  ]
+}{
+  "id": 2,
+  "name": "B",
+  "homeschoolstudent": []
 }
