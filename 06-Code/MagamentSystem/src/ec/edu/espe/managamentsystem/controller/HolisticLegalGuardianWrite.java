@@ -24,7 +24,6 @@ public class HolisticLegalGuardianWrite {
       public void fileWritter(HolisticLegalGuardian holisticLegalGuardian){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String gsonholisticLegalGuardian = gson.toJson(holisticLegalGuardian);
-        System.out.println(gsonholisticLegalGuardian);
     
         JSONParser parser = new JSONParser();
         

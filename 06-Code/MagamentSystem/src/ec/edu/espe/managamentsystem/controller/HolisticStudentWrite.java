@@ -31,7 +31,7 @@ public class HolisticStudentWrite {
     public void fileWritter(HolisticStudent holisticStudent){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String gsonholisticStudent = gson.toJson(holisticStudent);
-        System.out.println(gsonholisticStudent);
+        
         
         JSONParser parser = new JSONParser();
         

@@ -17,4 +17,12 @@ public class Validator {
 		return false;
 	}
     }
+    
+    public static boolean validateMinus(Double number){
+        if(number > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

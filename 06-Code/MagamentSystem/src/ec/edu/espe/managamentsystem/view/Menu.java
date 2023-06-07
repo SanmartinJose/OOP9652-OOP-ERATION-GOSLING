@@ -98,7 +98,7 @@ public class Menu {
         int option = 0;
         Scanner optionIn = new Scanner(System.in);
         do{
-            System.out.println("-------Administración de educación holística-----\n");
+            System.out.println("-------Administración de educación Holística-----\n");
             System.out.println("1. Añadir nuevo estudiante\n");
             System.out.println("2. Visualizar estudiantes\n");
             System.out.println("3. Regresar\n");
@@ -124,7 +124,7 @@ public class Menu {
     }
     
     public static void addNewHolisticStudent(){
-        System.out.println("-------Administración de educación holística-----\n");
+        System.out.println("-------Administración de educación Holística-----\n");
         System.out.println("Ingrese los datos del estudiante\n");
         
         HolisticStudentRecord holisticStudentRecord = new HolisticStudentRecord();

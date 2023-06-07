@@ -32,7 +32,14 @@ public void monthlyValue() {
         JSONObject debtJsonObject = new JSONObject(debtJsonContent);
 
         Scanner sc = new Scanner(System.in);
-        double monthlyPayment = sc.nextDouble();
+        
+        String monthlyPaymentString = sc.next();
+        while(!Validator.validateString(monthlyPaymentString) ){
+            System.out.println("Ingrese un valor numerico por favor");
+            System.out.println("Ingrese el Nuevo Pago Mensual: ");
+            monthlyPaymentString = sc.next();
+        }
+        Double monthlyPayment = Double.parseDouble(monthlyPaymentString);
 
         for (int i = 0; i < studentsArray.length(); i++) {
             JSONObject studentObject = studentsArray.getJSONObject(i);
@@ -79,7 +86,14 @@ public void monthlyValue() {
 
                 Scanner scanner = new Scanner(System.in);
                 System.out.print("Ingrese el valor pagado para el ID " + id + ": ");
-                double payment = scanner.nextDouble();
+                String paymentString = scanner.next();
+                while(!Validator.validateString(paymentString)){
+                    System.out.println("Ingrese un valor numerico por favor");
+                    System.out.println("Ingrese el valor pagado para el ID " + id + ": ");
+                    paymentString = scanner.next();
+                }
+                Double payment = Double.parseDouble(paymentString);
+                
 
                 double updatedPaidValue = paidValue + payment;
                 double difference = monthlyValue - updatedPaidValue;
