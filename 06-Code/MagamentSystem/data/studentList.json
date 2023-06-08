@@ -62,3 +62,21 @@
   "name": "B",
   "homeschoolstudent": []
 }
+{
+  "id": 1,
+  "name": "A",
+  "homeschoolstudent": [
+    {
+      "id": 5,
+      "age": 13,
+      "name": "Juan",
+      "typeOfStudy": "new",
+      "address": "10521",
+      "bornDate": "Aug 4, 2009, 12:00:00 AM"
+    }
+  ]
+}{
+  "id": 2,
+  "name": "B",
+  "homeschoolstudent": []
+}

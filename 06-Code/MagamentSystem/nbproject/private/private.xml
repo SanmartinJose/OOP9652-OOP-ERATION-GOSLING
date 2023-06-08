@@ -3,11 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/oswal/Desktop/Personal/IngSoftware/OOP/projectFolder/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/HolisticLegalGuardianWrite.java</file>
-            <file>file:/C:/Users/oswal/Desktop/Personal/IngSoftware/OOP/projectFolder/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/HolisticStudentWrite.java</file>
-            <file>file:/C:/Users/oswal/Desktop/Personal/IngSoftware/OOP/projectFolder/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/HolisticStudentRecord.java</file>
-            <file>file:/C:/Users/oswal/Desktop/Personal/IngSoftware/OOP/projectFolder/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/view/Menu.java</file>
-            <file>file:/C:/Users/oswal/Desktop/Personal/IngSoftware/OOP/projectFolder/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/RegisterStudent.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/HomeSchoolLegalGuardian.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/HolisticLegalGuardianWrite.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/CreateMenu.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/HolisticLegalGuardianRecord.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/Schedule.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/HolisticLegalGuardian.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/HolisticStudentRecord.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/Admin.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/HolisticStudentWrite.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/RegisterStudent.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/Teacher.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/GradesMenu.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/Debt.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/StudentListWrite.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/HolisticStudent.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/HomeSchoolCourse.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/view/Menu.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/PaymentRecord.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/Validator.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/HomeSchoolStudent.java</file>
+            <file>file:/D:/UNIVERSIDAD/2doSemestre/POO/Inspeccion/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/Payment.java</file>
         </group>
     </open-files>
 </project-private>
