@@ -26,17 +26,24 @@ public class Menu {
         
         PaymentRecord paymentRecord = new PaymentRecord("data/holisticStudents.json", "data/debts.json");
         
-        Scanner optionIn = new Scanner(System.in);
-        int option;
+        Scanner scanner = new Scanner(System.in);
+        Payment payment = new Payment();
+        int option = 0;
+
         
         do {
-            System.out.println("--------Sistema de administración de horarios-------\n");
+            System.out.println("--------Sistema de administracion de horarios-------\n");
             System.out.println("1. Administrar cursos del HomeSchool\n");
-            System.out.println("2. Administrar estudiantes de Holística\n");
+            System.out.println("2. Administrar estudiantes de Holistica\n");
             System.out.println("3. Administrar pagos\n");
             System.out.println("4. Salir\n");
-            System.out.print("Seleccione una opción: ");
-            option = optionIn.nextInt();
+            System.out.print("Seleccione una opcion: ");
+            try {
+                option = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese una opcion valida. Intentelo nuevamente");
+                continue;
+            }
 
             switch (option) {
                 case 1:
@@ -46,33 +53,37 @@ public class Menu {
                     controlHolisticStudentsMenu();
                     break;
                 case 3:
-                    Payment payment = new Payment();
                     payment.Payment();
                     break;
                 case 4:
                     System.out.println("Saliendo del programa...");
-                    option =3;
+                    option =4;
                     break;
                 default:
-                    System.out.println("Opción inválida. Intente nuevamente.");
+                    System.out.println("Opcion invalida. Intente nuevamente.");
                     break;
             }
-        } while (option != 3);
+        } while (option!=4);
     }
     
     public static void controlHomeSchoolMenu(){
         
         int option = 0;
-        Scanner optionIn = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         Teacher teacher = new Teacher();
         do{
-            System.out.println("-------Administración del HomeSchool-----\n");
+            System.out.println("-------Administracion del HomeSchool-----\n");
             System.out.println("1. Administrar Estudiantes\n");
             System.out.println("2. Aministar horarios\n");
             System.out.println("3. Administrar notas\n");
             System.out.println("4. Regresar\n");
             System.out.println("Selecciones una opción: ");
-            option = optionIn.nextInt();
+            try {
+                option = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese una opcion valida. Intentelo nuevamente");
+                continue;
+            }
             
             switch(option){
                 case 1:
@@ -84,11 +95,11 @@ public class Menu {
                     GradesMenu.main();
                     break;  
                 case 4:
-                    System.out.println("Disponible solo para modo gráfico");
+                    System.out.println("Disponible solo para modo grafico");
                     option=4;
                     break;
                 default:
-                    System.out.println("Opción inválida. Intente nuevamente.");
+                    System.out.println("Opcion invalida. Intente nuevamente");
                     break;
             }
         }while(option!=4);
@@ -96,14 +107,19 @@ public class Menu {
     
     public static void controlHolisticStudentsMenu() throws IOException, FileNotFoundException, ParseException, org.json.simple.parser.ParseException{
         int option = 0;
-        Scanner optionIn = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         do{
-            System.out.println("-------Administración de educación Holística-----\n");
+            System.out.println("-------Administracion de educacion Holistica-----\n");
             System.out.println("1. Añadir nuevo estudiante\n");
             System.out.println("2. Visualizar estudiantes\n");
             System.out.println("3. Regresar\n");
-            System.out.println("Selecciones una opción: ");
-            option = optionIn.nextInt();
+            System.out.println("Selecciones una opcion: ");
+            try {
+                option = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese una opcion valida. Intentelo nuevamente");
+                continue;
+            }
             
             switch(option){
                 case 1:
@@ -116,7 +132,7 @@ public class Menu {
                     option = 3;
                     break;
                 default:
-                    System.out.println("Opción inválida. Intente nuevamente.");
+                    System.out.println("Opcion invalida. Intente nuevamente.");
                     break;
             }
             

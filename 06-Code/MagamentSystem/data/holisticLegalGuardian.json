@@ -6,6 +6,18 @@
       "name": "Juan",
       "age": 35,
       "email": "micehejrjr"
+    },
+    {
+      "phoneNumber": 9876533,
+      "name": "Pedro",
+      "age": 45,
+      "email": "stevenriva@gmail.com"
+    },
+    {
+      "phoneNumber": 4847588,
+      "name": "jos",
+      "age": 24,
+      "email": "mdkdjgjti@gmail.com"
     }
   ]
 }
