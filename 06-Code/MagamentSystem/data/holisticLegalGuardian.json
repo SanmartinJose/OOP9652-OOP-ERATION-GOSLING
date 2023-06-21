@@ -18,6 +18,18 @@
       "name": "jos",
       "age": 24,
       "email": "mdkdjgjti@gmail.com"
+    },
+    {
+      "phoneNumber": 345670,
+      "name": "paul",
+      "age": 0,
+      "email": "juan"
+    },
+    {
+      "phoneNumber": 89765467,
+      "name": "pepe",
+      "age": 68,
+      "email": "vghbjbtvtj457"
     }
   ]
 }
