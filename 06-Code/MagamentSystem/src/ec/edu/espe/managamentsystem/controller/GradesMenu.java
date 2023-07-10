@@ -12,7 +12,7 @@ public class GradesMenu {
     private static List<Integer> gradesOfStudents = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main() {
+    public static void setGrades() {
         int opcionOfMenu;
 
         do {

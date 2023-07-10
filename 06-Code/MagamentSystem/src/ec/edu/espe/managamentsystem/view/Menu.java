@@ -92,7 +92,7 @@ public class Menu {
                 case 2:
                     break;
                 case 3:
-                    GradesMenu.main();
+                    GradesMenu.setGrades();
                     break;  
                 case 4:
                     System.out.println("Disponible solo para modo grafico");
