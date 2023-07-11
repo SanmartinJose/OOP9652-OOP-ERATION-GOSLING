@@ -90,10 +90,8 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" alignment="2" groupAlignment="2" attributes="0">
-                          <Component id="btnHomeSchool" alignment="2" max="32767" attributes="0"/>
-                          <Component id="btnHolistic" alignment="1" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnHomeSchool" alignment="2" max="32767" attributes="0"/>
+                      <Component id="btnHolistic" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnPayments" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
@@ -136,6 +134,9 @@
             <Property name="text" type="java.lang.String" value="Administrar Pagos"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPaymentsActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
