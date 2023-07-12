@@ -5,7 +5,6 @@
 package ec.edu.espe.managamentsystem.view.payments;
 
 import ec.edu.espe.managamentsystem.view.FrmMagamentSystem;
-import ec.edu.espe.managamentsystem.view.payments.FrmMonthlyPayment;
 
 /**
  *
@@ -57,6 +56,11 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
 
         btnUpdatePayment.setText("Actualizar Pagos de Estudiantes");
         btnUpdatePayment.setToolTipText("");
+        btnUpdatePayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdatePaymentActionPerformed(evt);
+            }
+        });
 
         btnAddMonthlyPayment.setText("Agregar Pago Mensual");
         btnAddMonthlyPayment.addActionListener(new java.awt.event.ActionListener() {
@@ -142,11 +146,18 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowPaymentsActionPerformed
 
     private void btnAddMonthlyPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMonthlyPaymentActionPerformed
-        FrmMonthlyPayment frmonthlyPayment;
-        frmonthlyPayment = new FrmMonthlyPayment();
-        frmonthlyPayment.setVisible(true);
+        FrmMonthlyPayment frmMonthlyPayment;
+        frmMonthlyPayment = new FrmMonthlyPayment();
+        frmMonthlyPayment.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAddMonthlyPaymentActionPerformed
+
+    private void btnUpdatePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePaymentActionPerformed
+        FrmUpdatePaymentStudent frmUpdatePaymentStudent;
+        frmUpdatePaymentStudent = new FrmUpdatePaymentStudent();
+        frmUpdatePaymentStudent.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnUpdatePaymentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +184,9 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmPaymentRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
