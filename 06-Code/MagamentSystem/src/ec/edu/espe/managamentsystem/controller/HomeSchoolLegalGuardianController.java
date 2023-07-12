@@ -50,7 +50,7 @@ public class HomeSchoolLegalGuardianController {
     public void deleteHolisticLegalGuardian(int id){
         try (MongoClient mongo = MongoClients.create(uri)) {
             MongoDatabase database = mongo.getDatabase("ManagementSystem");
-            MongoCollection<Document> collection = database.getCollection("HolisticLegalGuardian");
+            MongoCollection<Document> collection = database.getCollection("HomeSchoolLegalGuardian");
             
             Document findDocument = new Document ("studentId",id);
             collection.findOneAndDelete(findDocument);
