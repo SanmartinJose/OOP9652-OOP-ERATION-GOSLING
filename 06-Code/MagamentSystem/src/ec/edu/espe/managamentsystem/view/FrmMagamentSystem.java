@@ -4,6 +4,7 @@
  */
 package ec.edu.espe.managamentsystem.view;
 
+import ec.edu.espe.managamentsystem.view.holistic.FrmHolisticStudent;
 import ec.edu.espe.managamentsystem.view.payments.FrmPaymentRecord;
 import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
 
@@ -37,7 +38,8 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
         btnPayments = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnCreatAccount = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
+        btnCloseSesion = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,7 +92,7 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(183, 183, 183)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnHolistic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPayments, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -116,12 +118,14 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
             }
         });
 
-        btnExit.setText("Salir");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
+        btnCloseSesion.setText("Cerra Sesion");
+        btnCloseSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
+                btnCloseSesionActionPerformed(evt);
             }
         });
+
+        jButton1.setText("Salir del programa");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -131,7 +135,9 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(btnCreatAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCloseSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -139,8 +145,9 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btnCreatAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCloseSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(btnCreatAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -172,7 +179,9 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHolisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHolisticActionPerformed
-        // TODO add your handling code here:
+       FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+       frmHolisticStudent.setVisible(true);
+       this.setVisible(false);
     }//GEN-LAST:event_btnHolisticActionPerformed
 
     private void btnHomeSchoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeSchoolActionPerformed
@@ -192,9 +201,11 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCreatAccountActionPerformed
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExitActionPerformed
+    private void btnCloseSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSesionActionPerformed
+        FrmPrincipalLogin frmPrincipalLogin = new FrmPrincipalLogin();
+        frmPrincipalLogin.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,11 +244,12 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCloseSesion;
     private javax.swing.JButton btnCreatAccount;
-    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnHolistic;
     private javax.swing.JButton btnHomeSchool;
     private javax.swing.JButton btnPayments;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

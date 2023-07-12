@@ -81,6 +81,11 @@ public class FrmCourse extends javax.swing.JFrame {
         });
 
         btnBack.setText("Regresar");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -170,6 +175,12 @@ public class FrmCourse extends javax.swing.JFrame {
         btnAddTeacher.setVisible(true);
         
     }//GEN-LAST:event_btnSaveTheNameActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        FrmControlHomeSchoolMenu frmControlHomeSchoolMenu = new FrmControlHomeSchoolMenu();
+        frmControlHomeSchoolMenu.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments

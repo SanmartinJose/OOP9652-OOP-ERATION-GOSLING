@@ -4,6 +4,7 @@
  */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
+import ec.edu.espe.managamentsystem.view.FrmMagamentSystem;
 import javax.swing.JComboBox;
 
 /**
@@ -178,9 +179,12 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddCourseActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        FrmMagamentSystem frmMagamentSystem = new FrmMagamentSystem();
+        frmMagamentSystem.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
