@@ -128,8 +128,8 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToMainMenuActionPerformed
-        MagamentSystem magamentSystem;
-        magamentSystem = new MagamentSystem();
+        FrmMagamentSystem magamentSystem;
+        magamentSystem = new FrmMagamentSystem();
         magamentSystem.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackToMainMenuActionPerformed
