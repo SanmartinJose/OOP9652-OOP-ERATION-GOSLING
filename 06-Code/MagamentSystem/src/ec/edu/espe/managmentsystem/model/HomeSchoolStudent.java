@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class HomeSchoolStudent {
     private int id;
     private int age;
+    private int courseId;
     private String name;
     private String typeOfStudy;
     private String address; 
@@ -18,8 +19,9 @@ public class HomeSchoolStudent {
     
 
     
-    public HomeSchoolStudent(int id, String name, String typeOfStudy, String address, Date bornDate) {
+    public HomeSchoolStudent(int id,int courseId, String name, String typeOfStudy, String address, Date bornDate) {
         this.id = id;
+        this.courseId = courseId;
         this.name = name;
         this.typeOfStudy = typeOfStudy;
         this.address = address;
@@ -37,6 +39,10 @@ public class HomeSchoolStudent {
     }
     public int getId() {
         return id;
+    }
+    
+    public int getCourseId(){
+        return courseId;
     }
 
     public void setId(int id) {

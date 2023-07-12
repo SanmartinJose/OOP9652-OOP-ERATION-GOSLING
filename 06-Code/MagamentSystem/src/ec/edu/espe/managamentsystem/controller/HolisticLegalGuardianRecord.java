@@ -49,7 +49,7 @@ public class HolisticLegalGuardianRecord {
         String email = readFile.next();
         
      
-        HolisticLegalGuardian holisticLegalGuardian = new HolisticLegalGuardian(ageInt, phoneNumberInt, name, email);
+        HolisticLegalGuardian holisticLegalGuardian = new HolisticLegalGuardian(ageInt, phoneNumber, name, email);
         return holisticLegalGuardian;
     }
 }

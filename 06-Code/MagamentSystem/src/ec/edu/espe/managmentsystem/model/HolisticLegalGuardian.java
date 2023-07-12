@@ -9,13 +9,15 @@ package ec.edu.espe.managmentsystem.model;
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class HolisticLegalGuardian {
-     int age;
-    long phoneNumber;
+    int age ;
+    int studentId;
+    String phoneNumber;
     String name;
     String email;
     
-    public HolisticLegalGuardian(int age, long phoneNumber, String name, String email){
+    public HolisticLegalGuardian(int age, String phoneNumber, String name, String email){
         this.age = age;
+        this.studentId = studentId;
         this.phoneNumber = phoneNumber;
         this.name= name;
         this.email = email;
@@ -29,12 +31,24 @@ public class HolisticLegalGuardian {
         this.age = age;
     }
     
-    public long getPhoneNumber(){
+    public int getStudentId(){
+        return studentId;
+    }
+    
+    public void setStudentId(){
+        this.studentId = studentId;
+    }
+    
+    public String getPhoneNumber(){
         return phoneNumber;
     }
     
     public void setName(String name){
         this.name = name;
+    }
+    
+    public String getName(){
+        return name;
     }
     
     public String getEmail(){
@@ -43,10 +57,5 @@ public class HolisticLegalGuardian {
     
     public void setEmail(String email){
         this.email = email;
-    }
-    
-    @Override
-    public String toString(){
-        return "HolisticStudent{" + "age=" + age + "phoneNumber=" + phoneNumber + "name=" + name + "email=" + email + "}";
     }
 }
