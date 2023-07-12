@@ -47,7 +47,7 @@ public class FrmControlHolisticSchoolMenu extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 248, 207));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Administración del HomeSchool");
+        jLabel1.setText("Administración del Holistic School");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
