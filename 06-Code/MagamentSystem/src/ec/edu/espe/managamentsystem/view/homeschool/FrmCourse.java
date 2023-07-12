@@ -63,6 +63,11 @@ public class FrmCourse extends javax.swing.JFrame {
         });
 
         btnAddTeacher.setText("Añadir Profesor al Curso");
+        btnAddTeacher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTeacherActionPerformed(evt);
+            }
+        });
 
         btnAddSchedule.setText("Añadir Horario al curso");
         btnAddSchedule.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +186,12 @@ public class FrmCourse extends javax.swing.JFrame {
         frmControlHomeSchoolMenu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnAddTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTeacherActionPerformed
+        FrmCreatTeacher frmCreatTeacher = new FrmCreatTeacher();
+        frmCreatTeacher.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAddTeacherActionPerformed
 
     /**
      * @param args the command line arguments
