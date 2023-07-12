@@ -4,6 +4,9 @@
  */
 package ec.edu.espe.managamentsystem.view;
 
+import ec.edu.espe.managamentsystem.view.payments.FrmPaymentRecord;
+import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
+
 /**
  *
  * @author PabloEZurita
