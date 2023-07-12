@@ -1,12 +1,16 @@
 
 package ec.edu.espe.managamentsystem.controller;
 
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import java.io.FileWriter;
 import java.io.IOException;
-import static java.lang.System.in;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,63 +23,37 @@ public class PaymentRecord {
     private String students;
     private String debts;
 
-    public PaymentRecord(String students, String debts) {
-        this.students = students;
-        this.debts = debts;
-    }
-    public void monthlyValue() {
-        try {
-            String idJsonContent = new String(Files.readAllBytes(Paths.get(getStudents())));
-            JSONObject idJsonObject = new JSONObject(idJsonContent);
-            JSONArray studentsArray = idJsonObject.getJSONArray("students");
 
-            String debtJsonContent = new String(Files.readAllBytes(Paths.get(getDebts())));
-            JSONObject debtJsonObject = new JSONObject(debtJsonContent);
+    public void monthlyValue(String uri, String newValue) {
+    try (var mongoClient = MongoClients.create(uri)) {
+        MongoDatabase database = mongoClient.getDatabase("TestPayment");
+        MongoCollection<Document> estudiantesCollection = database.getCollection("estudiantes");
 
-            Scanner scanner = new Scanner(System.in);
+        MongoCursor<Document> cursor = estudiantesCollection.find().iterator();
+        while (cursor.hasNext()) {
+            Document estudiante = cursor.next();
+            int estudianteId = estudiante.getInteger("id");
+            String nombre = estudiante.getString("nombre");
 
-            boolean isValidInput = false;
-            Double monthlyPayment = 0.0;
+            Double pagoMensual = Double.parseDouble(newValue);
 
-            while (!isValidInput) {
-                try {
-                    System.out.println("Ingrese el Nuevo Pago Mensual: ");
-                    String monthlyPaymentString = scanner.nextLine();
-                    monthlyPayment = Double.parseDouble(monthlyPaymentString);
-                    isValidInput = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("Error: Ingrese un valor numerico valido.");
-                }
+            MongoCollection<Document> pagosCollection = database.getCollection("pagos");
+            Document existingPago = pagosCollection.find(new Document("id", estudianteId)).first();
+
+            if (existingPago != null) {
+                pagosCollection.updateOne(new Document("id", estudianteId),
+                        new Document("$set", new Document("pagoMensual", pagoMensual)));
+            } else {
+                Document pagoDocumento = new Document("id", estudianteId)
+                        .append("nombre", nombre)
+                        .append("pagoMensual", pagoMensual);
+                pagosCollection.insertOne(pagoDocumento);
             }
-
-            for (int i = 0; i < studentsArray.length(); i++) {
-                JSONObject studentObject = studentsArray.getJSONObject(i);
-                String existingId = Integer.toString(studentObject.getInt("id"));
-                JSONArray existingDebts = debtJsonObject.optJSONArray(existingId);
-
-                if (existingDebts == null) {
-                    existingDebts = new JSONArray();
-                    debtJsonObject.put(existingId, existingDebts);
-                } else {
-                    existingDebts.remove(0);
-                }
-
-                JSONObject debtObject = new JSONObject();
-                debtObject.put("value", monthlyPayment);
-                debtObject.put("paid", 0.0);
-
-                existingDebts.put(debtObject);
-            }
-
-            FileWriter debtFileWriter = new FileWriter(getDebts());
-            debtFileWriter.write(debtJsonObject.toString());
-            debtFileWriter.close();
-
-            System.out.println("Deudas agregadas con éxito");
-        } catch (IOException | JSONException e) {
-            System.out.println("Error al agregar las deudas: " + e.getMessage());
         }
+        cursor.close();
     }
+}
+    
     public void updatePayment(String id) {
         try {
             String debtJsonContent = new String(Files.readAllBytes(Paths.get(getDebts())));

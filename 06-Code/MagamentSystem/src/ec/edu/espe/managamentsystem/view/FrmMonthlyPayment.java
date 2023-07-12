@@ -10,6 +10,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.ReplaceOptions;
+import ec.edu.espe.managamentsystem.controller.PaymentRecord;
+import javax.swing.JOptionPane;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 /**
@@ -39,7 +41,7 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
         txtNewValue = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnAddPayment = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btmBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,10 +82,10 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btmBack.setText("Regresar");
+        btmBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btmBackActionPerformed(evt);
             }
         });
 
@@ -95,7 +97,7 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
                 .addGap(106, 106, 106)
                 .addComponent(btnAddPayment)
                 .addGap(65, 65, 65)
-                .addComponent(jButton2)
+                .addComponent(btmBack)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -104,7 +106,7 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddPayment)
-                    .addComponent(jButton2))
+                    .addComponent(btmBack))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -136,51 +138,34 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNewValueActionPerformed
 
     private void btnAddPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPaymentActionPerformed
-        String uri ="mongodb+srv://stevenriva21:stevenriva21@cluster0.skbktne.mongodb.net/?retryWrites=true&w=majority";
-        try (var mongoClient = MongoClients.create(uri)) {
-        // Conectarse a la base de datos
-        MongoDatabase database = mongoClient.getDatabase("TestPayment");
+
+        String[] options = { "Si", "No" };
+        int option = JOptionPane.showOptionDialog(this,
+                "Estás seguro de actualizar al nuevo pago mensual de \n" + "$" + txtNewValue.getText(),
+                "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, options, options[0]);
+
+        if (option == JOptionPane.YES_OPTION) {
+            String uri = "mongodb+srv://stevenriva21:stevenriva21@cluster0.skbktne.mongodb.net/?retryWrites=true&w=majority";
+            String newValue = txtNewValue.getText();
+            PaymentRecord paymentRecord = new PaymentRecord();
+            paymentRecord.monthlyValue(uri, newValue);
+             JOptionPane.showMessageDialog(rootPane, "Guardado");
+            txtNewValue.setText("");
+        } else if (option == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(rootPane, "Abortado");
+            txtNewValue.setText("");
+        }
+        txtNewValue.setText("");
         
-        // Obtener la colección de estudiantes
-        MongoCollection<Document> estudiantesCollection = database.getCollection("estudiantes");
-
-        // Obtener todos los estudiantes
-        MongoCursor<Document> cursor = estudiantesCollection.find().iterator();
-        while (cursor.hasNext()) {
-            Document estudiante = cursor.next();
-            int estudianteId = estudiante.getInteger("id");
-            String nombre = estudiante.getString("nombre");
-            
-            Double pagoMensual = Double.parseDouble(txtNewValue.getText());
-
-            // Verificar si el documento ya existe en la colección "pagos"
-            MongoCollection<Document> pagosCollection = database.getCollection("pagos");
-            Document existingPago = pagosCollection.find(new Document("estudianteId", estudianteId)).first();
-
-            if (existingPago != null) {
-                // Actualizar el pago mensual del estudiante existente
-                pagosCollection.updateOne(new Document("Id", estudianteId),
-                        new Document("$set", new Document("pagoMensual", pagoMensual)));
-            } else {
-                // Insertar un nuevo documento en la colección "pagos"
-                Document pagoDocumento = new Document("Id", estudianteId)
-                        .append("nombre", nombre)
-                        .append("pagoMensual", pagoMensual);
-                pagosCollection.insertOne(pagoDocumento);
-            }
-        }
-
-        // Cerrar el cursor
-        cursor.close();
-        }
     }//GEN-LAST:event_btnAddPaymentActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btmBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBackActionPerformed
        FrmPaymentRecord frmPaymentRecord;
        frmPaymentRecord = new FrmPaymentRecord();
        frmPaymentRecord.setVisible(true);
        this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btmBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,8 +203,8 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btmBack;
     private javax.swing.JButton btnAddPayment;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -52,7 +52,8 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
             }
         });
 
-        btnUpdatePayment.setText("Actualizar Pago");
+        btnUpdatePayment.setText("Actualizar Pagos de Estudiantes");
+        btnUpdatePayment.setToolTipText("");
 
         btnAddMonthlyPayment.setText("Agregar Pago Mensual");
         btnAddMonthlyPayment.addActionListener(new java.awt.event.ActionListener() {

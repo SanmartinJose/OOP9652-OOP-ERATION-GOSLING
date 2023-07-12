@@ -95,7 +95,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnUpdatePayment">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Actualizar Pago"/>
+            <Property name="text" type="java.lang.String" value="Actualizar Pagos de Estudiantes"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnAddMonthlyPayment">

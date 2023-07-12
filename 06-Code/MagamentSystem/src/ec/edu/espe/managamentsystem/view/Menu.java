@@ -24,7 +24,7 @@ public class Menu {
     
     public static void main(String[] args) throws IOException, FileNotFoundException, ParseException, org.json.simple.parser.ParseException {
         
-        PaymentRecord paymentRecord = new PaymentRecord("data/holisticStudents.json", "data/debts.json");
+
         
         Scanner scanner = new Scanner(System.in);
         Payment payment = new Payment();
