@@ -1,19 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package ec.edu.espe.managamentsystem.view;
 
+package ec.edu.espe.managamentsystem.view;
+import ec.edu.espe.managmentsystem.util.MongoDBConnection;
 /**
  *
  * @author Labs-DCCO
  */
-public class FrmCreatUser extends javax.swing.JFrame {
+public class FrmCreateUser extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmCreatUser
      */
-    public FrmCreatUser() {
+    public FrmCreateUser() {
         initComponents();
     }
 
@@ -44,6 +41,8 @@ public class FrmCreatUser extends javax.swing.JFrame {
         txtCreateUsername = new javax.swing.JTextField();
         txtCreatPassword = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        brnRegister = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         jTextField2.setText("jTextField1");
 
@@ -94,7 +93,7 @@ public class FrmCreatUser extends javax.swing.JFrame {
                     .addComponent(txtCreateUsername)
                     .addComponent(cmbCharge, 0, 135, Short.MAX_VALUE)
                     .addComponent(txtCreatPassword))
-                .addGap(0, 299, Short.MAX_VALUE))
+                .addGap(0, 72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,18 +128,37 @@ public class FrmCreatUser extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtCreatPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
+
+        brnRegister.setText("Registrar");
+        brnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brnRegisterActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("Volver");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(brnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,6 +185,11 @@ public class FrmCreatUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void brnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnRegisterActionPerformed
+        MongoDBConnection db = new MongoDBConnection();
+        db.connection("Users");
+    }//GEN-LAST:event_brnRegisterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -184,25 +207,28 @@ public class FrmCreatUser extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCreatUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCreatUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCreatUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCreatUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCreateUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCreatUser().setVisible(true);
+                new FrmCreateUser().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton brnRegister;
+    private javax.swing.JButton btnBack;
     private javax.swing.JComboBox<String> cmbCharge;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

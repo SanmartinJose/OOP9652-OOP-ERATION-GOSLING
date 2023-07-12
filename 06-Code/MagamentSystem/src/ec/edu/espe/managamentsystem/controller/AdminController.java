@@ -14,7 +14,6 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
-import com.mongodb.client.result.InsertOneResult;
 import ec.edu.espe.managmentsystem.model.Admin;
 import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;

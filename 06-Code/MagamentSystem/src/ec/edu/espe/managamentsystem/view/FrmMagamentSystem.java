@@ -104,11 +104,11 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(btnHomeSchool, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(27, 27, 27)
                 .addComponent(btnHolistic, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(37, 37, 37)
                 .addComponent(btnPayments, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         btnCreatAccount.setText("Crear cuenta");
@@ -198,7 +198,10 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPaymentsActionPerformed
 
     private void btnCreatAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatAccountActionPerformed
-        // TODO add your handling code here:
+        FrmCreateUser frmCreateUser;
+        frmCreateUser = new FrmCreateUser();
+        frmCreateUser.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCreatAccountActionPerformed
 
     private void btnCloseSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSesionActionPerformed
