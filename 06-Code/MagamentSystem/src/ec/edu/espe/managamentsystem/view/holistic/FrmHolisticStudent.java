@@ -38,7 +38,7 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         btnAddStudent = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        btnReturn2 = new javax.swing.JButton();
+        btnPrint = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -125,10 +125,10 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
 
         jButton3.setText("Borrar Estudiante");
 
-        btnReturn2.setText("Regresar");
-        btnReturn2.addActionListener(new java.awt.event.ActionListener() {
+        btnPrint.setText("Imprimir");
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReturn2ActionPerformed(evt);
+                btnPrintActionPerformed(evt);
             }
         });
 
@@ -144,7 +144,7 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
-                .addComponent(btnReturn2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -155,7 +155,7 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
                     .addComponent(btnAddStudent)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(btnReturn2))
+                    .addComponent(btnPrint))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -190,9 +190,11 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         returnToMagamentSystem();
     }//GEN-LAST:event_btnReturn1ActionPerformed
 
-    private void btnReturn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturn2ActionPerformed
-       returnToMagamentSystem();
-    }//GEN-LAST:event_btnReturn2ActionPerformed
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+       FrmPrintData frmPrintData;
+       frmPrintData = new FrmPrintData();
+       frmPrintData.setVisible(true);
+    }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnAddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentActionPerformed
         FrmCreateHolisticStudent frmCreateHolistStudent = new FrmCreateHolisticStudent();
@@ -243,8 +245,8 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStudent;
+    private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnReturn1;
-    private javax.swing.JButton btnReturn2;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
