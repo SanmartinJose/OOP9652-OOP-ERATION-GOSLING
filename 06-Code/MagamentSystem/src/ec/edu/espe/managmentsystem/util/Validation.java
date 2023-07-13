@@ -69,5 +69,16 @@ public class Validation {
         return pattern.matcher(text).matches();
     }
     
+    public  String validatePassword(JTextField textField) {
+        String cadena = textField.getText();
+
+        if (cadena.matches("^[a-zA-Z0-9]{6,12}$")) {
+            return cadena;
+        } else {
+            textField.setText(""); 
+            return "";
+        }
     
+    
+    }
 }
