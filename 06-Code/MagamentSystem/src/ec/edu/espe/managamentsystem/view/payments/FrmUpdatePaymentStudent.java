@@ -6,6 +6,9 @@ package ec.edu.espe.managamentsystem.view.payments;
 
 
 import ec.edu.espe.managamentsystem.controller.PaymentRecord;
+import ec.edu.espe.managmentsystem.model.Payment;
+import ec.edu.espe.managmentsystem.util.Validation;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -13,7 +16,7 @@ import ec.edu.espe.managamentsystem.controller.PaymentRecord;
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
-
+    Payment payment;
     /**
      * Creates new form FrmUpdatePaymentStudent
      */
@@ -177,16 +180,34 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private Payment readData() throws NumberFormatException{
+        String id;
+        double valorPagado;
+        id = txtIdStudent.getText();
+        valorPagado = Double.parseDouble(txtValuePaid.getText());
+        payment = new Payment(id, valorPagado);
+        return payment;
+    }
     private void btnUpdatePaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePaidActionPerformed
-        String uri = "mongodb+srv://stevenriva21:stevenriva21@cluster0.skbktne.mongodb.net/?retryWrites=true&w=majority";
-        
-        String idText = txtIdStudent.getText();
-        int id = Integer.parseInt(idText);
-        
-        String valuePaidText = txtValuePaid.getText();
-        PaymentRecord paymentRecord = new PaymentRecord();
-        paymentRecord.updatePayment(uri, id, valuePaidText);
+        payment = readData();
+        Validation validation = new Validation();
+        String inputString = validation.validateNumber(txtValuePaid);
+
+        if (inputString != null) {
+            try {
+                double valuePaid = Double.parseDouble(inputString);
+                PaymentRecord paymentRecord = new PaymentRecord();
+                paymentRecord.updatePayment(payment.getId(), valuePaid);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un número válido", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ingrese un número válido", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                txtIdStudent.setText("");
+                txtValuePaid.setText("");
+
     }//GEN-LAST:event_btnUpdatePaidActionPerformed
 
     private void txtValuePaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValuePaidActionPerformed
@@ -201,12 +222,9 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnDeletePaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePaidActionPerformed
-        String uri = "mongodb+srv://stevenriva21:stevenriva21@cluster0.skbktne.mongodb.net/?retryWrites=true&w=majority";
-        
-        String idText = txtIdStudent.getText();
-        int id = Integer.parseInt(idText);
+        String id = txtIdStudent.getText();
         PaymentRecord paymentRecord = new PaymentRecord();
-        paymentRecord.deletePaid(uri, id);
+        paymentRecord.deletePaid(id);
     }//GEN-LAST:event_btnDeletePaidActionPerformed
 
     /**
@@ -234,6 +252,36 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmUpdatePaymentStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
