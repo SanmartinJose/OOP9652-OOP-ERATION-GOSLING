@@ -156,7 +156,7 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
        else{
            lblAlert1.setVisible(false);
            lblAlert2.setVisible(false);
-           enterToTheProgram();
+            stayInLogin();  
        }
        
       if(login(txtUser, txtPassword)== true){
