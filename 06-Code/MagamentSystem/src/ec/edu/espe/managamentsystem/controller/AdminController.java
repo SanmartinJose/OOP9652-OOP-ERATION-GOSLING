@@ -32,15 +32,15 @@ public class AdminController {
             MongoCollection<Document> collection = database.getCollection("Admin");
                         
             try {
-                Document holisticLegalGuardianDocument = new Document();
-                holisticLegalGuardianDocument.append("_id", admin.getId());
-                holisticLegalGuardianDocument.append("name", admin.getName());
-                holisticLegalGuardianDocument.append("phoneNumber", admin.getPhoneNumber());
-                holisticLegalGuardianDocument.append("email", admin.getEmail());
-                holisticLegalGuardianDocument.append("charge", admin.getCharge());
-                holisticLegalGuardianDocument.append("userName", admin.getUserName());
-                holisticLegalGuardianDocument.append("password", admin.getPassword());
-                collection.insertOne(holisticLegalGuardianDocument);    
+                Document adminDocument = new Document();
+                adminDocument.append("_id", admin.getId());
+                adminDocument.append("name", admin.getName());
+                adminDocument.append("phoneNumber", admin.getPhoneNumber());
+                adminDocument.append("email", admin.getEmail());
+                adminDocument.append("charge", admin.getCharge());
+                adminDocument.append("userName", admin.getUserName());
+                adminDocument.append("password", admin.getPassword());
+                collection.insertOne(adminDocument);    
             } catch (MongoException me) {
 
             }

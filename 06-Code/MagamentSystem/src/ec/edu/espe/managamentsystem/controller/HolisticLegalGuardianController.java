@@ -54,4 +54,26 @@ public class HolisticLegalGuardianController {
             
         }
     }
+    
+    public String getHolisticLegalGuardianList(int id){
+        MongoClient mongo = MongoClients.create(uri);
+        MongoDatabase database = mongo.getDatabase("ManagementSystem");
+        MongoCollection<Document> collection = database.getCollection("HolisticLegalGuardian");
+               
+        MongoCursor<Document> cursor = collection.find().iterator();
+        String legalGuardianName = "No existente";
+        
+        while(cursor.hasNext()){
+            Document name = cursor.next();
+            int nameInt = 0;
+            nameInt = (int) name.get("_id");
+            
+            if(nameInt == id){
+                legalGuardianName = (String) name.get("name"); 
+            }else{
+                legalGuardianName = "No existente";
+            }
+        }
+        return legalGuardianName;
+    }
 }

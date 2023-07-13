@@ -20,10 +20,9 @@ public class Teacher {
     private int age;
     private String address;
     private String email;
-    private int phoneNumber;
-    HomeSchoolStudent homeSchoolStudent;
+    private String phoneNumber;
 
-    public Teacher(int id,int courseId, String name, int age, String address, String email, int phoneNumber, HomeSchoolStudent homeSchoolStudent) {
+    public Teacher(int id,int courseId, String name, int age, String address, String email, String phoneNumber) {
         this.id = id;
         this.courseId= courseId;
         this.name = name;
@@ -31,7 +30,6 @@ public class Teacher {
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.homeSchoolStudent = homeSchoolStudent;
     }
 
     public int getId() {
@@ -58,11 +56,7 @@ public class Teacher {
         return email;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public HomeSchoolStudent getHomeSchoolStudent() {
-        return homeSchoolStudent;
     }
 }

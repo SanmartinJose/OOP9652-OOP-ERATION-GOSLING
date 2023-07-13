@@ -15,28 +15,17 @@ public class HomeSchoolStudent {
     private String name;
     private String typeOfStudy;
     private String address; 
-    private Date bornDate;
     
 
     
-    public HomeSchoolStudent(int id,int courseId, String name, String typeOfStudy, String address, Date bornDate) {
+    public HomeSchoolStudent(int id,int courseId, String name, String typeOfStudy, String address) {
         this.id = id;
         this.courseId = courseId;
         this.name = name;
         this.typeOfStudy = typeOfStudy;
         this.address = address;
-        this.bornDate = bornDate;
-        bornDate.setYear(bornDate.getYear()-1900);
-        this.age=computeAge().getYear();
     }
-    private Date computeAge(){
-        // TODO code, compute agein years using the bornOnDate
-        long timeDiff = new Date().getTime() - bornDate.getTime();
-        Date ageDate = new Date();
-        ageDate.setTime(timeDiff);
-        ageDate.setYear(ageDate.getYear()-70);
-        return ageDate;
-    }
+
     public int getId() {
         return id;
     }
@@ -81,17 +70,9 @@ public class HomeSchoolStudent {
         this.address = address;
     }
 
-    public Date getBorndate() {
-        return bornDate;
-    }
-
-    public void setBorndate(Date borndate) {
-        this.bornDate = bornDate;
-    }
-
     @Override
     public String toString() {
-        return "HomeSchoolStudent{" + "id=" + id + ", age=" + age + ", name=" + name + ", typeOfStudy=" + typeOfStudy + ", address=" + address + ", borndate=" + bornDate + '}';
+        return "HomeSchoolStudent{" + "id=" + id + ", age=" + age + ", name=" + name + ", typeOfStudy=" + typeOfStudy + ", address=" + address +'}';
     }
     
 }

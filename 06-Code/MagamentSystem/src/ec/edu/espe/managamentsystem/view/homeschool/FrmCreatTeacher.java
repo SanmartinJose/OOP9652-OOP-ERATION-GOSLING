@@ -4,6 +4,13 @@
  */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
+import com.mongodb.client.MongoCursor;
+import ec.edu.espe.managamentsystem.controller.StudentCourseController;
+import ec.edu.espe.managamentsystem.controller.TeacherController;
+import ec.edu.espe.managmentsystem.model.HomeSchoolStudent;
+import ec.edu.espe.managmentsystem.model.Teacher;
+import org.bson.Document;
+
 /**
  *
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
@@ -15,6 +22,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
      */
     public FrmCreatTeacher() {
         initComponents();
+        addComoBoxItems();
     }
 
     /**
@@ -39,6 +47,9 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtPhoneNumber = new javax.swing.JTextField();
         txtAdress = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        cmbTeacherCourse = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
 
@@ -57,6 +68,15 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
 
         jLabel6.setText("Dirección:");
 
+        btnSave.setText("Guardar");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Curso Asignado:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -68,21 +88,31 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jSeparator1))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(259, Short.MAX_VALUE)
+                .addComponent(btnSave)
+                .addGap(258, 258, 258))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtName)
-                    .addComponent(txtAge)
-                    .addComponent(txtEmail)
-                    .addComponent(txtPhoneNumber)
-                    .addComponent(txtAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtName)
+                            .addComponent(txtAge)
+                            .addComponent(txtEmail)
+                            .addComponent(txtPhoneNumber)
+                            .addComponent(txtAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(cmbTeacherCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,7 +142,12 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cmbTeacherCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                .addComponent(btnSave))
         );
 
         btnBack.setText("Regresar");
@@ -169,6 +204,64 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+          
+        String name;
+        int age;
+        String address;
+        String email;
+        String phoneNumber;
+        int courseId;
+        String courseName;
+        
+        name = txtName.getText();
+        address = txtAdress.getText();
+        email = txtEmail.getText();
+        phoneNumber = txtPhoneNumber.getText();
+        age = Integer.parseInt(txtAge.getText());
+        courseName = cmbTeacherCourse.getSelectedItem().toString();
+        courseId = getCOurseId(courseName);
+        
+        Teacher teacher = new Teacher(age, courseId, name, age, address, email, phoneNumber);
+        TeacherController teacherController= new TeacherController();
+        
+        teacherController.fileWritter(teacher);
+        
+        FrmCourse frmCourse = new FrmCourse();
+        frmCourse.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    public void addComoBoxItems(){
+        
+       StudentCourseController studentCourseController;
+       studentCourseController = new StudentCourseController();
+       
+       MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            String item = document.getString("name");
+            cmbTeacherCourse.addItem(item);   
+       }
+    }
+    
+     public int getCOurseId(String name){
+        StudentCourseController studentCourseController;
+        studentCourseController = new StudentCourseController();
+       
+        MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
+       
+       int id=0;
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            if(document.get("name") == name){
+              id = (int) document.get("_id");
+            }
+       }
+       return id;
+    }
     /**
      * @param args the command line arguments
      */
@@ -206,12 +299,15 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> cmbTeacherCourse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;

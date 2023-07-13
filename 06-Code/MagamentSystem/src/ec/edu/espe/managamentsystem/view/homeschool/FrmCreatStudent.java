@@ -4,6 +4,18 @@
  */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
+import com.mongodb.client.MongoCursor;
+import ec.edu.espe.managamentsystem.controller.HomeStudentController;
+import ec.edu.espe.managamentsystem.controller.StudentCourseController;
+import ec.edu.espe.managmentsystem.model.HomeSchoolLegalGuardian;
+import ec.edu.espe.managmentsystem.model.HomeSchoolStudent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import org.bson.Document;
+
 /**
  *
  * @author PabloEZurita
@@ -15,6 +27,7 @@ public class FrmCreatStudent extends javax.swing.JFrame {
      */
     public FrmCreatStudent() {
         initComponents();
+        addComboBox();
     }
 
     /**
@@ -38,8 +51,10 @@ public class FrmCreatStudent extends javax.swing.JFrame {
         txtAdreesStudent = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtTypeOfStudy = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnAddLegalGuardian = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        cmbCourseName = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
 
@@ -66,10 +81,10 @@ public class FrmCreatStudent extends javax.swing.JFrame {
         txtTypeOfStudy.setRows(5);
         jScrollPane1.setViewportView(txtTypeOfStudy);
 
-        jButton1.setText("+ Añadir Tutol Legal");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddLegalGuardian.setText("+ Añadir Tutol Legal");
+        btnAddLegalGuardian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddLegalGuardianActionPerformed(evt);
             }
         });
 
@@ -80,32 +95,44 @@ public class FrmCreatStudent extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Curso:");
+
+        cmbCourseName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCourseNameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnAddLegalGuardian)
                         .addGap(65, 65, 65)
                         .addComponent(btnBack)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAdreesStudent, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtAgeStudent)
-                                .addComponent(txtNameStudent)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(212, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmbCourseName, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtAdreesStudent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtAgeStudent)
+                                    .addComponent(txtNameStudent)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(212, 212, 212))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,9 +153,13 @@ public class FrmCreatStudent extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtAdreesStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jLabel6)
+                    .addComponent(cmbCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddLegalGuardian)
                     .addComponent(btnBack))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -141,7 +172,7 @@ public class FrmCreatStudent extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 26, Short.MAX_VALUE)
+            .addGap(0, 23, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,11 +212,33 @@ public class FrmCreatStudent extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAdreesStudentActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddLegalGuardianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLegalGuardianActionPerformed
+        
+        int age;
+        int courseId;
+        String name;
+        String typeOfStudy;
+        String address; 
+        String courseName;
+        
+        age = Integer.parseInt(txtAgeStudent.getText()); 
+        name = txtNameStudent.getText();
+        typeOfStudy = txtTypeOfStudy.getText();
+        address = txtAdreesStudent.getText();
+        courseName = cmbCourseName.getSelectedItem().toString();
+        courseId = getCOurseId(courseName);
+        
+        HomeSchoolStudent homeSchoolStudent; 
+        homeSchoolStudent = new HomeSchoolStudent(age, courseId, name, typeOfStudy, address);
+        
+        HomeStudentController homeSchoolController = new HomeStudentController();
+        homeSchoolController.writeHomeStudent(homeSchoolStudent);
+        
+        
         FrmCreateLegalGuardian frmCreateLegalGuardian = new FrmCreateLegalGuardian();
         frmCreateLegalGuardian.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddLegalGuardianActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         FrmCourse frmCourse = new FrmCourse();
@@ -193,6 +246,41 @@ public class FrmCreatStudent extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void cmbCourseNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCourseNameActionPerformed
+  
+    }//GEN-LAST:event_cmbCourseNameActionPerformed
+
+    
+    public void addComboBox(){
+       StudentCourseController studentCourseController;
+       studentCourseController = new StudentCourseController();
+       
+       MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            String item = document.getString("name");
+            cmbCourseName.addItem(item);   
+       }
+    }
+    
+    public int getCOurseId(String name){
+        StudentCourseController studentCourseController;
+        studentCourseController = new StudentCourseController();
+       
+        MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
+       
+       int id=0;
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            if(document.get("name") == name){
+              id = (int) document.get("_id");
+            }
+       }
+       return id;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -232,13 +320,15 @@ public class FrmCreatStudent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddLegalGuardian;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cmbCourseName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

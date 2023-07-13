@@ -13,17 +13,15 @@ import java.util.ArrayList;
 public class HomeSchoolCourse {
     private int id;
     private String name;
-    private ArrayList<HomeSchoolStudent>homeschoolstudent;
 
-    public HomeSchoolCourse(int id, String name, ArrayList<HomeSchoolStudent> homeschoolstudent) {
+    public HomeSchoolCourse(int id, String name) {
         this.id = id;
         this.name = name;
-        this.homeschoolstudent = homeschoolstudent;
     }
 
     @Override
     public String toString() {
-        return "HomeSchoolCourse{" + "id=" + id + ", name=" + name + ", homeschoolstudent=" + homeschoolstudent + '}';
+        return "HomeSchoolCourse{" + "id=" + id + ", name=" + name + '}';
     }
 
     
@@ -34,13 +32,7 @@ public class HomeSchoolCourse {
         return id;
     }
 
-    public ArrayList<HomeSchoolStudent> getHomeschoolstudent() {
-        return homeschoolstudent;
-    }
 
-    public void setHomeschoolstudent(ArrayList<HomeSchoolStudent> homeschoolstudent) {
-        this.homeschoolstudent = homeschoolstudent;
-    }
 
     /**
      * @param id the id to set

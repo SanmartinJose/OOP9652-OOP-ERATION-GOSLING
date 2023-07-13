@@ -34,13 +34,13 @@ public class HomeSchoolLegalGuardianController {
             MongoCollection<Document> collection = database.getCollection("HomeSchoolLegalGuardian");
                         
             try {
-                Document holisticLegalGuardianDocument = new Document();
-                holisticLegalGuardianDocument.append("name", homeSchoolLegalGuardian.getName());
-                holisticLegalGuardianDocument.append("age", homeSchoolLegalGuardian.getAge());
-                holisticLegalGuardianDocument.append("email", homeSchoolLegalGuardian.getEmail());
-                holisticLegalGuardianDocument.append("phoneNumber", homeSchoolLegalGuardian.getPhoneNumber());
-                holisticLegalGuardianDocument.append("studentId", homeSchoolLegalGuardian.getStudentId());
-                collection.insertOne(holisticLegalGuardianDocument);    
+                Document homeSchoolLegalGuardianDocument = new Document();
+                homeSchoolLegalGuardianDocument.append("name", homeSchoolLegalGuardian.getName());
+                homeSchoolLegalGuardianDocument.append("age", homeSchoolLegalGuardian.getAge());
+                homeSchoolLegalGuardianDocument.append("email", homeSchoolLegalGuardian.getEmail());
+                homeSchoolLegalGuardianDocument.append("phoneNumber", homeSchoolLegalGuardian.getPhoneNumber());
+                homeSchoolLegalGuardianDocument.append("studentId", homeSchoolLegalGuardian.getStudentId());
+                collection.insertOne(homeSchoolLegalGuardianDocument);    
             } catch (MongoException me) {
                 
             }

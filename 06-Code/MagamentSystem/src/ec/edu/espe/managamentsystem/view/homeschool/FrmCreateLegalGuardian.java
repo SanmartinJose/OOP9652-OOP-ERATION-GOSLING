@@ -4,6 +4,13 @@
  */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
+import com.mongodb.client.MongoCursor;
+import ec.edu.espe.managamentsystem.controller.HomeSchoolLegalGuardianController;
+import ec.edu.espe.managamentsystem.controller.HomeStudentController;
+import ec.edu.espe.managamentsystem.controller.StudentCourseController;
+import ec.edu.espe.managmentsystem.model.HomeSchoolLegalGuardian;
+import org.bson.Document;
+
 /**
  *
  * @author PabloEZurita
@@ -54,6 +61,11 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
         jLabel5.setText("E-mail:");
 
         btnSave.setText("Guardar");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Regresar");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +159,45 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        int age ;
+        int studentId;
+        String phoneNumber;
+        String name;
+        String email;
+        
+        name = txtLegalGuardianName.getText();
+        age = Integer.parseInt(txtLegalGuardianAge.getText());
+        phoneNumber = txtLegalGuardianPhoneNumber.getText();
+        email = txtEmail.getText();
+        studentId = getStudentId();
+        
+        HomeSchoolLegalGuardian homeSchoolLegalGuardian;
+        homeSchoolLegalGuardian = new HomeSchoolLegalGuardian(age, studentId, phoneNumber, name, email);
+        
+        HomeSchoolLegalGuardianController homeSchoolLegalGuardianController;
+        homeSchoolLegalGuardianController = new HomeSchoolLegalGuardianController();
+        homeSchoolLegalGuardianController.fileWrite(homeSchoolLegalGuardian);
+        
+        FrmCourse frmCourse = new FrmCourse();
+        frmCourse.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSaveActionPerformed
+    
+    public int getStudentId(){
+       HomeStudentController homeStudentController;
+       homeStudentController = new HomeStudentController();
+       
+       MongoCursor<Document> cursor = homeStudentController.getStudentList().iterator();
+       
+       int id=0;
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            id = (int) document.getInteger("_id");
+       }
+       return id;
+    }
     /**
      * @param args the command line arguments
      */

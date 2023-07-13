@@ -4,7 +4,15 @@
  */
 package ec.edu.espe.managamentsystem.view.holistic;
 
+import com.mongodb.client.MongoCursor;
+import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
+import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
+import ec.edu.espe.managamentsystem.controller.HomeSchoolLegalGuardianController;
+import ec.edu.espe.managamentsystem.controller.HomeStudentController;
 import ec.edu.espe.managamentsystem.view.homeschool.*;
+import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
+import ec.edu.espe.managmentsystem.model.HomeSchoolLegalGuardian;
+import org.bson.Document;
 
 /**
  *
@@ -56,6 +64,11 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         jLabel5.setText("E-mail:");
 
         btnSave.setText("Guardar");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Regresar");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +162,45 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        int age ;
+        int studentId;
+        String phoneNumber;
+        String name;
+        String email;
+        
+        name = txtLegalGuardianName.getText();
+        age = Integer.parseInt(txtLegalGuardianAge.getText());
+        phoneNumber = txtLegalGuardianPhoneNumber.getText();
+        email = txtEmail.getText();
+        studentId = getStudentId();
+        
+        HolisticLegalGuardian holisticLegalGuardian;
+        holisticLegalGuardian = new HolisticLegalGuardian(age, studentId, phoneNumber, name, email);
+        
+        HolisticLegalGuardianController holisticLegalGuardianController;
+        holisticLegalGuardianController = new HolisticLegalGuardianController();
+        holisticLegalGuardianController.fileWrite(holisticLegalGuardian);
+            
+        FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+        frmHolisticStudent.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    public int getStudentId(){
+       HolisticStudentController holisticStudentController;
+       holisticStudentController = new HolisticStudentController();
+       
+       MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
+       
+       int id=0;
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            id = (int) document.getInteger("_id");
+       }
+       return id;
+    }
     /**
      * @param args the command line arguments
      */

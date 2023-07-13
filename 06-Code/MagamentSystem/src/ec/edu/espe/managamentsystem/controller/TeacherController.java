@@ -33,14 +33,14 @@ public class TeacherController {
             MongoCollection<Document> collection = database.getCollection("Teacher");
                         
             try {
-                Document holisticLegalGuardianDocument = new Document();
-                holisticLegalGuardianDocument.append("_id", teacher.getId());
-                holisticLegalGuardianDocument.append("courseId", teacher.getCourseId());
-                holisticLegalGuardianDocument.append("name", teacher.getName());
-                holisticLegalGuardianDocument.append("age", teacher.getAge());
-                holisticLegalGuardianDocument.append("address", teacher.getAddress());
-                holisticLegalGuardianDocument.append("email", teacher.getAddress());
-                collection.insertOne(holisticLegalGuardianDocument);    
+                Document teacherDocument = new Document();
+                teacherDocument.append("_id", teacher.getId());
+                teacherDocument.append("courseId", teacher.getCourseId());
+                teacherDocument.append("name", teacher.getName());
+                teacherDocument.append("age", teacher.getAge());
+                teacherDocument.append("address", teacher.getAddress());
+                teacherDocument.append("email", teacher.getAddress());
+                collection.insertOne(teacherDocument);    
             } catch (MongoException me) {
 
             }

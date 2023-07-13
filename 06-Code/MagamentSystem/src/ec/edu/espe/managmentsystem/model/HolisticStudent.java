@@ -9,7 +9,7 @@ package ec.edu.espe.managmentsystem.model;
  * @author PabloEZurita
  */
 public class HolisticStudent {
-     int id;
+    int id;
     int age;
     String name;
     String address;
