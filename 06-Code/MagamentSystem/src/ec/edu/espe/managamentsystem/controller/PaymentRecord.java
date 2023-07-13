@@ -1,11 +1,12 @@
 
 package ec.edu.espe.managamentsystem.controller;
 
-
+import com.mongodb.MongoException;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import ec.edu.espe.managmentsystem.model.Payment;
-import ec.edu.espe.managmentsystem.util.MongoDBConnectionOptional;
+import com.mongodb.client.MongoDatabase;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,88 +23,91 @@ import org.json.JSONObject;
 public class PaymentRecord {
     private String students;
     private String debts;
-    private MongoDBConnectionOptional mdb;
 
-    public PaymentRecord() {
-        mdb = new MongoDBConnectionOptional();
-        mdb.connection("Payments");
-    }
-    
-    public void monthlyValue(Payment payment) {
-        MongoDBConnectionOptional db = new MongoDBConnectionOptional();
-        db.connection("Users");
 
-        MongoCursor<Document> cursor = db.getCollection().find().iterator();
+    public void monthlyValue(String uri, String newValue) {
+    try (var mongoClient = MongoClients.create(uri)) {
+        MongoDatabase database = mongoClient.getDatabase("TestPayment");
+        MongoCollection<Document> estudiantesCollection = database.getCollection("estudiantes");
+
+        MongoCursor<Document> cursor = estudiantesCollection.find().iterator();
         while (cursor.hasNext()) {
-            Document student = cursor.next();
-            String studentId = student.getString("id");
-            String name = student.getString("fullName");
+            Document estudiante = cursor.next();
+            int estudianteId = estudiante.getInteger("id");
+            String nombre = estudiante.getString("nombre");
 
-            Double mounthlyPayment = payment.getPagoMensual();
+            Double pagoMensual = Double.parseDouble(newValue);
 
-            MongoCollection<Document> paymentCollection = db.getDatabase().getCollection("Payments");
-            Document existingPayment = paymentCollection.find(new Document("id", studentId)).first();
+            MongoCollection<Document> pagosCollection = database.getCollection("pagos");
+            Document existingPago = pagosCollection.find(new Document("id", estudianteId)).first();
 
-            if (existingPayment != null) {
-                paymentCollection.updateOne(new Document("id", studentId),
-                        new Document("$set", new Document("monthlyPayment", mounthlyPayment)));
+            if (existingPago != null) {
+                pagosCollection.updateOne(new Document("id", estudianteId),
+                        new Document("$set", new Document("pagoMensual", pagoMensual)));
             } else {
-                Document pagoDocumento = new Document("id", studentId)
-                        .append("fullName", name)
-                        .append("monthlyPayment", mounthlyPayment);
-                paymentCollection.insertOne(pagoDocumento);
+                Document pagoDocumento = new Document("id", estudianteId)
+                        .append("nombre", nombre)
+                        .append("pagoMensual", pagoMensual);
+                pagosCollection.insertOne(pagoDocumento);
             }
         }
         cursor.close();
     }
+}
+    
+    public void updatePayment(String uri, int estudianteId, String valorPagado) {
+        try (var mongoClient = MongoClients.create(uri)) {
+            MongoDatabase database = mongoClient.getDatabase("TestPayment");
+            MongoCollection<Document> pagosCollection = database.getCollection("pagos");
 
-    public void updatePayment(String studentId, Double valuePaid) {
-        Document existingPayment = mdb.getCollection().find(new Document("id", studentId)).first();
+            Document existingPago = pagosCollection.find(new Document("id", estudianteId)).first();
 
-        if (existingPayment != null) {
-            Double currerntPaidValue = existingPayment.containsKey("valuePaid") ? existingPayment.getDouble("valuePaid") : 0.0;
-            Double newPaidValue = currerntPaidValue + valuePaid;
+            if (existingPago != null) {
+                Double valorPagadoActual = existingPago.containsKey("valorPagado") ? existingPago.getDouble("valorPagado") : 0.0;
+                Double valorPagadoDouble = Double.parseDouble(valorPagado);
+                Double nuevoValorPagado = valorPagadoActual + valorPagadoDouble;
 
-            Document estudiante = mdb.getCollection().find(new Document("id", studentId)).first();
-            Number mounthlyPaymentNumber = (Number) estudiante.get("monthlyPayment");
-            Double mounthlyPayment = mounthlyPaymentNumber.doubleValue();
-            Double remainingValue = mounthlyPayment - newPaidValue;
+                Document estudiante = database.getCollection("pagos").find(new Document("id", estudianteId)).first();
+                Double pagoMensual = estudiante.getDouble("pagoMensual");
+                Double valorRestante = pagoMensual - nuevoValorPagado;
 
-            mdb.getCollection().updateOne(new Document("id", studentId),
-                    new Document("$set", new Document("valuePaid", newPaidValue)
-                            .append("remainingValue", remainingValue))
-            );
-        } else {
-            // If there is no payment record for the student, create a new one
-            Document student = mdb.getCollection().find(new Document("id", studentId)).first();
-            if (student != null) {
-                String name = student.getString("fullName");
-                Number mounthlyPaymentNumber = (Number) student.get("monthlyPayment");
-                Double mounthlyPayment = mounthlyPaymentNumber.doubleValue();
-                Double remainingValue = mounthlyPayment - valuePaid;
+                pagosCollection.updateOne(
+                        new Document("id", estudianteId),
+                        new Document("$set", new Document("valorPagado", nuevoValorPagado)
+                                .append("valorRestante", valorRestante))
+                );
+            } else {
+                // Si no existe un registro de pago para el estudiante, se crea uno nuevo
+                    Document estudiante = database.getCollection("pagos").find(new Document("id", estudianteId)).first();
+                    if (estudiante != null) {
+                        String nombre = estudiante.getString("nombre");
+                        Double pagoMensual = estudiante.containsKey("pagoMensual") ? estudiante.getDouble("pagoMensual") : 0.0;
+                        Double valorPagadoDouble = Double.parseDouble(valorPagado);
+                        Double valorRestante = pagoMensual - valorPagadoDouble;
 
-                Document documentPaid = new Document("id", studentId)
-                        .append("fullName", name)
-                        .append("monthlyPayment", mounthlyPayment)
-                        .append("valuePaid", valuePaid)
-                        .append("remainingValue", remainingValue);
+                        Document pagoDocumento = new Document("id", estudianteId)
+                        .append("nombre", nombre)
+                        .append("pagoMensual", pagoMensual)
+                        .append("valorPagado", valorPagadoDouble)
+                        .append("valorRestante", valorRestante);
 
-                mdb.getCollection().insertOne(documentPaid);
+                        pagosCollection.insertOne(pagoDocumento);
+                    }
             }
         }
     }
+    
+    public void deletePaid(String uri, int estudianteId) {
+        try (var mongoClient = MongoClients.create(uri)) {
+            MongoDatabase database = mongoClient.getDatabase("TestPayment");
+            MongoCollection<Document> collection = database.getCollection("pagos");
 
-    public void deletePaid(String studentId) {
-        MongoCollection<Document> PaymentCollection = mdb.getCollection();
-        Document student = PaymentCollection.find(new Document("id", studentId)).first();
-        if (student != null) {
-            Number mounthlyPaymentNumber = (Number) student.get("monthlyPayment");
-            Double mounthlyPayment = mounthlyPaymentNumber.doubleValue();
+            Document filter = new Document("id", estudianteId);
+            Document update = new Document("$set", new Document("valorPagado", 0).append("valorRestante", 250));
 
-            Document filter = new Document("id", studentId);
-            Document update = new Document("$set", new Document("valuePaid", 0.0).append("remainingValue", mounthlyPayment));
-
-            PaymentCollection.updateOne(filter, update);
+            collection.updateOne(filter, update);
+        } catch (MongoException e) {
+            System.out.println("Error al realizar la operación en la base de datos: " + e.getMessage());
         }
     }
 

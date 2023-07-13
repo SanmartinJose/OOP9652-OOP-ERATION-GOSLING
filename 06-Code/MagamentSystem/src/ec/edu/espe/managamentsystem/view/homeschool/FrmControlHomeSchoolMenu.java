@@ -4,7 +4,7 @@
  */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
-import ec.edu.espe.managamentsystem.view.FrmMagamentSystem;
+import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
 import javax.swing.JComboBox;
 
 /**
@@ -12,8 +12,7 @@ import javax.swing.JComboBox;
  * @author PabloEZurita
  */
 public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
-   
-    
+
     /**
      * Creates new form ControlHomeSchoolMenu
      */
@@ -25,12 +24,6 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
             lblChooseCourse.setVisible(false);
             btnEnterToTheCourse.setVisible(false);
             txtCourse.setVisible(true);
-        }
-        else{
-            cmbCourse.setVisible(true);
-            lblChooseCourse.setVisible(true);
-            btnEnterToTheCourse.setVisible(true);
-            txtCourse.setVisible(false);
         }
     }
 
@@ -193,7 +186,7 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
     
     
     private void cmbCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCourseActionPerformed
-       
+        
         
     }//GEN-LAST:event_cmbCourseActionPerformed
 
@@ -204,7 +197,7 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddCourseActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmMagamentSystem frmMagamentSystem = new FrmMagamentSystem();
+        FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
         frmMagamentSystem.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -246,10 +239,6 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
         });
     }
 
-    
-
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCourse;
     private javax.swing.JButton btnBack;
@@ -264,9 +253,4 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblChooseCourse;
     private javax.swing.JLabel txtCourse;
     // End of variables declaration//GEN-END:variables
-
-    /**
-     * @return the cmbCourse
-     */
-    
 }

@@ -1,8 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.managamentsystem.view;
+
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 /**
  *
@@ -136,7 +143,13 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnterLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterLoginActionPerformed
-       if (txtUser.getText().isEmpty()||txtPassword.getText().isEmpty()){
+       String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
+        String db = "SchoolManagmentSystem";
+        try(MongoClient mongoClient = MongoClients.create(uri)){
+            MongoDatabase database = mongoClient.getDatabase(db);
+            MongoCollection<Document> collection = database.getCollection("Users");               
+        
+        if (txtUser.getText().isEmpty()||txtPassword.getText().isEmpty()){
             lblAlert1.setVisible(true);
             lblAlert2.setVisible(true);
        }
@@ -146,16 +159,49 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
            enterToTheProgram();
        }
        
-        
-        
+      if(login(txtUser, txtPassword)== true){
+          enterToTheProgram();        
+        } else {
+          stayInLogin();
+          JOptionPane.showMessageDialog(rootPane, "Intenta de nuevo", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+          
+      }
     }//GEN-LAST:event_btnEnterLoginActionPerformed
-
+    }
     private void enterToTheProgram() {
-        FrmMagamentSystem frmMagamentSystem = new FrmMagamentSystem();
+        
+        FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
         frmMagamentSystem.setVisible(true);
         this.setVisible(false);
     }
+    private void stayInLogin() {
+        FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
+        frmMagamentSystem.setVisible(false);
+        this.setVisible(true);
+    }
+    public boolean login(JTextField usernameField, JTextField passwordField) {
+    String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
+        String db = "SchoolManagmentSystem";
+        try(MongoClient mongoClient = MongoClients.create(uri)){
+            MongoDatabase database = mongoClient.getDatabase(db);
+            MongoCollection<Document> collection = database.getCollection("Users");    
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
+        Bson filter = Filters.and(
+                Filters.eq("username", username),
+                Filters.eq("password", password)
+        );
+
+        Document user = collection.find(filter).first();
+
+        if (user != null && user.getString("username").equals(username) && user.getString("password").equals(password)) {
+            return true;  
+        } else {
+            return false;  
+    }
+}
+}
     /**
      * @param args the command line arguments
      */

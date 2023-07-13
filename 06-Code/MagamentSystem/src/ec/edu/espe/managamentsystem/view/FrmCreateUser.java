@@ -50,6 +50,12 @@ MongoDBConnection db = new MongoDBConnection();
         jLabel8 = new javax.swing.JLabel();
         txtCreateUsername = new javax.swing.JTextField();
         txtCreatPassword = new javax.swing.JTextField();
+        lblAlertID = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblphone = new javax.swing.JLabel();
+        lbluser = new javax.swing.JLabel();
+        lblemail = new javax.swing.JLabel();
+        lblpass = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         brnRegister = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
@@ -77,6 +83,24 @@ MongoDBConnection db = new MongoDBConnection();
 
         jLabel8.setText("Contraseña:");
 
+        lblAlertID.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblAlertID.setText("*Campo Vacio por favor completar");
+
+        lblName.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblName.setText("*Campo Vacio por favor completar");
+
+        lblphone.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblphone.setText("*Campo Vacio por favor completar");
+
+        lbluser.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lbluser.setText("*Campo Vacio por favor completar");
+
+        lblemail.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblemail.setText("*Campo Vacio por favor completar");
+
+        lblpass.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblpass.setText("*Campo Vacio por favor completar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -103,7 +127,26 @@ MongoDBConnection db = new MongoDBConnection();
                     .addComponent(txtCreateUsername)
                     .addComponent(cmbCharge, 0, 135, Short.MAX_VALUE)
                     .addComponent(txtCreatPassword))
-                .addGap(0, 72, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblAlertID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(19, 19, 19))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblphone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbluser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblpass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblemail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,19 +156,23 @@ MongoDBConnection db = new MongoDBConnection();
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCreateCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCreateCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAlertID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtCreatFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCreatFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtCreatePhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCreatePhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblphone))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtCreateEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCreateEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblemail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -133,11 +180,13 @@ MongoDBConnection db = new MongoDBConnection();
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtCreateUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCreateUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbluser))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtCreatPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCreatPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblpass))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -149,6 +198,11 @@ MongoDBConnection db = new MongoDBConnection();
         });
 
         btnBack.setText("Volver");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -159,7 +213,7 @@ MongoDBConnection db = new MongoDBConnection();
                 .addComponent(brnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,6 +265,24 @@ MongoDBConnection db = new MongoDBConnection();
         String username;
         String password;
         
+        if(txtCreateCedula.getText().isEmpty()||txtCreatFullName.getText().isEmpty()
+                ||txtCreatPassword.getText().isEmpty()||txtCreateEmail.getText().isEmpty()||
+                txtCreateUsername.getText().isEmpty()||txtCreatePhoneNumber.getText().isEmpty()){
+            lblAlertID.setVisible(true);
+            lblName.setVisible(true);
+            lblemail.setVisible(true);
+            lblpass.setVisible(true);
+            lblphone.setVisible(true);
+            lbluser.setVisible(true);
+                    
+        }else{
+            lblAlertID.setVisible(false);
+            lblName.setVisible(false);
+            lblemail.setVisible(false);
+            lblpass.setVisible(false);
+            lblphone.setVisible(false);
+            lbluser.setVisible(false);
+        }
         id = v.validateNumber(txtCreateCedula);
         fullName=v.validateName(txtCreatFullName);
         cellphone=v.validateNumber(txtCreatePhoneNumber);
@@ -240,6 +312,13 @@ MongoDBConnection db = new MongoDBConnection();
         emptyField();
         
     }//GEN-LAST:event_brnRegisterActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        FrmManagmentSystem frmManagmentSystem;
+        frmManagmentSystem = new FrmManagmentSystem();
+        frmManagmentSystem.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +380,12 @@ MongoDBConnection db = new MongoDBConnection();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblAlertID;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblemail;
+    private javax.swing.JLabel lblpass;
+    private javax.swing.JLabel lblphone;
+    private javax.swing.JLabel lbluser;
     private javax.swing.JTextField txtCreatFullName;
     private javax.swing.JTextField txtCreatPassword;
     private javax.swing.JTextField txtCreateCedula;

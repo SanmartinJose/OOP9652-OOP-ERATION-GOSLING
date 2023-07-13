@@ -5,27 +5,19 @@
 package ec.edu.espe.managamentsystem.view.homeschool;
 
 import ec.edu.espe.managamentsystem.view.homeschool.FrmCreatStudent;
-import ec.edu.espe.managmentsystem.model.HomeSchoolCourse;
-import ec.edu.espe.managmentsystem.model.HomeSchoolStudent;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 
 /**
  *
  * @author PabloEZurita
  */
 public class FrmCourse extends javax.swing.JFrame {
-    public FrmControlHomeSchoolMenu frmControlHomeSchoolMenu = new FrmControlHomeSchoolMenu();
+
     /**
      * Creates new form FrmCourse
      */
-    
-
     public FrmCourse() {
         initComponents();
+       
         lblObligation.setVisible(false);
         btnAddStudent.setVisible(false);
         btnAddSchedule.setVisible(false);
@@ -227,9 +219,6 @@ public class FrmCourse extends javax.swing.JFrame {
             lblObligation.setVisible(true);
         }
         else{
-            
-            
-            btnSaveTheName.setEnabled(false);
             btnAddSchedule.setVisible(true);
             btnAddStudent.setVisible(true);
             btnAddTeacher.setVisible(true);
@@ -241,12 +230,10 @@ public class FrmCourse extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveTheNameActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        
+        FrmControlHomeSchoolMenu frmControlHomeSchoolMenu = new FrmControlHomeSchoolMenu();
         frmControlHomeSchoolMenu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
-
-    
 
     private void btnAddTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTeacherActionPerformed
         FrmCreatTeacher frmCreatTeacher = new FrmCreatTeacher();

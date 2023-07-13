@@ -4,7 +4,7 @@
  */
 package ec.edu.espe.managamentsystem.view.holistic;
 
-import ec.edu.espe.managamentsystem.view.FrmMagamentSystem;
+import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
 
 /**
  *
@@ -203,7 +203,7 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddStudentActionPerformed
 
     private void returnToMagamentSystem() {
-        FrmMagamentSystem frmMagamentSystem = new FrmMagamentSystem();
+        FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
         frmMagamentSystem.setVisible(true);
         this.setVisible(false);
     }

@@ -4,7 +4,7 @@
  */
 package ec.edu.espe.managamentsystem.view.payments;
 
-import ec.edu.espe.managamentsystem.view.FrmMagamentSystem;
+import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
 
 /**
  *
@@ -135,8 +135,8 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToMainMenuActionPerformed
-        FrmMagamentSystem magamentSystem;
-        magamentSystem = new FrmMagamentSystem();
+        FrmManagmentSystem magamentSystem;
+        magamentSystem = new FrmManagmentSystem();
         magamentSystem.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackToMainMenuActionPerformed
@@ -184,18 +184,6 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmPaymentRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

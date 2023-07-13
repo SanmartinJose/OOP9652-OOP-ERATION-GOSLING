@@ -4,7 +4,7 @@
  */
 package ec.edu.espe.managamentsystem.view.holistic;
 
-import ec.edu.espe.managamentsystem.view.FrmMagamentSystem;
+import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;

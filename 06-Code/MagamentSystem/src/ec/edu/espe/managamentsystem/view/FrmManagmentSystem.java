@@ -12,12 +12,12 @@ import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
  *
  * @author PabloEZurita
  */
-public class FrmMagamentSystem extends javax.swing.JFrame {
-    public FrmControlHomeSchoolMenu frmcontrolHomeSchoolMenu = new FrmControlHomeSchoolMenu();
+public class FrmManagmentSystem extends javax.swing.JFrame {
+
     /**
      * Creates new form MagamentSystem
      */
-    public FrmMagamentSystem() {
+    public FrmManagmentSystem() {
         initComponents();
     }
 
@@ -190,7 +190,7 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHolisticActionPerformed
 
     private void btnHomeSchoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeSchoolActionPerformed
-        
+        FrmControlHomeSchoolMenu frmcontrolHomeSchoolMenu = new FrmControlHomeSchoolMenu();
         frmcontrolHomeSchoolMenu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnHomeSchoolActionPerformed
@@ -237,21 +237,23 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmMagamentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmManagmentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmMagamentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmManagmentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmMagamentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmManagmentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmMagamentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmManagmentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMagamentSystem().setVisible(true);
+                new FrmManagmentSystem().setVisible(true);
             }
         });
     }
