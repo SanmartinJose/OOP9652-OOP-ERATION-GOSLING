@@ -15,7 +15,7 @@ public class HolisticLegalGuardian {
     String name;
     String email;
     
-    public HolisticLegalGuardian(int age, String phoneNumber, String name, String email){
+    public HolisticLegalGuardian(int age,int studentId, String phoneNumber, String name, String email){
         this.age = age;
         this.studentId = studentId;
         this.phoneNumber = phoneNumber;

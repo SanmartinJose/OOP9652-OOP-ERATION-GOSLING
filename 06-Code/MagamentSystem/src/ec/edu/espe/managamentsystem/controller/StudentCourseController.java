@@ -16,6 +16,7 @@ import com.mongodb.client.model.Updates;
 import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;
 import ec.edu.espe.managmentsystem.model.HomeSchoolCourse;
+import javax.swing.JOptionPane;
 import org.bson.Document;
 
 
@@ -33,12 +34,12 @@ public class StudentCourseController {
             MongoDatabase database = mongoClient.getDatabase("ManagementSystem");
             MongoCollection<Document> collection = database.getCollection("HomeSchoolCourse");
             try {
-                Document holisticLegalGuardianDocument = new Document();
-                holisticLegalGuardianDocument.append("_id", homeschoolcourse.getId());
-                holisticLegalGuardianDocument.append("name", homeschoolcourse.getName());
-                collection.insertOne(holisticLegalGuardianDocument);    
+                Document homeschoolcourseDocument = new Document();
+                homeschoolcourseDocument.append("_id", homeschoolcourse.getId());
+                homeschoolcourseDocument.append("name", homeschoolcourse.getName());
+                collection.insertOne(homeschoolcourseDocument);    
             } catch (MongoException me) {
-
+                
             }
         }
     }
@@ -70,5 +71,12 @@ public class StudentCourseController {
         }catch(MongoException me){
             
         }
+    }
+    
+    public FindIterable<Document> getStudentCourse(){
+        MongoClient mongo = MongoClients.create(uri);
+        MongoDatabase database = mongo.getDatabase("ManagementSystem");
+        MongoCollection<Document> collection = database.getCollection("HomeSchoolCourse");
+        return collection.find();
     }
 }

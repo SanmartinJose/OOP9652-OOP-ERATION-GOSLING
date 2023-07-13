@@ -4,7 +4,12 @@
  */
 package ec.edu.espe.managamentsystem.view.holistic;
 
+import com.mongodb.client.MongoCursor;
+import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
+import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
 import ec.edu.espe.managamentsystem.view.FrmMagamentSystem;
+import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
 
 /**
  *
@@ -12,11 +17,17 @@ import ec.edu.espe.managamentsystem.view.FrmMagamentSystem;
  */
 public class FrmHolisticStudent extends javax.swing.JFrame {
 
+    DefaultTableModel dtm = new DefaultTableModel();
+    
     /**
      * Creates new form FrmHolisticStudent
      */
     public FrmHolisticStudent() {
         initComponents();
+        String[] title = new String[]{"N", "Name","Age","Legal Guardian"};
+        dtm.setColumnIdentifiers(title);
+        tbeHolisticStudents.setModel(dtm);
+        addTableData();
     }
 
     /**
@@ -32,7 +43,7 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbeHolisticStudents = new javax.swing.JTable();
         btnReturn1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnAddStudent = new javax.swing.JButton();
@@ -46,18 +57,9 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Estudiantes de Holística");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbeHolisticStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, "", null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "N°", "Name", "Age", "Legal Guardian"
@@ -71,11 +73,11 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setSelectionBackground(new java.awt.Color(204, 204, 255));
-        jTable1.setShowGrid(false);
-        jTable1.setShowHorizontalLines(true);
-        jTable1.setShowVerticalLines(true);
-        jScrollPane1.setViewportView(jTable1);
+        tbeHolisticStudents.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        tbeHolisticStudents.setShowGrid(false);
+        tbeHolisticStudents.setShowHorizontalLines(true);
+        tbeHolisticStudents.setShowVerticalLines(true);
+        jScrollPane1.setViewportView(tbeHolisticStudents);
 
         btnReturn1.setText("Regresar");
         btnReturn1.addActionListener(new java.awt.event.ActionListener() {
@@ -207,6 +209,32 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         frmMagamentSystem.setVisible(true);
         this.setVisible(false);
     }
+    
+    private void addTableData(){
+        
+       HolisticStudentController holisticStudentController;
+       holisticStudentController = new HolisticStudentController();
+       
+       HolisticLegalGuardianController holisticLegalGuardianController;
+       holisticLegalGuardianController = new HolisticLegalGuardianController();
+       
+       MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
+       
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            
+            int id = (int) document.get("_id");
+            
+            dtm.addRow(new Object[]{
+               document.get("_id"),
+                document.get("name"),
+                document.get("age"), 
+            });
+       }
+        
+
+    }
 
     /**
      * @param args the command line arguments
@@ -255,6 +283,6 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbeHolisticStudents;
     // End of variables declaration//GEN-END:variables
 }

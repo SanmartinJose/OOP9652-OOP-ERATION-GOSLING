@@ -4,7 +4,11 @@
  */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
+import com.mongodb.client.MongoCursor;
+import ec.edu.espe.managamentsystem.controller.StudentCourseController;
 import ec.edu.espe.managamentsystem.view.homeschool.FrmCreatStudent;
+import ec.edu.espe.managmentsystem.model.HomeSchoolCourse;
+import org.bson.Document;
 
 /**
  *
@@ -175,6 +179,20 @@ public class FrmCourse extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddStudentAncestorAdded
 
     private void btnSaveTheNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveTheNameActionPerformed
+        
+        String name;
+        int id;
+        
+        name = txtNameOfCourse.getText();
+        id = setId();
+        
+        HomeSchoolCourse homeSchoolCourse = new HomeSchoolCourse(id, name);
+        
+        StudentCourseController studentCourseController;
+        studentCourseController = new StudentCourseController();
+        
+        studentCourseController.writeStudentCourse(homeSchoolCourse);
+        
         btnAddSchedule.setVisible(true);
         btnAddStudent.setVisible(true);
         btnAddTeacher.setVisible(true);
@@ -192,7 +210,22 @@ public class FrmCourse extends javax.swing.JFrame {
         frmCreatTeacher.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAddTeacherActionPerformed
-
+    
+    public int setId(){
+       StudentCourseController studentCourseController;
+       studentCourseController = new StudentCourseController();
+       
+       MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
+       
+       int id=0;
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            int item = (int) document.getInteger("_id");
+            id = item+1;
+       }
+       return id;
+    }
     /**
      * @param args the command line arguments
      */

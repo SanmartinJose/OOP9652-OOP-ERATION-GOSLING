@@ -4,7 +4,12 @@
  */
 package ec.edu.espe.managamentsystem.view.holistic;
 
+import com.mongodb.client.MongoCursor;
+import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
+import ec.edu.espe.managamentsystem.controller.StudentCourseController;
 import ec.edu.espe.managamentsystem.view.homeschool.*;
+import ec.edu.espe.managmentsystem.model.HolisticStudent;
+import org.bson.Document;
 
 /**
  *
@@ -171,6 +176,24 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAdreesStudentActionPerformed
 
     private void btnAddLegalGuardianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLegalGuardianActionPerformed
+        
+        int id;
+        int age;
+        String name;
+        String address;
+    
+        name = txtNameStudent.getText();
+        address = txtAdreesStudent.getText();
+        age = Integer.parseInt(txtAgeStudent.getText());
+        id = setId();
+        
+        HolisticStudent holisticStudent = new HolisticStudent(id, age, name, address);
+        HolisticStudentController holisticStudentController;
+        holisticStudentController = new HolisticStudentController();
+        
+        holisticStudentController.fileWritter(holisticStudent);
+        
+        
         FrmCreateHolisticLegalGuardian frmCreateHolisticLegalGuardian = new FrmCreateHolisticLegalGuardian();
         frmCreateHolisticLegalGuardian.setVisible(true);
         this.setVisible(false);
@@ -182,6 +205,22 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    public int setId(){
+       HolisticStudentController holisticStudentController;
+       holisticStudentController = new HolisticStudentController();
+       
+       MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
+       
+       int id=0;
+       
+        while(cursor.hasNext()){
+            Document document = cursor.next();
+            int item = (int) document.getInteger("_id");
+            id = item+1;
+        }
+      
+       return id;
+    }
     /**
      * @param args the command line arguments
      */

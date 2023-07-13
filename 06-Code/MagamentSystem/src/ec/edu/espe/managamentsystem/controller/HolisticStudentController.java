@@ -33,12 +33,12 @@ public class HolisticStudentController {
             MongoCollection<Document> collection = database.getCollection("HolisticStudents");
                         
             try {
-                Document holisticLegalGuardianDocument = new Document();
-                holisticLegalGuardianDocument.append("_id", holisticStudent.getId());
-                holisticLegalGuardianDocument.append("name", holisticStudent.getName());
-                holisticLegalGuardianDocument.append("age", holisticStudent.getAge());
-                holisticLegalGuardianDocument.append("address", holisticStudent.getAddress());
-                collection.insertOne(holisticLegalGuardianDocument);    
+                Document holisticStudentDocument = new Document();
+                holisticStudentDocument.append("_id", holisticStudent.getId());
+                holisticStudentDocument.append("name", holisticStudent.getName());
+                holisticStudentDocument.append("age", holisticStudent.getAge());
+                holisticStudentDocument.append("address", holisticStudent.getAddress());
+                collection.insertOne(holisticStudentDocument);    
             } catch (MongoException me) {
 
             }
@@ -77,5 +77,13 @@ public class HolisticStudentController {
         }catch(MongoException me){
             
         }
+    }
+    
+    public FindIterable<Document> getStudentList(){
+        MongoClient mongo = MongoClients.create(uri);
+        MongoDatabase database = mongo.getDatabase("ManagementSystem");
+        MongoCollection<Document> collection = database.getCollection("HolisticStudents");
+
+        return collection.find();
     }
 }

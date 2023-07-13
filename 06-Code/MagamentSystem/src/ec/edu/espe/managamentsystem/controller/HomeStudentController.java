@@ -3,6 +3,7 @@ package ec.edu.espe.managamentsystem.controller;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -28,15 +29,14 @@ public class HomeStudentController {
             MongoDatabase database = mongoClient.getDatabase("ManagementSystem");
             MongoCollection<Document> collection = database.getCollection("HomeSchoolStudent");
             try {
-                Document holisticLegalGuardianDocument = new Document();
-                holisticLegalGuardianDocument.append("_id", homeSchoolStudent.getId());
-                holisticLegalGuardianDocument.append("courseId", homeSchoolStudent.getCourseId());
-                holisticLegalGuardianDocument.append("age", homeSchoolStudent.getAge());
-                holisticLegalGuardianDocument.append("name", homeSchoolStudent.getName());
-                holisticLegalGuardianDocument.append("typeOfStudy", homeSchoolStudent.getTypeOfStudy());
-                holisticLegalGuardianDocument.append("address", homeSchoolStudent.getAddress());
-                holisticLegalGuardianDocument.append("bornDate", homeSchoolStudent.getBorndate());
-                collection.insertOne(holisticLegalGuardianDocument);    
+                Document homeSchoolStudentDocument = new Document();
+                homeSchoolStudentDocument.append("_id", homeSchoolStudent.getId());
+                homeSchoolStudentDocument.append("courseId", homeSchoolStudent.getCourseId());
+                homeSchoolStudentDocument.append("age", homeSchoolStudent.getAge());
+                homeSchoolStudentDocument.append("name", homeSchoolStudent.getName());
+                homeSchoolStudentDocument.append("typeOfStudy", homeSchoolStudent.getTypeOfStudy());
+                homeSchoolStudentDocument.append("address", homeSchoolStudent.getAddress());
+                collection.insertOne(homeSchoolStudentDocument);    
             } catch (MongoException me) {
 
             }
@@ -65,8 +65,7 @@ public class HomeStudentController {
             collection.updateOne(Filters.eq("age",oldAge), Updates.set("age", homeSchoolStudent.getAge()));
             collection.updateOne(Filters.eq("typeOfStudy",oldTypeOfStudy), Updates.set("typeOfStudy", homeSchoolStudent.getTypeOfStudy()));
             collection.updateOne(Filters.eq("address",oldAddress), Updates.set("address", homeSchoolStudent.getAddress()));
-            collection.updateOne(Filters.eq("bornDate",oldBornDate), Updates.set("bornDate", homeSchoolStudent.getBorndate()));
-            
+                       
         }catch(MongoException me){
 
         }
@@ -82,5 +81,13 @@ public class HomeStudentController {
         }catch(MongoException me){
             
         }
+    }
+    
+    public FindIterable<Document> getStudentList(){
+        MongoClient mongo = MongoClients.create(uri);
+        MongoDatabase database = mongo.getDatabase("ManagementSystem");
+        MongoCollection<Document> collection = database.getCollection("HomeSchoolStudent");
+
+        return collection.find();
     }
 }

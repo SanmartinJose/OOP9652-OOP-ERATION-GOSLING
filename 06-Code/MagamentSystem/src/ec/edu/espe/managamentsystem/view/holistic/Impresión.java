@@ -4,20 +4,29 @@
  */
 package ec.edu.espe.managamentsystem.view.holistic;
 
+import com.mongodb.client.MongoCursor;
+import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
+import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
 
 /**
  *
  * @author Oswaldo Tipan
  */
 public class Impresión extends javax.swing.JPanel implements Printable {
-
+    DefaultTableModel dtm = new DefaultTableModel();
     public Impresión() {
         initComponents();
+        String[] title = new String[]{"N", "Name","Age","Legal Guardian"};
+        dtm.setColumnIdentifiers(title);
+        tbeHolisticStudents.setModel(dtm);
+        addTableData();
     }
 
     /**
@@ -31,12 +40,12 @@ public class Impresión extends javax.swing.JPanel implements Printable {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbeHolisticStudents = new javax.swing.JTable();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Estudiantes de Holística");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbeHolisticStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -61,11 +70,11 @@ public class Impresión extends javax.swing.JPanel implements Printable {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setSelectionBackground(new java.awt.Color(204, 204, 255));
-        jTable1.setShowGrid(false);
-        jTable1.setShowHorizontalLines(true);
-        jTable1.setShowVerticalLines(true);
-        jScrollPane1.setViewportView(jTable1);
+        tbeHolisticStudents.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        tbeHolisticStudents.setShowGrid(false);
+        tbeHolisticStudents.setShowHorizontalLines(true);
+        tbeHolisticStudents.setShowVerticalLines(true);
+        jScrollPane1.setViewportView(tbeHolisticStudents);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -90,12 +99,13 @@ public class Impresión extends javax.swing.JPanel implements Printable {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbeHolisticStudents;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -108,5 +118,29 @@ public class Impresión extends javax.swing.JPanel implements Printable {
         }else{
             return NO_SUCH_PAGE;
         }
+    }
+    
+     private void addTableData(){
+        
+       HolisticStudentController holisticStudentController;
+       holisticStudentController = new HolisticStudentController();
+       
+       HolisticLegalGuardianController holisticLegalGuardianController;
+       holisticLegalGuardianController = new HolisticLegalGuardianController();
+       
+       MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
+       
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            
+            int id = (int) document.get("_id");
+            
+            dtm.addRow(new Object[]{
+               document.get("_id"),
+                document.get("name"),
+                document.get("age"), 
+            });
+       }
     }
 }
