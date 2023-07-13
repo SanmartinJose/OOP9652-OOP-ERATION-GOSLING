@@ -118,7 +118,7 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
             }
         });
 
-        btnCloseSesion.setText("Cerra Sesion");
+        btnCloseSesion.setText("Cerrar Sesion");
         btnCloseSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseSesionActionPerformed(evt);
@@ -126,6 +126,11 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
         });
 
         jButton1.setText("Salir del programa");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -198,7 +203,10 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPaymentsActionPerformed
 
     private void btnCreatAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatAccountActionPerformed
-        // TODO add your handling code here:
+        FrmCreatUser frmCreatUser;
+        frmCreatUser = new FrmCreatUser();
+        frmCreatUser.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCreatAccountActionPerformed
 
     private void btnCloseSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSesionActionPerformed
@@ -206,6 +214,10 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
         frmPrincipalLogin.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCloseSesionActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
