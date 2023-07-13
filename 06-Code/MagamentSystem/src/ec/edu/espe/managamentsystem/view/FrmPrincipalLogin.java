@@ -187,20 +187,28 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
             MongoCollection<Document> collection = database.getCollection("Users");    
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String cifrada = "";
+
+        int desplazar = 2;
+        for (int i = 0; i < password.length(); i++) {
+            int codigoLetra = password.codePointAt(i);
+            char letraDesplazada = (char)(codigoLetra + desplazar);
+            cifrada = cifrada + letraDesplazada;
+        }
 
         Bson filter = Filters.and(
-                Filters.eq("username", username),
-                Filters.eq("password", password)
+            Filters.eq("username", username),
+            Filters.eq("password", cifrada) // Utiliza la contraseña cifrada en la consulta
         );
 
         Document user = collection.find(filter).first();
 
-        if (user != null && user.getString("username").equals(username) && user.getString("password").equals(password)) {
+        if (user != null && user.getString("username").equals(username) && user.getString("password").equals(cifrada)) {
             return true;  
         } else {
             return false;  
+        }
     }
-}
 }
     /**
      * @param args the command line arguments

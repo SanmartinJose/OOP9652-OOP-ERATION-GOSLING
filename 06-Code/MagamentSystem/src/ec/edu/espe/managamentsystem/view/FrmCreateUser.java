@@ -22,6 +22,12 @@ MongoDBConnection db = new MongoDBConnection();
      */
     public FrmCreateUser() {
         initComponents();
+        lblAlertID.setVisible(false);
+        lblName.setVisible(false);
+        lblemail.setVisible(false);
+        lblpass.setVisible(false);
+        lblphone.setVisible(false);
+        lbluser.setVisible(false);
     }
 
     /**
@@ -263,8 +269,8 @@ MongoDBConnection db = new MongoDBConnection();
         String email;
         String typeOfUser;
         String username;
-        String password;
-        
+        String password = null;
+        String cadena;
         if(txtCreateCedula.getText().isEmpty()||txtCreatFullName.getText().isEmpty()
                 ||txtCreatPassword.getText().isEmpty()||txtCreateEmail.getText().isEmpty()||
                 txtCreateUsername.getText().isEmpty()||txtCreatePhoneNumber.getText().isEmpty()){
@@ -289,19 +295,30 @@ MongoDBConnection db = new MongoDBConnection();
         email=v.validateEmail(txtCreateEmail);
         typeOfUser=cmbCharge.getSelectedItem().toString();
         username=txtCreateUsername.getText();
-        password=txtCreatPassword.getText();
-        
-        Document document = new Document("id", id)
-                .append("fullName", fullName)
-                .append("cellphone", cellphone)
-                .append("email", email)
-                .append("typeOfUser", typeOfUser)
-                .append("username", username)
-                .append("password", password);
+        cadena = txtCreatPassword.getText();
+        String cifrada = "";
+        int desplazar = 2;
 
-        
-        collection.insertOne(document);
-        System.out.println("Documento insertado correctamente en MongoDB");
+        for (int i = 0; i < cadena.length(); i++) {
+        // Obtenemos el código ASCII de las letras de la cadena
+        int codigoLetra = cadena.codePointAt(i);
+        // Sumamos el desplazamiento al código y convertimos en char el resultado
+        char letraDesplazada = (char)(codigoLetra + desplazar);
+        // Concatenamos la letra obtenida a la cadena donde vamos cifrando
+        cifrada = cifrada + letraDesplazada;
+    }
+
+    Document document = new Document("id", id)
+            .append("fullName", fullName)
+            .append("cellphone", cellphone)
+            .append("email", email)
+            .append("typeOfUser", typeOfUser)
+            .append("username", username)
+            .append("password", cifrada);
+
+
+            collection.insertOne(document);
+            System.out.println("Documento insertado correctamente en MongoDB");
 
         
         mongoClient.close();
