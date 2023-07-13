@@ -117,7 +117,6 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblChooseCourse)
                         .addGap(66, 66, 66)
@@ -140,8 +139,7 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
                     .addComponent(lblChooseCourse)
                     .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
-                .addComponent(jButton1)
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE)
         );
 
         btnBack.setText("Regresar");

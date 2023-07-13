@@ -145,7 +145,7 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
                 .addGap(38, 38, 38))
                 .addGap(27, 27, 27)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
