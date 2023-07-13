@@ -4,15 +4,8 @@
  */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
-
 import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
-import com.mongodb.client.MongoCursor;
-import ec.edu.espe.managamentsystem.controller.StudentCourseController;
-import java.util.ArrayList;
-import java.util.Map;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import org.bson.Document;
 
 /**
  *
@@ -32,8 +25,6 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
             btnEnterToTheCourse.setVisible(false);
             txtCourse.setVisible(true);
         }
-        addComoBoxItems();
-
     }
 
     /**
@@ -114,14 +105,6 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
                 .addGap(246, 246, 246)
                 .addComponent(txtCourse)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblChooseCourse)
-                        .addGap(66, 66, 66)
-                        .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(153, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,12 +117,6 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
                     .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEnterToTheCourse))
                 .addContainerGap(61, Short.MAX_VALUE))
-                .addGap(88, 88, 88)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblChooseCourse)
-                    .addComponent(cmbCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addContainerGap(217, Short.MAX_VALUE)
         );
 
         btnBack.setText("Regresar");
@@ -188,8 +165,6 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator2))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -201,9 +176,8 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
 
         pack();
@@ -211,6 +185,11 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
     
     
     
+    private void cmbCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCourseActionPerformed
+        
+        
+    }//GEN-LAST:event_cmbCourseActionPerformed
+
     private void btnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCourseActionPerformed
         FrmCourse frmCourse = new FrmCourse();
         frmCourse.setVisible(true);
@@ -222,10 +201,6 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
         frmMagamentSystem.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
-
-    private void cmbCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCourseActionPerformed
-        
-    }//GEN-LAST:event_cmbCourseActionPerformed
 
     
     /**
@@ -262,20 +237,6 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
                 new FrmControlHomeSchoolMenu().setVisible(true);
             }
         });
-    }
-    
-    public void addComoBoxItems(){
-        
-       StudentCourseController studentCourseController;
-       studentCourseController = new StudentCourseController();
-       
-       MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
-       
-       while(cursor.hasNext()){
-            Document document = cursor.next();
-            String item = document.getString("name");
-            cmbCourse.addItem(item);   
-       }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
