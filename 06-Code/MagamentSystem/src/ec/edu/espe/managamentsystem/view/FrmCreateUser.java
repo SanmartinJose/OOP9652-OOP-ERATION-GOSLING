@@ -1,12 +1,22 @@
 
 package ec.edu.espe.managamentsystem.view;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import ec.edu.espe.managmentsystem.model.User;
 import ec.edu.espe.managmentsystem.util.MongoDBConnection;
+import ec.edu.espe.managmentsystem.util.Validation;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import org.bson.Document;
 /**
  *
  * @author Labs-DCCO
  */
 public class FrmCreateUser extends javax.swing.JFrame {
-
+MongoDBConnection db = new MongoDBConnection();
     /**
      * Creates new form FrmCreatUser
      */
@@ -61,7 +71,7 @@ public class FrmCreateUser extends javax.swing.JFrame {
 
         jLabel4.setText("Número de Cédula:");
 
-        cmbCharge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador/a", "Profesor/a" }));
+        cmbCharge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Instructor" }));
 
         jLabel7.setText("Nombre de Usuario:");
 
@@ -186,13 +196,63 @@ public class FrmCreateUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void brnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnRegisterActionPerformed
-        MongoDBConnection db = new MongoDBConnection();
-        db.connection("Users");
+        Validation v = new Validation();
+        String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
+        String db = "SchoolManagmentSystem";
+        try(MongoClient mongoClient = MongoClients.create(uri)){
+            MongoDatabase database = mongoClient.getDatabase(db);
+            MongoCollection<Document> collection = database.getCollection("Users"); 
+        User user;
+        String id;
+        String fullName;
+        String cellphone;
+        String email;
+        String typeOfUser;
+        String username;
+        String password;
+        
+        id = v.validateNumber(txtCreateCedula);
+        fullName=v.validateName(txtCreatFullName);
+        cellphone=v.validateNumber(txtCreatePhoneNumber);
+        email=v.validateEmail(txtCreateEmail);
+        typeOfUser=cmbCharge.getSelectedItem().toString();
+        username=txtCreateUsername.getText();
+        password=txtCreatPassword.getText();
+        
+        Document document = new Document("id", id)
+                .append("fullName", fullName)
+                .append("cellphone", cellphone)
+                .append("email", email)
+                .append("typeOfUser", typeOfUser)
+                .append("username", username)
+                .append("password", password);
+
+        
+        collection.insertOne(document);
+        System.out.println("Documento insertado correctamente en MongoDB");
+
+        
+        mongoClient.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }   
+        JOptionPane.showMessageDialog(rootPane, "Saved");
+        emptyField();
+        
     }//GEN-LAST:event_brnRegisterActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    private void emptyField() {
+        txtCreatFullName.setText(" ");
+        txtCreatPassword.setText("");
+        txtCreateCedula.setText("");
+        txtCreateEmail.setText("");
+        txtCreatePhoneNumber.setText("");
+        txtCreateUsername.setText("");
+        
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

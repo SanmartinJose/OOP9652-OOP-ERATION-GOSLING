@@ -1,8 +1,9 @@
 
 package ec.edu.espe.managmentsystem.util;
 
-import java.util.regex.Matcher;
+
 import java.util.regex.Pattern;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -10,43 +11,63 @@ import javax.swing.JTextField;
  * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
 public class Validation {
-    public String validateName(JTextField textField) {
-        String inputString = textField.getText();
+     public String validateName(JTextField textField) {
+        String text = textField.getText();
         
-        if (inputString.matches("[a-zA-ZñÑ, ]+")) {
-            return inputString;
+        if (isValidText(text)) {
+            return text;
         } else {
-            return null;
+            textField.setText("");
+            
+            JLabel invalidLabel = new JLabel("Cadena inválida");
+            textField.add(invalidLabel);
+            
+            return validateName(textField);
         }
     }
-    public  String validateNumber(JTextField textField) {
-        String inputString = textField.getText();
+    
+    private boolean isValidText(String text) {
+        return text.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$");
+    }
+    
+    
+    
+  
+    public String validateNumber(JTextField textField) {
+        String text = textField.getText();
         
-        // Check if the string consists of only numeric characters and has a length of up to 10
-        if (inputString.matches("[0-9]{1,10}")) {
-            return inputString;
+        if (isValidNumber(text)) {
+            
+            return text;
         } else {
-            return null;
+            JLabel invalidLabel = new JLabel("Cadena incorrecta");
+            textField.add(invalidLabel);            
+            return validateName(textField);
         }
     }
-    public  String validateString(JTextField textField) {
-        String inputString = textField.getText();
+    
+    private boolean isValidNumber(String text) {
+        return text.matches("\\d{10}");
+    }
+    
+   
+    public String validateEmail(JTextField textField) {
+        String text = textField.getText();
         
-        // Regular expression that allows only letters of the alphabet (including "ñ")
-        // and verifies it has an email format
-        String pattern = "^[a-zA-ZñÑ]+@[a-zA-ZñÑ]+\\.[a-zA-ZñÑ]+$";
-
-        // Create a Pattern object
-        Pattern regexPattern = Pattern.compile(pattern);
-
-        // Create a Matcher object
-        Matcher matcher = regexPattern.matcher(inputString);
-
-        // Check if the string matches the pattern
-        if (matcher.matches()) {
-            return inputString;
+        if (isValidEmail(text)) {
+            return text;
         } else {
-            return null;
+            JLabel invalidLabel = new JLabel("no");
+            textField.add(invalidLabel);            
+            return validateName(textField);
         }
     }
+    
+    private boolean isValidEmail(String text) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        return pattern.matcher(text).matches();
+    }
+    
+    
 }

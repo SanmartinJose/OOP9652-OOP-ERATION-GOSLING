@@ -21,6 +21,7 @@ public class MongoDBConnection {
             MongoDatabase database = mongoClient.getDatabase(db);
             MongoCollection<Document> collection = database.getCollection(collections);               
         
+            
         }
     }
 }
