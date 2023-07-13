@@ -13,7 +13,7 @@ import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
  * @author PabloEZurita
  */
 public class FrmMagamentSystem extends javax.swing.JFrame {
-
+    public FrmControlHomeSchoolMenu frmcontrolHomeSchoolMenu = new FrmControlHomeSchoolMenu();
     /**
      * Creates new form MagamentSystem
      */
@@ -190,7 +190,7 @@ public class FrmMagamentSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHolisticActionPerformed
 
     private void btnHomeSchoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeSchoolActionPerformed
-        FrmControlHomeSchoolMenu frmcontrolHomeSchoolMenu = new FrmControlHomeSchoolMenu();
+        
         frmcontrolHomeSchoolMenu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnHomeSchoolActionPerformed
