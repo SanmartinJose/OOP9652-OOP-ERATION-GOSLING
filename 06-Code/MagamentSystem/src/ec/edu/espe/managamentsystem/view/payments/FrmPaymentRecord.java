@@ -142,7 +142,10 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackToMainMenuActionPerformed
 
     private void btnShowPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowPaymentsActionPerformed
-        // TODO add your handling code here:
+        FrmPrintDataPayments frmPrintDataPayments;
+        frmPrintDataPayments = new FrmPrintDataPayments();
+        frmPrintDataPayments.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnShowPaymentsActionPerformed
 
     private void btnAddMonthlyPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMonthlyPaymentActionPerformed
