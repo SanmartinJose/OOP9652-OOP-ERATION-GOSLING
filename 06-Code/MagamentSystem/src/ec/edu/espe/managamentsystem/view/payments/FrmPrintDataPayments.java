@@ -14,6 +14,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import ec.edu.espe.managmentsystem.util.Printer;
+import java.awt.print.PrinterException;
 import org.bson.Document;
 
 /**
@@ -27,55 +28,45 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
      */
     public FrmPrintDataPayments() {
         initComponents();
-        // Crear una instancia de MongoDBConnectionOptional
-        MongoDBConnectionOptional mongoConnection = new MongoDBConnectionOptional();
-        
-        // Establecer la conexión a la colección "Payments"
-        mongoConnection.connection("Payments");
-        
-        // Obtener el modelo de tabla
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        
-        // Definir los títulos de las columnas en un arreglo
-        String[] columnTitles = {"Id", "Nombre Completo", "Pago Mensual", "Valor Pagado", "Valor a Pagar"};
 
-        // Agregar los títulos de las columnas al modelo
+        MongoDBConnectionOptional mongoConnection = new MongoDBConnectionOptional();
+        mongoConnection.connection("Payments");
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        String[] columnTitles = {"Id", "Nombre Completo", "Pago Mensual", "Valor Pagado", "Valor a Pagar"};
         model.setColumnIdentifiers(columnTitles);
+        
         while (model.getRowCount() > 0) {
             model.removeRow(0);
         }
-        // Obtener la colección "Payments" de MongoDB
-        MongoCollection<Document> collection = mongoConnection.getCollection();
 
-        // Recuperar los documentos de la colección
+        MongoCollection<Document> collection = mongoConnection.getCollection();
         FindIterable<Document> documents = collection.find();
 
-        // Iterar sobre los documentos y agregar las filas al modelo
         for (Document doc : documents) {
-            Object[] rowData = new Object[6];  // Crear un arreglo de tamaño 4
+            Object[] rowData = new Object[6];
             int index = 0;
             for (String key : doc.keySet()) {
-                if (!key.equals("_id")) {  // Omitir la columna "_id"
-                Object value = doc.get(key);
-                if (index >= 2) { // Agregar el símbolo "$" a los valores de las últimas 3 columnas
-                    value = "$" + value;
-                }
-                rowData[index++] = value;
+                if (!key.equals("_id")) {
+                    Object value = doc.get(key);
+                    if (index >= 2) {
+                        value = "$" + value;
+                    }
+                    rowData[index++] = value;
                 }
             }
-        model.addRow(rowData);
+            model.addRow(rowData);
         }
 
-    // Obtener el ancho máximo del contenido de la columna 2
+        // Obtener el ancho máximo del contenido de la columna 2
         TableColumn column2 = jTable1.getColumnModel().getColumn(1);
         int maxWidth = 0;
+        
         for (int row = 0; row < jTable1.getRowCount(); row++) {
             TableCellRenderer renderer = jTable1.getCellRenderer(row, 1);
             Component component = jTable1.prepareRenderer(renderer, row, 1);
             int width = component.getPreferredSize().width;
             maxWidth = Math.max(maxWidth, width);
         }
-
         // Establecer el ancho máximo de la columna 2
         column2.setPreferredWidth(maxWidth);
     }
@@ -202,9 +193,19 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
        this.setVisible(false);
     }//GEN-LAST:event_btmBackActionPerformed
 
+    private void printTable(JTable table) {
+        try {
+            boolean complete = table.print();
+            if (complete) {
+                System.out.println("Ist Print");
+            }
+        } catch (PrinterException pe) {
+            System.err.println("Error al imprimir la tabla: " + pe.getMessage());
+        }
+    }
+    
     private void btmPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmPrintActionPerformed
-        Printer printer = new Printer(jTable1);
-        printer.imprimir();
+        printTable(jTable1);
     }//GEN-LAST:event_btmPrintActionPerformed
 
     /**
