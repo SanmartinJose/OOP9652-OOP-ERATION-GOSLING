@@ -6,6 +6,11 @@ package ec.edu.espe.managamentsystem.view.payments;
 
 
 import ec.edu.espe.managamentsystem.controller.PaymentRecord;
+import ec.edu.espe.managmentsystem.model.Payment;
+import ec.edu.espe.managmentsystem.util.Validation;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import static ec.edu.espe.managmentsystem.util.Validation.validId;
 
 
 /**
@@ -13,12 +18,14 @@ import ec.edu.espe.managamentsystem.controller.PaymentRecord;
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
-
+    Payment payment;
     /**
      * Creates new form FrmUpdatePaymentStudent
      */
     public FrmUpdatePaymentStudent() {
         initComponents();
+        lblAlert1.setVisible(false);
+        lblAlert2.setVisible(false);
     }
 
     /**
@@ -35,6 +42,8 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtIdStudent = new javax.swing.JTextField();
         txtValuePaid = new javax.swing.JTextField();
+        lblAlert1 = new javax.swing.JLabel();
+        lblAlert2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnUpdatePaid = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
@@ -48,11 +57,23 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese el Valor Cancelado:");
 
+        txtIdStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdStudentActionPerformed(evt);
+            }
+        });
+
         txtValuePaid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtValuePaidActionPerformed(evt);
             }
         });
+
+        lblAlert1.setForeground(new java.awt.Color(255, 51, 51));
+        lblAlert1.setText("*Ingrese un Id valido");
+
+        lblAlert2.setForeground(new java.awt.Color(255, 51, 51));
+        lblAlert2.setText("*Ingrese un valor valido");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,11 +85,15 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(txtValuePaid, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtValuePaid, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblAlert2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtIdStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtIdStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblAlert1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -77,11 +102,13 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtIdStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAlert1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtValuePaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtValuePaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAlert2))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -117,7 +144,7 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
                 .addComponent(btnDeletePaid)
                 .addGap(43, 43, 43)
                 .addComponent(btnBack)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,18 +206,33 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdatePaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePaidActionPerformed
-        String uri = "mongodb+srv://stevenriva21:stevenriva21@cluster0.skbktne.mongodb.net/?retryWrites=true&w=majority";
-        
-        String idText = txtIdStudent.getText();
-        int id = Integer.parseInt(idText);
-        
-        String valuePaidText = txtValuePaid.getText();
-        PaymentRecord paymentRecord = new PaymentRecord();
-        paymentRecord.updatePayment(uri, id, valuePaidText);
-    }//GEN-LAST:event_btnUpdatePaidActionPerformed
 
+        String validValueIs = txtValuePaid.getText().trim();
+        Double valuePaidValid = Validation.validValue(validValueIs);
+        String id = txtIdStudent.getText().trim();
+        String idValid = validId(id);
+
+        if (idValid != null && valuePaidValid != null) {
+            // Realiza la acción cuando los valores son válidos
+            PaymentRecord paymentRecord = new PaymentRecord();
+            paymentRecord.updatePayment(idValid, valuePaidValid);
+            lblAlert1.setVisible(false);
+            lblAlert2.setVisible(false);
+            JOptionPane.showMessageDialog(rootPane, "Datos enviados correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            emptyFields();
+         } else {
+            lblAlert2.setVisible(true);
+            lblAlert1.setVisible(true);
+            JOptionPane.showMessageDialog(rootPane, "Ingrese valores válidos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
+         }
+    }//GEN-LAST:event_btnUpdatePaidActionPerformed
+    private void emptyFields() {
+            txtIdStudent.setText("");
+            txtValuePaid.setText("");
+        }
+    
     private void txtValuePaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValuePaidActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtValuePaidActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -199,15 +241,24 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
        frmPaymentRecord.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
-
     private void btnDeletePaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePaidActionPerformed
-        String uri = "mongodb+srv://stevenriva21:stevenriva21@cluster0.skbktne.mongodb.net/?retryWrites=true&w=majority";
         
-        String idText = txtIdStudent.getText();
-        int id = Integer.parseInt(idText);
-        PaymentRecord paymentRecord = new PaymentRecord();
-        paymentRecord.deletePaid(uri, id);
+        String id = txtIdStudent.getText().trim();
+        String idValid = validId(id);
+        if (idValid != null) {
+            PaymentRecord paymentRecord = new PaymentRecord();
+            paymentRecord.deletePaid(id);
+            emptyFields();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Ingrese valores válidos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
+        
+        }
     }//GEN-LAST:event_btnDeletePaidActionPerformed
+
+    private void txtIdStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdStudentActionPerformed
+        Validation validation = new Validation();
+        validation.validateNumber(txtIdStudent);
+    }//GEN-LAST:event_txtIdStudentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +287,36 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -255,6 +336,8 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblAlert1;
+    private javax.swing.JLabel lblAlert2;
     private javax.swing.JTextField txtIdStudent;
     private javax.swing.JTextField txtValuePaid;
     // End of variables declaration//GEN-END:variables

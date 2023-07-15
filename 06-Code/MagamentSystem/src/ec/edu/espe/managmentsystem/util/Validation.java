@@ -4,6 +4,7 @@ package ec.edu.espe.managmentsystem.util;
 
 import java.util.regex.Pattern;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -30,7 +31,43 @@ public class Validation {
         return text.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$");
     }
     
+        public static String validId(String cedula) {
+        cedula = cedula.trim();
+
+        // Verificar longitud
+        if (cedula.length() != 10) {
+            return "Cadena inválida";
+        }
+
+        // Verificar que sean solo dígitos
+        if (!cedula.matches("\\d+")) {
+            return "La cédula debe contener solo dígitos";
+        }
+
+        return cedula;
+    }
     
+    
+    public static Double validValue(String valorPagadoStr) {
+        if (valorPagadoStr.isEmpty()) {
+            return null;
+        }
+
+        try {
+            double valor = Double.parseDouble(valorPagadoStr);
+
+            // Validar que sea un número válido y positivo
+            if (valor <= 0 || valor > 9999.99) {
+                return null;
+            }
+
+            return valor;
+
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     
   
     public String validateNumber(JTextField textField) {
