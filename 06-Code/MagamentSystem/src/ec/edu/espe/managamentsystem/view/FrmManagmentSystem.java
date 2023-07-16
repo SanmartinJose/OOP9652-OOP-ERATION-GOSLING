@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.managamentsystem.view;
 
 import ec.edu.espe.managamentsystem.view.holistic.FrmHolisticStudent;
@@ -13,6 +10,8 @@ import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
  * @author PabloEZurita
  */
 public class FrmManagmentSystem extends javax.swing.JFrame {
+
+   
 
     /**
      * Creates new form MagamentSystem
@@ -36,6 +35,7 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
         btnHomeSchool = new javax.swing.JButton();
         btnHolistic = new javax.swing.JButton();
         btnPayments = new javax.swing.JButton();
+        btmManageUser = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnCreatAccount = new javax.swing.JButton();
         btnCloseSesion = new javax.swing.JButton();
@@ -87,6 +87,13 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
             }
         });
 
+        btmManageUser.setText("Gestion de Usuarios");
+        btmManageUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btmManageUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -94,21 +101,24 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(183, 183, 183)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btmManageUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHolistic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPayments, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHomeSchool, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(192, 192, 192))
+                .addGap(207, 207, 207))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(btnHomeSchool, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnHolistic, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPayments, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btmManageUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         btnCreatAccount.setText("Crear cuenta");
@@ -220,6 +230,12 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btmManageUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmManageUserActionPerformed
+        FrmManagmentOfUser frmManagmentOfUser = new FrmManagmentOfUser();
+        frmManagmentOfUser.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btmManageUserActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,6 +275,7 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btmManageUser;
     private javax.swing.JButton btnCloseSesion;
     private javax.swing.JButton btnCreatAccount;
     private javax.swing.JButton btnHolistic;

@@ -159,7 +159,7 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
             stayInLogin();  
        }
        
-      if(login(txtUser, txtPassword)== true){
+      if(login(txtUser, txtPassword,"Admin")== true){
           enterToTheProgram();        
         } else {
           stayInLogin();
@@ -179,12 +179,13 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
         frmMagamentSystem.setVisible(false);
         this.setVisible(true);
     }
-    public boolean login(JTextField usernameField, JTextField passwordField) {
+    public boolean login(JTextField usernameField, JTextField passwordField, String typeOfUser) {
     String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-        String db = "SchoolManagmentSystem";
-        try(MongoClient mongoClient = MongoClients.create(uri)){
-            MongoDatabase database = mongoClient.getDatabase(db);
-            MongoCollection<Document> collection = database.getCollection("Users");    
+    String db = "SchoolManagmentSystem";
+    try (MongoClient mongoClient = MongoClients.create(uri)) {
+        MongoDatabase database = mongoClient.getDatabase(db);
+        MongoCollection<Document> collection = database.getCollection("Users");
+
         String username = usernameField.getText();
         String password = passwordField.getText();
         String cifrada = "";
@@ -192,24 +193,26 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
         int desplazar = 2;
         for (int i = 0; i < password.length(); i++) {
             int codigoLetra = password.codePointAt(i);
-            char letraDesplazada = (char)(codigoLetra + desplazar);
+            char letraDesplazada = (char) (codigoLetra + desplazar);
             cifrada = cifrada + letraDesplazada;
         }
 
         Bson filter = Filters.and(
-            Filters.eq("username", username),
-            Filters.eq("password", cifrada) // Utiliza la contraseña cifrada en la consulta
+                Filters.eq("username", username),
+                Filters.eq("password", cifrada), 
+                Filters.eq("typeOfUser", typeOfUser) 
         );
 
         Document user = collection.find(filter).first();
 
         if (user != null && user.getString("username").equals(username) && user.getString("password").equals(cifrada)) {
-            return true;  
+            return true;
         } else {
-            return false;  
+            return false;
         }
     }
 }
+
     /**
      * @param args the command line arguments
      */

@@ -4,10 +4,11 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-
+import static com.mongodb.client.model.Filters.eq;
 import ec.edu.espe.managmentsystem.model.User;
 import ec.edu.espe.managmentsystem.util.MongoDBConnection;
 import ec.edu.espe.managmentsystem.util.Validation;
+import java.awt.HeadlessException;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import org.bson.Document;
@@ -256,79 +257,83 @@ MongoDBConnection db = new MongoDBConnection();
     }// </editor-fold>//GEN-END:initComponents
 
     private void brnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnRegisterActionPerformed
+        if (registerAnUser()) {
+            return;
+        }
+        
+    }//GEN-LAST:event_brnRegisterActionPerformed
+
+    private boolean registerAnUser() throws HeadlessException {
         Validation v = new Validation();
         String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
         String db = "SchoolManagmentSystem";
-        try(MongoClient mongoClient = MongoClients.create(uri)){
+        try (final MongoClient mongoClient = MongoClients.create(uri)) {
             MongoDatabase database = mongoClient.getDatabase(db);
-            MongoCollection<Document> collection = database.getCollection("Users"); 
-        User user;
-        String id;
-        String fullName;
-        String cellphone;
-        String email;
-        String typeOfUser;
-        String username;
-        String password = null;
-        String cadena;
-        if(txtCreateCedula.getText().isEmpty()||txtCreatFullName.getText().isEmpty()
-                ||txtCreatPassword.getText().isEmpty()||txtCreateEmail.getText().isEmpty()||
-                txtCreateUsername.getText().isEmpty()||txtCreatePhoneNumber.getText().isEmpty()){
-            lblAlertID.setVisible(true);
-            lblName.setVisible(true);
-            lblemail.setVisible(true);
-            lblpass.setVisible(true);
-            lblphone.setVisible(true);
-            lbluser.setVisible(true);
-                    
-        }else{
-            lblAlertID.setVisible(false);
-            lblName.setVisible(false);
-            lblemail.setVisible(false);
-            lblpass.setVisible(false);
-            lblphone.setVisible(false);
-            lbluser.setVisible(false);
-        }
-        id = v.validateNumber(txtCreateCedula);
-        fullName=v.validateName(txtCreatFullName);
-        cellphone=v.validateNumber(txtCreatePhoneNumber);
-        email=v.validateEmail(txtCreateEmail);
-        typeOfUser=cmbCharge.getSelectedItem().toString();
-        username=txtCreateUsername.getText();
-        cadena = txtCreatPassword.getText();
-        String cifrada = "";
-        int desplazar = 2;
-
-        for (int i = 0; i < cadena.length(); i++) {
-        // Obtenemos el código ASCII de las letras de la cadena
-        int codigoLetra = cadena.codePointAt(i);
-        // Sumamos el desplazamiento al código y convertimos en char el resultado
-        char letraDesplazada = (char)(codigoLetra + desplazar);
-        // Concatenamos la letra obtenida a la cadena donde vamos cifrando
-        cifrada = cifrada + letraDesplazada;
-    }
-
-    Document document = new Document("id", id)
-            .append("fullName", fullName)
-            .append("cellphone", cellphone)
-            .append("email", email)
-            .append("typeOfUser", typeOfUser)
-            .append("username", username)
-            .append("password", cifrada);
-
-
-            collection.insertOne(document);
-            System.out.println("Documento insertado correctamente en MongoDB");
-
-        
-        mongoClient.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }   
-        JOptionPane.showMessageDialog(rootPane, "Saved");
+            MongoCollection<Document> collection = database.getCollection("Users");
+            User user;
+            String id;
+            String fullName;
+            String cellphone;
+            String email;
+            String typeOfUser;
+            String username;
+            String password = null;
+            String cadena;
+            if(txtCreateCedula.getText().isEmpty()||txtCreatFullName.getText().isEmpty()
+                    ||txtCreatPassword.getText().isEmpty()||txtCreateEmail.getText().isEmpty()||
+                    txtCreateUsername.getText().isEmpty()||txtCreatePhoneNumber.getText().isEmpty()){
+                lblAlertID.setVisible(true);
+                lblName.setVisible(true);
+                lblemail.setVisible(true);
+                lblpass.setVisible(true);
+                lblphone.setVisible(true);
+                lbluser.setVisible(true);
+                
+            }else{
+                lblAlertID.setVisible(false);
+                lblName.setVisible(false);
+                lblemail.setVisible(false);
+                lblpass.setVisible(false);
+                lblphone.setVisible(false);
+                lbluser.setVisible(false);
+            }   id = v.validateNumber(txtCreateCedula);
+            fullName=v.validateName(txtCreatFullName);
+            cellphone=v.validateNumber(txtCreatePhoneNumber);
+            email=v.validateEmail(txtCreateEmail);
+            typeOfUser=cmbCharge.getSelectedItem().toString();
+            username = txtCreateUsername.getText();
+            // Verificar si ya existe un usuario con ese username en la base de datos
+            Document existingUser = collection.find(eq("username", username)).first();
+            if (existingUser != null) {
+                // El username ya existe, mostrar un mensaje de error o realizar alguna acción
+                JOptionPane.showMessageDialog(rootPane, "El nombre de usuario ya existe");
+                return true; // Terminar el proceso de registro
+            }
+            cadena = txtCreatPassword.getText();
+            String cifrada = "";
+            int desplazar = 2;
+            for (int i = 0; i < cadena.length(); i++) {
+                // Obtenemos el código ASCII de las letras de la cadena
+                int codigoLetra = cadena.codePointAt(i);
+                // Sumamos el desplazamiento al código y convertimos en char el resultado
+                char letraDesplazada = (char)(codigoLetra + desplazar);
+                // Concatenamos la letra obtenida a la cadena donde vamos cifrando
+                cifrada = cifrada + letraDesplazada;
+            }       Document document = new Document("id", id)
+                    .append("fullName", fullName)
+                    .append("cellphone", cellphone)
+                    .append("email", email)
+                    .append("typeOfUser", typeOfUser)
+                    .append("username", username)
+                    .append("password", cifrada);
+            collection.insertOne(document);            
+            mongoClient.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }   JOptionPane.showMessageDialog(rootPane, "Usuario Guardado con Exito");
         emptyField();
-        
-    }//GEN-LAST:event_brnRegisterActionPerformed
+        return false;
+    }
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         FrmManagmentSystem frmManagmentSystem;
