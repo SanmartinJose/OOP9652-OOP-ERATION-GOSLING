@@ -51,10 +51,10 @@ public class SearchController {
         Document document = null;
         
         try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("SearchStudent");
             
-            if(collection.countDocuments() != 0){
+            if(collection.countDocuments() != 0){   
                 FindIterable<Document> user = null;
                 user = collection.find(new Document("_id", 1) );
                 name = user.first().get("name").toString();
