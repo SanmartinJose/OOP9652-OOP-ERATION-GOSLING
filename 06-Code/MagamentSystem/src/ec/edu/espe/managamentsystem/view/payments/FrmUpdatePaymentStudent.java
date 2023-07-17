@@ -212,19 +212,31 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         String id = txtIdStudent.getText().trim();
         String idValid = validId(id);
 
-        if (idValid != null && valuePaidValid != null) {
-            // Realiza la acción cuando los valores son válidos
-            PaymentRecord paymentRecord = new PaymentRecord();
-            paymentRecord.updatePayment(idValid, valuePaidValid);
-            lblAlert1.setVisible(false);
-            lblAlert2.setVisible(false);
-            JOptionPane.showMessageDialog(rootPane, "Datos enviados correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            emptyFields();
-         } else {
+        if (isValidId(id) && valuePaidValid != null) {
+        // Realiza la acción cuando los valores son válidos
+        PaymentRecord paymentRecord = new PaymentRecord();
+        paymentRecord.updatePayment(id, valuePaidValid);
+        lblAlert1.setVisible(false);
+        lblAlert2.setVisible(false);
+        JOptionPane.showMessageDialog(rootPane, "Datos enviados correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        emptyFields();
+        } else {
             lblAlert2.setVisible(true);
             lblAlert1.setVisible(true);
             JOptionPane.showMessageDialog(rootPane, "Ingrese valores válidos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
-         }
+        }
+    }
+
+    private boolean isValidId(String id) {
+        if (id.isEmpty()) {
+            return false;
+        }
+        try {
+            Integer.parseInt(id);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }//GEN-LAST:event_btnUpdatePaidActionPerformed
     private void emptyFields() {
             txtIdStudent.setText("");
