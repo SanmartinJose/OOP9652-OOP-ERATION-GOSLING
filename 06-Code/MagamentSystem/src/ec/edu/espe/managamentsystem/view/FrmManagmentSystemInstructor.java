@@ -9,15 +9,17 @@ import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
  *
  * @author PabloEZurita
  */
-public class FrmManagmentSystem extends javax.swing.JFrame {
+public class FrmManagmentSystemInstructor extends javax.swing.JFrame {
 
    
 
     /**
      * Creates new form MagamentSystem
      */
-    public FrmManagmentSystem() {
+    public FrmManagmentSystemInstructor() {
         initComponents();
+        
+        
         
     }
 
@@ -37,12 +39,6 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
         btnCloseSesion = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         paymentPanel = new javax.swing.JPanel();
-        btnPayments = new javax.swing.JButton();
-        IconPayment = new javax.swing.JLabel();
-        usersPanel = new javax.swing.JPanel();
-        btmManageUser = new javax.swing.JButton();
-        btnCreatAccount = new javax.swing.JButton();
-        IconUsers = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btnHolistic = new javax.swing.JButton();
         btnHomeSchool = new javax.swing.JButton();
@@ -71,7 +67,7 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -79,7 +75,7 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -112,7 +108,7 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addComponent(btnCloseSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(75, 75, 75))
         );
@@ -130,87 +126,15 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
         paymentPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         paymentPanel.setPreferredSize(new java.awt.Dimension(200, 320));
 
-        btnPayments.setText("Administrar Pagos");
-        btnPayments.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPayments.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPaymentsActionPerformed(evt);
-            }
-        });
-
-        IconPayment.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        IconPayment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/managamentsystem/images/Payment.png"))); // NOI18N
-
         javax.swing.GroupLayout paymentPanelLayout = new javax.swing.GroupLayout(paymentPanel);
         paymentPanel.setLayout(paymentPanelLayout);
         paymentPanelLayout.setHorizontalGroup(
             paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(paymentPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnPayments)
-                .addContainerGap(21, Short.MAX_VALUE))
-            .addGroup(paymentPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(IconPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 171, Short.MAX_VALUE)
         );
         paymentPanelLayout.setVerticalGroup(
             paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(paymentPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(IconPayment, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnPayments, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
-        );
-
-        usersPanel.setBackground(new java.awt.Color(255, 255, 255));
-        usersPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        btmManageUser.setText("Gestion de Usuarios");
-        btmManageUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btmManageUserActionPerformed(evt);
-            }
-        });
-
-        btnCreatAccount.setText("Crear cuenta");
-        btnCreatAccount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreatAccountActionPerformed(evt);
-            }
-        });
-
-        IconUsers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        IconUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/espe/managamentsystem/images/Usuarios.png"))); // NOI18N
-
-        javax.swing.GroupLayout usersPanelLayout = new javax.swing.GroupLayout(usersPanel);
-        usersPanel.setLayout(usersPanelLayout);
-        usersPanelLayout.setHorizontalGroup(
-            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, usersPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCreatAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-            .addGroup(usersPanelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(btmManageUser)
-                .addContainerGap(12, Short.MAX_VALUE))
-            .addGroup(usersPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(IconUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        usersPanelLayout.setVerticalGroup(
-            usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(usersPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(IconUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btmManageUser, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCreatAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+            .addGap(0, 316, Short.MAX_VALUE)
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -263,9 +187,6 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(427, 427, 427)
-                .addComponent(usersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(paymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(170, 170, 170)
@@ -277,9 +198,9 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(usersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(paymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -309,21 +230,6 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnHomeSchoolActionPerformed
 
-    private void btnPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentsActionPerformed
-        FrmPaymentRecord frmPaymentRecord;
-        frmPaymentRecord = new FrmPaymentRecord();
-        frmPaymentRecord.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnPaymentsActionPerformed
-
-    private void btnCreatAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatAccountActionPerformed
-
-        FrmCreateUser frmCreateUser;
-        frmCreateUser = new FrmCreateUser();
-        frmCreateUser.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnCreatAccountActionPerformed
-
     private void btnCloseSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseSesionActionPerformed
         FrmPrincipalLogin frmPrincipalLogin = new FrmPrincipalLogin();
         frmPrincipalLogin.setVisible(true);
@@ -333,12 +239,6 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btmManageUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmManageUserActionPerformed
-        FrmManagmentOfUser frmManagmentOfUser = new FrmManagmentOfUser();
-        frmManagmentOfUser.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btmManageUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,14 +257,26 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmManagmentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmManagmentSystemInstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmManagmentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmManagmentSystemInstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmManagmentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmManagmentSystemInstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmManagmentSystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmManagmentSystemInstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -373,21 +285,16 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmManagmentSystem().setVisible(true);
+                new FrmManagmentSystemInstructor().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IconLearn;
-    private javax.swing.JLabel IconPayment;
-    private javax.swing.JLabel IconUsers;
-    private javax.swing.JButton btmManageUser;
     private javax.swing.JButton btnCloseSesion;
-    private javax.swing.JButton btnCreatAccount;
     private javax.swing.JButton btnHolistic;
     private javax.swing.JButton btnHomeSchool;
-    private javax.swing.JButton btnPayments;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -395,6 +302,5 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel paymentPanel;
-    private javax.swing.JPanel usersPanel;
     // End of variables declaration//GEN-END:variables
 }

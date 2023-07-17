@@ -224,18 +224,26 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
        }
        
       if(login(txtUser, txtPassword,"Admin")== true){
-          enterToTheProgram();        
-        } else {
+          enterToTheProgramAdmin();        
+        } else if(login(txtUser, txtPassword,"Instructor")== true){
+          enterToTheProgramInstructor();
+        }else {
           stayInLogin();
           JOptionPane.showMessageDialog(rootPane, "Intenta de nuevo", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
           
       }}
     }//GEN-LAST:event_btnEnterLoginActionPerformed
 
-    private void enterToTheProgram() {
+    private void enterToTheProgramAdmin() {
         
         FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
         frmMagamentSystem.setVisible(true);
+        this.setVisible(false);
+    }
+    private void enterToTheProgramInstructor() {
+        
+        FrmManagmentSystemInstructor frmMagamentSystemInstructor = new FrmManagmentSystemInstructor();
+        frmMagamentSystemInstructor.setVisible(true);
         this.setVisible(false);
     }
     private void stayInLogin() {
