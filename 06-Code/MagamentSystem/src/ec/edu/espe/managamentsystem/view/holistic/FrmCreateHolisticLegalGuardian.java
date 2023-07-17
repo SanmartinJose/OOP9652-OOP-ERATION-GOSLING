@@ -9,6 +9,7 @@ import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
 import ec.edu.espe.managamentsystem.controller.HomeSchoolLegalGuardianController;
 import ec.edu.espe.managamentsystem.controller.HomeStudentController;
+import ec.edu.espe.managamentsystem.controller.SearchController;
 import ec.edu.espe.managamentsystem.view.homeschool.*;
 import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
 import ec.edu.espe.managmentsystem.model.HomeSchoolLegalGuardian;
@@ -25,6 +26,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
      */
     public FrmCreateHolisticLegalGuardian() {
         initComponents();
+        showGuardianData();
     }
 
     /**
@@ -37,7 +39,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -52,8 +54,8 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Añadir Tuto legal");
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Añadir Tuto legal");
 
         jLabel2.setText("Nombre del tutor:");
 
@@ -84,7 +86,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
                     .addComponent(jSeparator1))
                 .addGap(6, 6, 6))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -111,7 +113,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -175,13 +177,22 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         email = txtEmail.getText();
         studentId = getStudentId();
         
-        HolisticLegalGuardian holisticLegalGuardian;
-        holisticLegalGuardian = new HolisticLegalGuardian(age, studentId, phoneNumber, name, email);
+        HolisticStudentController holisticStudentController;
+        holisticStudentController = new HolisticStudentController();
+        SearchController searchController = new SearchController();
         
         HolisticLegalGuardianController holisticLegalGuardianController;
         holisticLegalGuardianController = new HolisticLegalGuardianController();
-        holisticLegalGuardianController.fileWrite(holisticLegalGuardian);
-            
+        
+        HolisticLegalGuardian holisticLegalGuardian;
+        holisticLegalGuardian = new HolisticLegalGuardian(age, studentId, phoneNumber, name, email);
+        
+        if(holisticStudentController.validateStudentData(searchController.getStudent())){
+            holisticLegalGuardianController.updateHolisticLeaglGuardian(holisticStudentController.getStudentId(), holisticLegalGuardian);
+        }else{
+            holisticLegalGuardianController.fileWrite(holisticLegalGuardian);
+        }
+                    
         FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
         frmHolisticStudent.setVisible(true);
         this.setVisible(false);
@@ -201,6 +212,43 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
        }
        return id;
     }
+    
+    public void showGuardianData(){
+       HolisticStudentController holistiStudentController = new HolisticStudentController(); 
+              
+       HolisticLegalGuardianController holisticLegalGuardianController = new HolisticLegalGuardianController();
+       
+       
+       SearchController searchController = new SearchController();
+      
+       if(holistiStudentController.validateStudentData(searchController.getStudent())){ 
+                     
+           String name = null;
+           String age = null;
+           String email = null;
+           String phoneNumber = null;
+           
+           int id = holistiStudentController.getStudentId();
+           
+           MongoCursor<Document> LegalGuardiaCursor = holisticLegalGuardianController.getLegalGuardian(id);
+           while(LegalGuardiaCursor.hasNext()){
+                Document document = LegalGuardiaCursor.next();
+                name = document.get("name").toString();
+                email = document.get("email").toString();
+                phoneNumber = document.get("phoneNumber").toString();
+                age =  document.get("age").toString();
+           }
+           
+           
+           txtLegalGuardianName.setText(name );
+           txtLegalGuardianAge.setText(age);
+           txtLegalGuardianPhoneNumber.setText(phoneNumber);
+           txtEmail.setText(phoneNumber);
+           btnSave.setText("Aplicar Cambios");
+           lblTitle.setText("Editar Tutor Legal");
+       }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -240,13 +288,13 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLegalGuardianAge;
     private javax.swing.JTextField txtLegalGuardianName;

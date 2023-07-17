@@ -45,18 +45,25 @@ public class HolisticStudentController {
         }
     }
     
-    public void updateHolisticStudent(int id, HolisticStudent holisticStudent){
+    public void updateHolisticStudent(String name, HolisticStudent holisticStudent){
           try (MongoClient mongo = MongoClients.create(uri)) {
             MongoDatabase database = mongo.getDatabase("ManagementSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticStudents");
             
-            BasicDBObject searchQuery = new BasicDBObject();
-            searchQuery.put("_id",id);
-            MongoCursor<Document> cursor = collection.find(searchQuery).iterator();
+            MongoCursor<Document> cursor = getStudentList().iterator();
+        
+            String oldName = null;
+            int oldAge = 0;
+            String oldAddress = null;
             
-            String oldName = (String) cursor.next().get("name");
-            String oldAge = (String) cursor.next().get("age");
-            String oldAddress = (String) cursor.next().get("address");
+            while(cursor.hasNext()){
+                Document document = cursor.next();
+                if(document.get("name").equals(name)){   
+                    oldName = document.get("name").toString();
+                    oldAge = (int) document.get("age");
+                    oldAddress = document.get("address").toString();
+                }
+            }
             
             collection.updateOne(Filters.eq("name",oldName), Updates.set("name", holisticStudent.getName()));
             collection.updateOne(Filters.eq("age",oldAge), Updates.set("age", holisticStudent.getAge()));
@@ -79,11 +86,55 @@ public class HolisticStudentController {
         }
     }
     
+    public MongoCursor<Document> getStudent(String name){
+        
+        MongoCursor<Document> cursor = null;
+       
+        try (MongoClient mongo = MongoClients.create(uri)) {
+            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoCollection<Document> collection = database.getCollection("HolisticStudents");
+            
+            Document findDocument = new Document ("name",name);
+            cursor = collection.find(findDocument).iterator();
+            
+        }catch(MongoException me){
+            
+        }
+        return cursor;
+    }    
+    
+    public int getStudentId(){
+        SearchController searchController = new SearchController();
+         
+        MongoCursor<Document> cursor = getStudent(searchController.getStudent());
+                   
+           int id = 0;
+           
+           while(cursor.hasNext()){
+                Document document = cursor.next();
+                id = (int) document.get("_id");
+           }
+        return id;
+    }
+    
     public FindIterable<Document> getStudentList(){
         MongoClient mongo = MongoClients.create(uri);
         MongoDatabase database = mongo.getDatabase("ManagementSystem");
         MongoCollection<Document> collection = database.getCollection("HolisticStudents");
 
         return collection.find();
+    }
+    
+    public boolean validateStudentData(String name){
+            
+        MongoCursor<Document> cursor = getStudentList().iterator();
+         
+        boolean isFound = false;
+        
+        while(cursor.hasNext()){
+            Document document = cursor.next();
+            isFound = document.get("name").equals(name);  
+        }
+        return isFound;
     }
 }

@@ -140,6 +140,7 @@ public class Impresión extends javax.swing.JPanel implements Printable {
                document.get("_id"),
                 document.get("name"),
                 document.get("age"), 
+                holisticLegalGuardianController.getHolisticLegalGuardianList(id)
             });
        }
     }

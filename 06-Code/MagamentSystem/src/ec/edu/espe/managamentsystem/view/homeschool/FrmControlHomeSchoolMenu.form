@@ -153,6 +153,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Entrar al curso seleccionado"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnterToTheCourseActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="txtCourse">
           <Properties>

@@ -14,19 +14,13 @@ import org.bson.Document;
  *
  * @author PabloEZurita
  */
-public class FrmCourse extends javax.swing.JFrame {
+public class FrmCourseInside extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmCourse
      */
-    public FrmCourse() {
+    public FrmCourseInside() {
         initComponents();
-       
-        lblObligation.setVisible(false);
-        btnAddStudent.setVisible(false);
-        btnAddSchedule.setVisible(false);
-        btnAddTeacher.setVisible(false);
-        
     }
 
     /**
@@ -43,10 +37,6 @@ public class FrmCourse extends javax.swing.JFrame {
         btnAddStudent = new javax.swing.JButton();
         btnAddTeacher = new javax.swing.JButton();
         btnAddSchedule = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txtNameOfCourse = new javax.swing.JTextField();
-        btnSaveTheName = new javax.swing.JButton();
-        lblObligation = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
@@ -87,18 +77,6 @@ public class FrmCourse extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Nombre del curso:");
-
-        btnSaveTheName.setText("Guardar");
-        btnSaveTheName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveTheNameActionPerformed(evt);
-            }
-        });
-
-        lblObligation.setForeground(new java.awt.Color(255, 51, 51));
-        lblObligation.setText("*Campo Obligatorio");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -107,28 +85,16 @@ public class FrmCourse extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(35, 35, 35)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblObligation)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtNameOfCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(46, 46, 46)
-                                        .addComponent(btnSaveTheName))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnAddTeacher, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAddSchedule, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAddStudent, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(118, 118, 118)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jSeparator2)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(202, 202, 202)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddStudent))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,20 +103,13 @@ public class FrmCourse extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNameOfCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSaveTheName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblObligation)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(btnAddStudent)
                 .addGap(18, 18, 18)
                 .addComponent(btnAddTeacher)
                 .addGap(18, 18, 18)
                 .addComponent(btnAddSchedule)
-                .addGap(108, 108, 108))
+                .addGap(204, 204, 204))
         );
 
         btnBack.setText("Regresar");
@@ -218,34 +177,6 @@ public class FrmCourse extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddStudentAncestorAdded
 
-    private void btnSaveTheNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveTheNameActionPerformed
-        if (txtNameOfCourse.getText().isEmpty()) {
-            lblObligation.setVisible(true);
-        }
-        else{
-            btnAddSchedule.setVisible(true);
-            btnAddStudent.setVisible(true);
-            btnAddTeacher.setVisible(true);
-        }
-        
-        String name;
-        int id;
-        
-        name = txtNameOfCourse.getText();
-        id = setId();
-        
-        HomeSchoolCourse homeSchoolCourse = new HomeSchoolCourse(id, name);
-        
-        StudentCourseController studentCourseController;
-        studentCourseController = new StudentCourseController();
-        
-        studentCourseController.writeStudentCourse(homeSchoolCourse);
-        
-        btnAddSchedule.setVisible(true);
-        btnAddStudent.setVisible(true);
-        btnAddTeacher.setVisible(true);
-    }//GEN-LAST:event_btnSaveTheNameActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         FrmControlHomeSchoolMenu frmControlHomeSchoolMenu = new FrmControlHomeSchoolMenu();
         frmControlHomeSchoolMenu.setVisible(true);
@@ -290,20 +221,21 @@ public class FrmCourse extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCourseInside.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCourseInside.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCourseInside.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCourse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCourseInside.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCourse().setVisible(true);
+                new FrmCourseInside().setVisible(true);
             }
         });
     }
@@ -313,14 +245,10 @@ public class FrmCourse extends javax.swing.JFrame {
     private javax.swing.JButton btnAddStudent;
     private javax.swing.JButton btnAddTeacher;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnSaveTheName;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblObligation;
-    private javax.swing.JTextField txtNameOfCourse;
     // End of variables declaration//GEN-END:variables
 }

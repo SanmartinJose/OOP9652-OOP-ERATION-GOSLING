@@ -47,7 +47,7 @@ public class TeacherController {
         }
     }
     
-    public void updateHolisticStudent(int id, Teacher teacher){
+    public void updateTeacher(int id, Teacher teacher){
           try (MongoClient mongo = MongoClients.create(uri)) {
             MongoDatabase database = mongo.getDatabase("ManagementSystem");
             MongoCollection<Document> collection = database.getCollection("Teacher");
@@ -73,7 +73,7 @@ public class TeacherController {
         }
     }
     
-    public void deleteHolisticStudent(int id){
+    public void deleteTeacher(int id){
         try (MongoClient mongo = MongoClients.create(uri)) {
             MongoDatabase database = mongo.getDatabase("ManagementSystem");
             MongoCollection<Document> collection = database.getCollection("Teacher");

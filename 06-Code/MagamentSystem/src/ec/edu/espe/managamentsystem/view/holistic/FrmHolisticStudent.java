@@ -10,6 +10,7 @@ import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
+import ec.edu.espe.managamentsystem.controller.SearchController;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
@@ -126,8 +127,18 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         });
 
         jButton2.setText("Modificar Estudiante");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Borrar Estudiante");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         btnPrint.setText("Imprimir");
         btnPrint.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +215,20 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         FrmCreateHolisticStudent frmCreateHolistStudent = new FrmCreateHolisticStudent();
         frmCreateHolistStudent.setVisible(true);
         this.setVisible(false);
+        
+        SearchController searchController = new SearchController();
+        searchController.fileWritter("");
     }//GEN-LAST:event_btnAddStudentActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
+        frmGetStudentData.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        FrmDeleteStudentData frmDeleteStudentData = new FrmDeleteStudentData();
+        frmDeleteStudentData.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void returnToMagamentSystem() {
         FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
@@ -225,18 +249,17 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
        
        while(cursor.hasNext()){
             Document document = cursor.next();
-            
             int id = (int) document.get("_id");
-            
             dtm.addRow(new Object[]{
                document.get("_id"),
                 document.get("name"),
-                document.get("age"), 
+                document.get("age"),
+                holisticLegalGuardianController.getHolisticLegalGuardianList(id)
             });
        }
-        
-
     }
+    
+
 
     /**
      * @param args the command line arguments

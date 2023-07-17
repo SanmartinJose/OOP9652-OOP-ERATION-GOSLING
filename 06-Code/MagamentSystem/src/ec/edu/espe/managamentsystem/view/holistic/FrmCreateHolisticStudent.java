@@ -4,8 +4,10 @@
  */
 package ec.edu.espe.managamentsystem.view.holistic;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
+import ec.edu.espe.managamentsystem.controller.SearchController;
 import ec.edu.espe.managamentsystem.controller.StudentCourseController;
 import ec.edu.espe.managamentsystem.view.homeschool.*;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;
@@ -16,12 +18,13 @@ import org.bson.Document;
  * @author PabloEZurita
  */
 public class FrmCreateHolisticStudent extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form FrmCreatStudent
      */
     public FrmCreateHolisticStudent() {
         initComponents();
+        showStudentData();
     }
 
     /**
@@ -33,7 +36,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTItle = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -49,8 +52,8 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Añadir Estudiante");
+        lblTItle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTItle.setText("Añadir Estudiante");
 
         jLabel2.setText("Nombre del estudiante:");
 
@@ -146,7 +149,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTItle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator2))
@@ -156,7 +159,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTItle, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,7 +184,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
         int age;
         String name;
         String address;
-    
+        
         name = txtNameStudent.getText();
         address = txtAdreesStudent.getText();
         age = Integer.parseInt(txtAgeStudent.getText());
@@ -190,13 +193,18 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
         HolisticStudent holisticStudent = new HolisticStudent(id, age, name, address);
         HolisticStudentController holisticStudentController;
         holisticStudentController = new HolisticStudentController();
+        FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
         
-        holisticStudentController.fileWritter(holisticStudent);
-        
-        
+        SearchController searchController = new SearchController();
+       
+        if(holisticStudentController.validateStudentData(searchController.getStudent())){
+          holisticStudentController.updateHolisticStudent(searchController.getStudent(), holisticStudent);
+        }else{
+            holisticStudentController.fileWritter(holisticStudent); 
+        }
         FrmCreateHolisticLegalGuardian frmCreateHolisticLegalGuardian = new FrmCreateHolisticLegalGuardian();
         frmCreateHolisticLegalGuardian.setVisible(true);
-        this.setVisible(false);
+        this.setVisible(false);  
     }//GEN-LAST:event_btnAddLegalGuardianActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -218,8 +226,46 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
             int item = (int) document.getInteger("_id");
             id = item+1;
         }
-      
        return id;
+    }
+    
+    public void showStudentData(){
+       HolisticStudentController holistiStudentController = new HolisticStudentController(); 
+       FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
+       
+       SearchController searchController = new SearchController();
+      
+       if(holistiStudentController.validateStudentData(searchController.getStudent())){
+           
+           MongoCursor<Document> cursor = holistiStudentController.getStudent(searchController.getStudent());
+           
+           String name = null;
+           String age = null;
+           String address = null;
+           
+           while(cursor.hasNext()){
+                Document document = cursor.next();
+                name = document.get("name").toString();
+                age = document.get("age").toString();
+                address = document.get("address").toString();
+           }
+           
+           txtNameStudent.setText(name );
+           txtAgeStudent.setText(age);
+           txtAdreesStudent.setText(address);
+           btnAddLegalGuardian.setText("Aplicar Cambios");
+           lblTItle.setText("Editar Estudiante");
+       }else{
+           txtNameStudent.setText("");
+           txtAgeStudent.setText("");
+           txtAdreesStudent.setText("");
+           btnAddLegalGuardian.setText("+ Añadir Tutor Legal");
+           lblTItle.setText("Guardar Estudiantes");
+       }
+    }
+    
+    public void updateStudentData(){
+        
     }
     /**
      * @param args the command line arguments
@@ -263,7 +309,6 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddLegalGuardian;
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -271,6 +316,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblTItle;
     private javax.swing.JTextField txtAdreesStudent;
     private javax.swing.JTextField txtAgeStudent;
     private javax.swing.JTextField txtNameStudent;

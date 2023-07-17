@@ -199,8 +199,8 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmCourse frmCourse = new FrmCourse();
-        frmCourse.setVisible(true);
+        FrmControlHomeSchoolMenu frmControlHomeSchool = new FrmControlHomeSchoolMenu();
+        frmControlHomeSchool.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
@@ -227,8 +227,8 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
         
         teacherController.fileWritter(teacher);
         
-        FrmCourse frmCourse = new FrmCourse();
-        frmCourse.setVisible(true);
+        FrmControlHomeSchoolMenu frmControlHomeSchool = new FrmControlHomeSchoolMenu();
+        frmControlHomeSchool.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -256,7 +256,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
        
        while(cursor.hasNext()){
             Document document = cursor.next();
-            if(document.get("name") == name){
+            if(document.get("name").equals(name)){
               id = (int) document.get("_id");
             }
        }

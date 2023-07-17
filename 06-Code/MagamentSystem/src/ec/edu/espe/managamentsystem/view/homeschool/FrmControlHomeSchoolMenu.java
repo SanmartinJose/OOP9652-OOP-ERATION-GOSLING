@@ -4,8 +4,11 @@
  */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
+import com.mongodb.client.MongoCursor;
+import ec.edu.espe.managamentsystem.controller.StudentCourseController;
 import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
 import javax.swing.JComboBox;
+import org.bson.Document;
 
 /**
  *
@@ -18,6 +21,7 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
      */
     public FrmControlHomeSchoolMenu() {
         initComponents();
+        addComboBox();
         txtCourse.setVisible(false);
         if (cmbCourse.getItemCount()==0) {
             cmbCourse.setVisible(false);
@@ -86,6 +90,11 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
         });
 
         btnEnterToTheCourse.setText("Entrar al curso seleccionado");
+        btnEnterToTheCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnterToTheCourseActionPerformed(evt);
+            }
+        });
 
         txtCourse.setText("No existen cursos");
 
@@ -202,6 +211,24 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnEnterToTheCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterToTheCourseActionPerformed
+        FrmCourseInside frmCourseInside = new FrmCourseInside();
+        frmCourseInside.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEnterToTheCourseActionPerformed
+    
+     public void addComboBox(){
+       StudentCourseController studentCourseController;
+       studentCourseController = new StudentCourseController();
+       
+       MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            String item = document.getString("name");
+            cmbCourse.addItem(item);   
+       }
+    }
     
     /**
      * @param args the command line arguments
