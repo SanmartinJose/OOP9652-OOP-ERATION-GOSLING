@@ -22,12 +22,12 @@ import org.bson.Document;
  */
 public class HolisticLegalGuardianController {
     
-    public String uri = "mongodb+srv://ojtipan:trabatrix2@farm.am6duog.mongodb.net/?retryWrites=true&w=majority";
+    public String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
 
     public void fileWrite(HolisticLegalGuardian holisticLegalGuardian){
         
          try (MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase("ManagementSystem");
+            MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticLegalGuardian");
                         
             try {
@@ -46,7 +46,7 @@ public class HolisticLegalGuardianController {
     
     public void deleteHolisticLegalGuardian(int id){
         try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticLegalGuardian");
             
             Document findDocument = new Document ("studentId",id);
@@ -59,7 +59,7 @@ public class HolisticLegalGuardianController {
     
     public String getHolisticLegalGuardianList(int id){
         MongoClient mongo = MongoClients.create(uri);
-        MongoDatabase database = mongo.getDatabase("ManagementSystem");
+        MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
         MongoCollection<Document> collection = database.getCollection("HolisticLegalGuardian");
                
         MongoCursor<Document> cursor = collection.find().iterator();
@@ -75,7 +75,7 @@ public class HolisticLegalGuardianController {
     
     public FindIterable<Document> getLegalGuardianList(){
         MongoClient mongo = MongoClients.create(uri);
-        MongoDatabase database = mongo.getDatabase("ManagementSystem");
+        MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
         MongoCollection<Document> collection = database.getCollection("HolisticLegalGuardian");
 
         return collection.find();
@@ -83,7 +83,7 @@ public class HolisticLegalGuardianController {
     
     public void updateHolisticLeaglGuardian(int id, HolisticLegalGuardian holisticLegalGuardian){
           try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticLegalGuardian");
             
             MongoCursor<Document> cursor = getLegalGuardianList().iterator();
@@ -118,7 +118,7 @@ public class HolisticLegalGuardianController {
         MongoCursor<Document> cursor = null;
        
         try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticLegalGuardian");
             
             Document findDocument = new Document ("studentId",id);

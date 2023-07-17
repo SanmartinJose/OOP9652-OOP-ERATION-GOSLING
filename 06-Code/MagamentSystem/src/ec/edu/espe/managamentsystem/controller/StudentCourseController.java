@@ -26,12 +26,12 @@ import org.bson.Document;
  */
 public class StudentCourseController {
     
-    public String uri = "mongodb+srv://ojtipan:trabatrix2@farm.am6duog.mongodb.net/?retryWrites=true&w=majority";
+    public String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
     
     public void writeStudentCourse(HomeSchoolCourse homeschoolcourse){
     
          try (MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase("ManagementSystem");
+            MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HomeSchoolCourse");
             try {
                 Document homeschoolcourseDocument = new Document();
@@ -46,7 +46,7 @@ public class StudentCourseController {
     
     public void updateStudentCoure(int id, HolisticStudent holisticStudent){
           try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HomeSchoolCourse");
             
             BasicDBObject searchQuery = new BasicDBObject();
@@ -63,7 +63,7 @@ public class StudentCourseController {
     
     public void deleteStudentCourse(int id){
         try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HomeSchoolCourse");
             
             Document findDocument = new Document ("_id",id);
@@ -75,7 +75,7 @@ public class StudentCourseController {
     
     public FindIterable<Document> getStudentCourse(){
         MongoClient mongo = MongoClients.create(uri);
-        MongoDatabase database = mongo.getDatabase("ManagementSystem");
+        MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
         MongoCollection<Document> collection = database.getCollection("HomeSchoolCourse");
         return collection.find();
     }

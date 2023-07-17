@@ -25,11 +25,11 @@ import org.bson.Document;
  */
 public class TeacherController {
     
-    public String uri = "mongodb+srv://ojtipan:trabatrix2@farm.am6duog.mongodb.net/?retryWrites=true&w=majority";
+    public String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
      
     public void fileWritter(Teacher teacher){
         try (MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase("ManagementSystem");
+            MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("Teacher");
                         
             try {
@@ -49,7 +49,7 @@ public class TeacherController {
     
     public void updateTeacher(int id, Teacher teacher){
           try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("Teacher");
             
             BasicDBObject searchQuery = new BasicDBObject();
@@ -75,7 +75,7 @@ public class TeacherController {
     
     public void deleteTeacher(int id){
         try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("Teacher");
             
             Document findDocument = new Document ("_id",id);

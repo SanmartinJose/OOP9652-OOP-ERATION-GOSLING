@@ -25,11 +25,11 @@ import org.bson.Document;
  */
 public class HolisticStudentController {
     
-    public String uri = "mongodb+srv://ojtipan:trabatrix2@farm.am6duog.mongodb.net/?retryWrites=true&w=majority";
+    public String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
      
     public void fileWritter(HolisticStudent holisticStudent){
         try (MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase("ManagementSystem");
+            MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticStudents");
                         
             try {
@@ -47,7 +47,7 @@ public class HolisticStudentController {
     
     public void updateHolisticStudent(String name, HolisticStudent holisticStudent){
           try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticStudents");
             
             MongoCursor<Document> cursor = getStudentList().iterator();
@@ -76,7 +76,7 @@ public class HolisticStudentController {
     
     public void deleteHolisticStudent(int id){
         try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticStudents");
             
             Document findDocument = new Document ("_id",id);
@@ -91,7 +91,7 @@ public class HolisticStudentController {
         MongoCursor<Document> cursor = null;
        
         try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticStudents");
             
             Document findDocument = new Document ("name",name);
@@ -119,7 +119,7 @@ public class HolisticStudentController {
     
     public FindIterable<Document> getStudentList(){
         MongoClient mongo = MongoClients.create(uri);
-        MongoDatabase database = mongo.getDatabase("ManagementSystem");
+        MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
         MongoCollection<Document> collection = database.getCollection("HolisticStudents");
 
         return collection.find();

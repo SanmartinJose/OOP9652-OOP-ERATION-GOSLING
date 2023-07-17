@@ -24,11 +24,11 @@ import org.bson.Document;
  * @author Oswaldo Tipan
  */
 public class AdminController {
-    public String uri = "mongodb+srv://ojtipan:trabatrix2@farm.am6duog.mongodb.net/?retryWrites=true&w=majority";
+    public String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
      
     public void fileWritter(Admin admin){
         try (MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase("ManagementSystem");
+            MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("Admin");
                         
             try {
@@ -49,7 +49,7 @@ public class AdminController {
     
     public void updateHolisticStudent(int id, Admin admin){
           try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("Admin");
             
             BasicDBObject searchQuery = new BasicDBObject();
@@ -77,7 +77,7 @@ public class AdminController {
     
     public void deleteHolisticStudent(int id){
         try (MongoClient mongo = MongoClients.create(uri)) {
-            MongoDatabase database = mongo.getDatabase("ManagementSystem");
+            MongoDatabase database = mongo.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("Admin");
             
             Document findDocument = new Document ("_id",id);
