@@ -11,6 +11,8 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
+import ec.edu.espe.managmentsystem.util.Validation;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
@@ -54,6 +56,7 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
+        btmSave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbeManagmentOfUser = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
@@ -99,6 +102,13 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
             }
         });
 
+        btmSave.setText("Guardar");
+        btmSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btmSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -112,21 +122,19 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtID)
-                            .addComponent(txtUserName)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDelete))))
-                .addContainerGap(129, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtID)
+                        .addComponent(txtUserName)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btmSave)
+                    .addComponent(btnDelete))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,13 +153,15 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete))
+                    .addComponent(btmSave))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCreate))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addComponent(btnDelete))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCreate)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tbeManagmentOfUser.setModel(new javax.swing.table.DefaultTableModel(
@@ -222,68 +232,10 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-    String userName = txtUserName.getText();
-    String email = txtEmail.getText(); 
-    String phone = txtPhone.getText();
-    String Id = txtID.getText();
-
-    DefaultTableModel tableModel = (DefaultTableModel) tbeManagmentOfUser.getModel();
-    tableModel.setRowCount(0); // Limpiar el contenido actual de la tabla
-
-    String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-    String db = "SchoolManagmentSystem";
-
-    try (final MongoClient mongoClient = MongoClients.create(uri)) {
-        MongoDatabase database = mongoClient.getDatabase(db);
-        MongoCollection<Document> collection = database.getCollection("Users");
-
-        // Construir el filtro de búsqueda
-        Bson filter = null;
-        if (!userName.isEmpty()) {
-            filter = Filters.eq("username", userName);
-        } else if (!email.isEmpty()) {
-            filter = Filters.eq("email", email);
-        } else if (!phone.isEmpty()) {
-            filter = Filters.eq("cellphone", phone);
-        }else if (!Id.isEmpty()) {
-            filter = Filters.eq("id", Id);
-        }
-
-        // Buscar los documentos que coincidan con el filtro
-        FindIterable<Document> documents;
-        if (filter != null) {
-            documents = collection.find(filter);
-        } else {
-            documents = collection.find();
-        }
-
-        for (Document document : documents) {
-            String id = document.getString("id");
-            String fullName = document.getString("fullName");
-            String cellphone = document.getString("cellphone");
-            String userEmail = document.getString("email");
-            String username = document.getString("username");
-            String password = document.getString("password");
-            String typeOfUser = document.getString("typeOfUser");
-
-            // Desencriptar la contraseña
-            String descifrada = "";
-            int desplazar = 2;
-            for (int i = 0; i < password.length(); i++) {
-                int codigoLetra = password.codePointAt(i);
-                char letraDesplazada = (char) (codigoLetra - desplazar);
-                descifrada += letraDesplazada;
-            }
-
-            // Agregar la fila al modelo de la tabla
-            tableModel.addRow(new Object[]{id, fullName, cellphone, userEmail, username, descifrada, typeOfUser});
-        }
-    } catch (MongoException e) {
-        e.printStackTrace();
-    }
+        SearchInDataBase();
 
     }//GEN-LAST:event_btnSearchActionPerformed
-
+      
     private void btmBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBackActionPerformed
         FrmManagmentSystem frmManagmentSystem = new FrmManagmentSystem();
         frmManagmentSystem.setVisible(true);
@@ -297,73 +249,29 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-     int selectedRow = tbeManagmentOfUser.getSelectedRow();
-    
-    if (selectedRow != -1) {
-        String id = tbeManagmentOfUser.getValueAt(selectedRow, 0).toString();
-        String userName = tbeManagmentOfUser.getValueAt(selectedRow, 4).toString();
-        String email = txtEmail.getText();
-        String phone = txtPhone.getText();
-        
-        tbeManagmentOfUser.setValueAt(email, selectedRow, 3);
-        tbeManagmentOfUser.setValueAt(phone, selectedRow, 2);
-        
-        boolean success = updateDataBase(id, userName, email, phone);
-        
-        if (success) {
-            JOptionPane.showMessageDialog(this, "Los datos se actualizaron correctamente en la base de datos.");
-        } else {
-            JOptionPane.showMessageDialog(this, "Hubo un error al actualizar los datos en la base de datos.");
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila para editar.");
-    }        
+     
+        editUser();
+
             
     }//GEN-LAST:event_btnEditActionPerformed
 
+    
+
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
     
-    int selectedRow = tbeManagmentOfUser.getSelectedRow();
-
-    if (selectedRow != -1) {
-        String fullName = tbeManagmentOfUser.getValueAt(selectedRow, 1).toString();
-        String id = tbeManagmentOfUser.getValueAt(selectedRow, 0).toString();
-
-        // Mostrar el cuadro de diálogo de confirmación
-        int choice = JOptionPane.showOptionDialog(
-            this,
-            "¿Estás seguro de que deseas eliminar a este usuario?\n: " + fullName,
-            "Confirmar eliminación",
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            new Object[]{"Sí", "No", "Cancelar"},
-            null
-        );
-
-        if (choice == JOptionPane.YES_OPTION) {
-           
-            DefaultTableModel tableModel = (DefaultTableModel) tbeManagmentOfUser.getModel();
-            tableModel.removeRow(selectedRow);
-
-            
-            boolean success = deleteInDataBase(id);
-
-            if (success) {
-                JOptionPane.showMessageDialog(this, "El usuario se eliminó correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Hubo un error al eliminar el usuario.");
-            }
-        } else if (choice == JOptionPane.NO_OPTION) {
-            JOptionPane.showMessageDialog(this, "La eliminación del usuario ha sido cancelada.");
-        } else if (choice == JOptionPane.CANCEL_OPTION) {
-            // No hacer nada, simplemente cerrar el cuadro de diálogo
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Por favor, selecciona un usuario para eliminar.");
-    }
+        deleteDataBase();
 
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btmSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmSaveActionPerformed
+        saveNewData();
+
+        
+    }//GEN-LAST:event_btmSaveActionPerformed
+
+    
+
+   
     
     
     /**
@@ -408,12 +316,12 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
     DefaultTableModel tableModel = new DefaultTableModel();
         
     tableModel.addColumn("ID");
-    tableModel.addColumn("Full Name");
-    tableModel.addColumn("Cellphone");
+    tableModel.addColumn("Nombre Completo");
+    tableModel.addColumn("Telefono");
     tableModel.addColumn("Email");
     tableModel.addColumn("Username");
-    tableModel.addColumn("Password");
-    tableModel.addColumn("Type of User");
+    tableModel.addColumn("Contraseña");
+    
 
     try (final MongoClient mongoClient = MongoClients.create(uri)) {
         MongoDatabase database = mongoClient.getDatabase(db);
@@ -430,7 +338,7 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
             String email = document.getString("email");
             String username = document.getString("username");
             String password = document.getString("password");
-            String typeOfUser = document.getString("typeOfUser");
+            
 
             // Desencriptar la contraseña
             String descifrada = "";
@@ -441,7 +349,7 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
                 descifrada += letraDesplazada;
             }
 
-            tableModel.addRow(new Object[]{id, fullName, cellphone, email, username, descifrada, typeOfUser});
+            tableModel.addRow(new Object[]{id, fullName, cellphone, email, username, descifrada});
         }
     } catch (MongoException e) {
         e.printStackTrace();
@@ -507,12 +415,184 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
 
     return false; // La eliminación no fue exitosa
 }
-
-    
-  
-    
+private void SearchInDataBase() {
+        String userName = txtUserName.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        String Id = txtID.getText();
+        
+        DefaultTableModel tableModel = (DefaultTableModel) tbeManagmentOfUser.getModel();
+        tableModel.setRowCount(0); // Limpiar el contenido actual de la tabla
+        
+        String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
+        String db = "SchoolManagmentSystem";
+        
+        try (final MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase database = mongoClient.getDatabase(db);
+            MongoCollection<Document> collection = database.getCollection("Users");
+            
+            // Construir el filtro de búsqueda
+            Bson filter = null;
+            if (!userName.isEmpty()) {
+                filter = Filters.eq("username", userName);
+            } else if (!email.isEmpty()) {
+                filter = Filters.eq("email", email);
+            } else if (!phone.isEmpty()) {
+                filter = Filters.eq("cellphone", phone);
+            }else if (!Id.isEmpty()) {
+                filter = Filters.eq("id", Id);
+            }
+            
+            // Buscar los documentos que coincidan con el filtro
+            FindIterable<Document> documents;
+            if (filter != null) {
+                documents = collection.find(filter);
+            } else {
+                documents = collection.find();
+            }
+            
+            for (Document document : documents) {
+                String id = document.getString("id");
+                String fullName = document.getString("fullName");
+                String cellphone = document.getString("cellphone");
+                String userEmail = document.getString("email");
+                String username = document.getString("username");
+                String password = document.getString("password");
+                String typeOfUser = document.getString("typeOfUser");
+                
+                // Desencriptar la contraseña
+                String descifrada = "";
+                int desplazar = 2;
+                for (int i = 0; i < password.length(); i++) {
+                    int codigoLetra = password.codePointAt(i);
+                    char letraDesplazada = (char) (codigoLetra - desplazar);
+                    descifrada += letraDesplazada;
+                }
+                
+                // Agregar la fila al modelo de la tabla
+                tableModel.addRow(new Object[]{id, fullName, cellphone, userEmail, username, descifrada, typeOfUser});
+            }
+        } catch (MongoException e) {
+            e.printStackTrace();
+        }
+}
+   private void deleteDataBase() throws HeadlessException {
+        int selectedRow = tbeManagmentOfUser.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            String fullName = tbeManagmentOfUser.getValueAt(selectedRow, 1).toString();
+            String id = tbeManagmentOfUser.getValueAt(selectedRow, 0).toString();
+            
+            // Mostrar el cuadro de diálogo de confirmación
+            int choice = JOptionPane.showOptionDialog(
+                    this,
+                    "¿Estás seguro de que deseas eliminar a este usuario?\n: " + fullName,
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new Object[]{"Sí", "No", "Cancelar"},
+                    null
+            );
+            
+            if (choice == JOptionPane.YES_OPTION) {
+                
+                DefaultTableModel tableModel = (DefaultTableModel) tbeManagmentOfUser.getModel();
+                tableModel.removeRow(selectedRow);
+                
+                
+                boolean success = deleteInDataBase(id);
+                
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "El usuario se eliminó correctamente.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hubo un error al eliminar el usuario.");
+                }
+            } else if (choice == JOptionPane.NO_OPTION) {
+                JOptionPane.showMessageDialog(this, "La eliminación del usuario ha sido cancelada.");
+            } else if (choice == JOptionPane.CANCEL_OPTION) {
+                // No hacer nada, simplemente cerrar el cuadro de diálogo
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona un usuario para eliminar.");
+        }
+    }
+    private void editUser() throws HeadlessException {
+        int selectedRowIndex = tbeManagmentOfUser.getSelectedRow();
+        
+        if (selectedRowIndex >= 0) {
+            
+            String id = (String) tbeManagmentOfUser.getValueAt(selectedRowIndex, 0);
+            String username = (String) tbeManagmentOfUser.getValueAt(selectedRowIndex, 4);
+            String email = (String) tbeManagmentOfUser.getValueAt(selectedRowIndex, 3);
+            String cellphone = (String) tbeManagmentOfUser.getValueAt(selectedRowIndex, 2);
+            
+            
+            txtID.setText(id);
+            txtUserName.setText(username);
+            txtEmail.setText(email);
+            txtPhone.setText(cellphone);
+            
+            
+            txtUserName.setEnabled(false);
+            txtID.setEnabled(false);
+            
+            
+            txtEmail.setEnabled(true);
+            txtPhone.setEnabled(true);
+        } else {
+            
+            JOptionPane.showMessageDialog(this, "Please select a row to edit.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void saveNewData() throws HeadlessException {
+        String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
+        String db = "SchoolManagmentSystem";
+        Validation v = new Validation();
+        String id = txtID.getText();
+        String email = v.validateEmail(txtEmail);
+        String cellphone = v.validateNumber(txtPhone);
+        
+        try (final MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase database = mongoClient.getDatabase(db);
+            MongoCollection<Document> collection = database.getCollection("Users");
+            
+            // Create a filter to find the document by ID
+            Bson filter = Filters.eq("id", id);
+            
+            // Create an update with the modified values
+            Bson update = Updates.combine(
+                    Updates.set("email", email),
+                    Updates.set("cellphone", cellphone)
+            );
+            
+            // Update the document in the collection
+            UpdateResult updateResult = collection.updateOne(filter, update);
+            
+            if (updateResult.getModifiedCount() > 0) {
+                // Data saved successfully
+                JOptionPane.showMessageDialog(this, "Data successfully saved");
+                
+                // Enable all the fields
+                txtID.setEnabled(true);
+                txtUserName.setEnabled(true);
+                
+                // Clear all the fields
+                txtID.setText("");
+                txtUserName.setText("");
+                txtEmail.setText("");
+                txtPhone.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to save data");
+            }
+        } catch (MongoException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred while saving the data");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btmBack;
+    private javax.swing.JButton btmSave;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
