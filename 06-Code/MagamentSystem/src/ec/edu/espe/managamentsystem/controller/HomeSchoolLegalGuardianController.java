@@ -35,6 +35,7 @@ public class HomeSchoolLegalGuardianController {
                         
             try {
                 Document homeSchoolLegalGuardianDocument = new Document();
+                homeSchoolLegalGuardianDocument.append("_id", homeSchoolLegalGuardian.getId());
                 homeSchoolLegalGuardianDocument.append("name", homeSchoolLegalGuardian.getName());
                 homeSchoolLegalGuardianDocument.append("age", homeSchoolLegalGuardian.getAge());
                 homeSchoolLegalGuardianDocument.append("email", homeSchoolLegalGuardian.getEmail());

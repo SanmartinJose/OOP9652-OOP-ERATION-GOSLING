@@ -10,20 +10,26 @@ package ec.edu.espe.managmentsystem.model;
  */
 public class HolisticLegalGuardian {
     int age ;
+    int id;
     int studentId;
     String phoneNumber;
     String name;
     String email;
     
-    public HolisticLegalGuardian(int age,int studentId, String phoneNumber, String name, String email){
+    public HolisticLegalGuardian(int id, int age,int studentId, String phoneNumber, String name, String email){
         this.age = age;
+        this.id=id;
         this.studentId = studentId;
         this.phoneNumber = phoneNumber;
         this.name= name;
         this.email = email;
     }
     
-     public int getAge(){
+    public int getId(){
+        return id;
+    }
+    
+    public int getAge(){
         return age;
     }
     

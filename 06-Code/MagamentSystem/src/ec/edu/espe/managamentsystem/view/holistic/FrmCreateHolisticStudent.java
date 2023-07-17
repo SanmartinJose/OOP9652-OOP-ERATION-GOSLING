@@ -239,6 +239,8 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
            
            MongoCursor<Document> cursor = holistiStudentController.getStudent(searchController.getStudent());
            
+           
+           
            String name = null;
            String age = null;
            String address = null;

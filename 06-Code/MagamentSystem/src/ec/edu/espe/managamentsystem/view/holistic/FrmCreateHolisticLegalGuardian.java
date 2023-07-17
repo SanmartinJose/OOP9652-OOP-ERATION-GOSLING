@@ -51,6 +51,8 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +81,14 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Cédula:");
+
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,13 +108,15 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtLegalGuardianName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtLegalGuardianAge, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtLegalGuardianPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(75, 75, 75)
                 .addComponent(btnBack)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -132,7 +144,11 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnBack))
@@ -152,7 +168,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,12 +186,14 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         String phoneNumber;
         String name;
         String email;
+        int id;
         
         name = txtLegalGuardianName.getText();
         age = Integer.parseInt(txtLegalGuardianAge.getText());
         phoneNumber = txtLegalGuardianPhoneNumber.getText();
         email = txtEmail.getText();
         studentId = getStudentId();
+        id= Integer.parseInt(txtId.getText());
         
         HolisticStudentController holisticStudentController;
         holisticStudentController = new HolisticStudentController();
@@ -185,7 +203,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         holisticLegalGuardianController = new HolisticLegalGuardianController();
         
         HolisticLegalGuardian holisticLegalGuardian;
-        holisticLegalGuardian = new HolisticLegalGuardian(age, studentId, phoneNumber, name, email);
+        holisticLegalGuardian = new HolisticLegalGuardian(id, age, studentId, phoneNumber, name, email);
         
         if(holisticStudentController.validateStudentData(searchController.getStudent())){
             holisticLegalGuardianController.updateHolisticLeaglGuardian(holisticStudentController.getStudentId(), holisticLegalGuardian);
@@ -197,6 +215,10 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         frmHolisticStudent.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
 
     public int getStudentId(){
        HolisticStudentController holisticStudentController;
@@ -288,6 +310,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -296,6 +319,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtLegalGuardianAge;
     private javax.swing.JTextField txtLegalGuardianName;
     private javax.swing.JTextField txtLegalGuardianPhoneNumber;

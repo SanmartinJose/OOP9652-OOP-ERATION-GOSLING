@@ -32,6 +32,7 @@ public class HolisticLegalGuardianController {
                         
             try {
                 Document holisticLegalGuardianDocument = new Document();
+                holisticLegalGuardianDocument.append("_id", holisticLegalGuardian.getId());
                 holisticLegalGuardianDocument.append("name", holisticLegalGuardian.getName());
                 holisticLegalGuardianDocument.append("age", holisticLegalGuardian.getAge());
                 holisticLegalGuardianDocument.append("email", holisticLegalGuardian.getEmail());
