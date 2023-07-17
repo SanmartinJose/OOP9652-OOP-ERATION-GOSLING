@@ -8,6 +8,7 @@ import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
 import ec.edu.espe.managamentsystem.controller.SearchController;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import org.bson.Document;
 
@@ -36,6 +37,7 @@ public class FrmEditStudentData extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtStudentName = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
@@ -43,8 +45,20 @@ public class FrmEditStudentData extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Ingrese el nombre del estudiante:");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setText("Nombre del estudiante:");
+
+        txtStudentName.setForeground(new java.awt.Color(153, 153, 153));
+        txtStudentName.setText("Ingrese el nombre del estudiante");
+        txtStudentName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtStudentNameMouseClicked(evt);
+            }
+        });
+
+        btnSearch.setBackground(new java.awt.Color(255, 102, 102));
+        btnSearch.setForeground(new java.awt.Color(255, 255, 255));
         btnSearch.setText("Buscar");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,39 +66,48 @@ public class FrmEditStudentData extends javax.swing.JFrame {
             }
         });
 
+        lblFound.setFont(new java.awt.Font("sansserif", 2, 12)); // NOI18N
         lblFound.setForeground(new java.awt.Color(255, 0, 0));
         lblFound.setText("*estudiante no encontrado");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(11, 11, 11)
+                .addComponent(txtStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(lblFound))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(btnSearch))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(lblFound)
+                .addGap(14, 14, 14)
+                .addComponent(btnSearch))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSearch)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(lblFound)))
-                .addContainerGap(57, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblFound)
-                .addGap(5, 5, 5)
-                .addComponent(btnSearch)
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -112,6 +135,11 @@ public class FrmEditStudentData extends javax.swing.JFrame {
             lblFound.setVisible(true);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtStudentNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtStudentNameMouseClicked
+        txtStudentName.setText("");
+        txtStudentName.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtStudentNameMouseClicked
 
     /**
      * @param args the command line arguments
@@ -152,6 +180,7 @@ public class FrmEditStudentData extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblFound;
     private javax.swing.JTextField txtStudentName;
     // End of variables declaration//GEN-END:variables
