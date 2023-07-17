@@ -21,6 +21,8 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
      */
     public FrmMonthlyPayment() {
         initComponents();
+        lblAlert1.setVisible(false);
+        lblAlert2.setVisible(false);
     }
 
     /**
@@ -41,7 +43,11 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         txtNewValue = new javax.swing.JTextField();
+        lblAlert1 = new javax.swing.JLabel();
+        lblAlert2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,8 +124,16 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Ingrese el Nuevo Pago Mensual:");
+        jLabel1.setText("Id del Tutor Legal");
         jLabel1.setToolTipText("");
+
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Valor Pagado");
 
         txtNewValue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,34 +141,62 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
             }
         });
 
+        lblAlert1.setForeground(new java.awt.Color(255, 51, 51));
+        lblAlert1.setText("*Ingrese un Id Valido");
+
+        lblAlert2.setForeground(new java.awt.Color(255, 51, 51));
+        lblAlert2.setText("*Ingrese un Valor Valido");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNewValue, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(txtNewValue))
+                .addGap(44, 44, 44)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAlert1)
+                    .addComponent(lblAlert2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNewValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAlert1))
                     .addComponent(jLabel1))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNewValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAlert2))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,8 +204,9 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,51 +223,56 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNewValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewValueActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
 
-    }//GEN-LAST:event_txtNewValueActionPerformed
-    private Payment readData() throws NumberFormatException{
+    }//GEN-LAST:event_txtIdActionPerformed
 
-        String validValueIs = txtNewValue.getText().trim();        
-        Double pagoMensual = Validation.validValue(validValueIs);
-        if (pagoMensual != null) {
-            payment = new Payment(pagoMensual);
-            return payment;
-        } else {
-            return null;
-        }
-    }
     private void btnAddPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPaymentActionPerformed
-        payment = readData();
-        payment = readData();
-        if (payment != null) {
-            String[] options = { "Si", "No" };
-            int option = JOptionPane.showOptionDialog(this,
-                    "Estás seguro de actualizar al nuevo pago mensual de \n" + "$" + payment.getPagoMensual(),
-                    "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                    null, options, options[0]);
+       String validValueIs = txtId.getText().trim();
+        Double valuePaidValid = Validation.validValue(validValueIs);
+        String id = txtId.getText().trim();
 
-            if (option == JOptionPane.YES_OPTION) {
-                PaymentRecord paymentRecord = new PaymentRecord();
-                paymentRecord.monthlyValue(payment);
-                JOptionPane.showMessageDialog(rootPane, "Guardado");
-            } else if (option == JOptionPane.NO_OPTION) {
-                JOptionPane.showMessageDialog(rootPane, "Abortado");
-            }
+        if (isValidId(id) && valuePaidValid != null) {
+            PaymentRecord paymentRecord = new PaymentRecord();
+            paymentRecord.monthlyValue(valuePaidValid, id);
+
+            JOptionPane.showMessageDialog(rootPane, "Datos guardados", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            emptyFields();
+            
         } else {
-            // Manejar el caso en el que el valor no sea válido
-            // Por ejemplo, mostrar un mensaje de error al usuario
-            JOptionPane.showMessageDialog(rootPane, "El valor ingresado no es válido");
+            lblAlert1.setVisible(true);
+            lblAlert2.setVisible(true);
+            JOptionPane.showMessageDialog(rootPane, "Ingrese valores válidos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
+            emptyFields();
         }
-        txtNewValue.setText("");
     }//GEN-LAST:event_btnAddPaymentActionPerformed
 
+    private boolean isValidId(String id) {
+        if (id.isEmpty()) {
+            return false;
+        }
+        try {
+            Integer.parseInt(id);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    private void emptyFields() {
+        txtId.setText("");
+        txtId.setText("");
+    }
+    
     private void btmBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBackActionPerformed
        FrmPaymentRecord frmPaymentRecord;
        frmPaymentRecord = new FrmPaymentRecord();
        frmPaymentRecord.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btmBackActionPerformed
+
+    private void txtNewValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewValueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNewValueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -520,12 +568,16 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
     private javax.swing.JButton btmBack;
     private javax.swing.JButton btnAddPayment;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblAlert1;
+    private javax.swing.JLabel lblAlert2;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNewValue;
     // End of variables declaration//GEN-END:variables
 }

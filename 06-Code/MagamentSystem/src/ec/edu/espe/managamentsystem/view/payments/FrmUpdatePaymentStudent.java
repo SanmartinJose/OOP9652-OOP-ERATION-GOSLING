@@ -248,8 +248,6 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
             // Realiza la acción cuando los valores son válidos
             PaymentRecord paymentRecord = new PaymentRecord();
             paymentRecord.updatePayment(idValid, valuePaidValid);
-            lblAlert1.setVisible(false);
-            lblAlert2.setVisible(false);
             JOptionPane.showMessageDialog(rootPane, "Datos enviados correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             emptyFields();
          } else {
