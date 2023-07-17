@@ -11,6 +11,7 @@ import ec.edu.espe.managamentsystem.controller.SearchController;
 import ec.edu.espe.managamentsystem.controller.StudentCourseController;
 import ec.edu.espe.managamentsystem.view.homeschool.*;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;
+import ec.edu.espe.managmentsystem.util.Validation;
 import org.bson.Document;
 
 /**
@@ -25,6 +26,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
     public FrmCreateHolisticStudent() {
         initComponents();
         showStudentData();
+        lblFull.setVisible(false);
     }
 
     /**
@@ -50,6 +52,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
         txtAgeStudent = new javax.swing.JTextField();
         txtAdreesStudent = new javax.swing.JTextField();
         btnAddLegalGuardian = new javax.swing.JButton();
+        lblFull = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
         btnBack = new javax.swing.JButton();
@@ -118,6 +121,8 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
             }
         });
 
+        lblFull.setText("*existen campos sin llenar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,6 +135,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFull)
                     .addComponent(btnAddLegalGuardian)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtNameStudent, javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +158,9 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtAdreesStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFull)
+                .addGap(7, 7, 7)
                 .addComponent(btnAddLegalGuardian)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -231,26 +239,34 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
         String name;
         String address;
         
-        name = txtNameStudent.getText();
-        address = txtAdreesStudent.getText();
-        age = Integer.parseInt(txtAgeStudent.getText());
-        id = setId();
-        
-        HolisticStudent holisticStudent = new HolisticStudent(id, age, name, address);
-        HolisticStudentController holisticStudentController;
-        holisticStudentController = new HolisticStudentController();
-        FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
-        
-        SearchController searchController = new SearchController();
-       
-        if(holisticStudentController.validateStudentData(searchController.getStudent())){
-          holisticStudentController.updateHolisticStudent(searchController.getStudent(), holisticStudent);
+         if(txtAdreesStudent.getText().isEmpty() || txtAgeStudent.getText().isEmpty() || txtNameStudent.getText().isEmpty()){
+            lblFull.setVisible(true);
         }else{
-            holisticStudentController.fileWritter(holisticStudent); 
+            lblFull.setVisible(false);
+        
+            Validation validation = new Validation();
+
+            name = validation.validateName(txtNameStudent);
+            address = validation.validateName(txtAdreesStudent);
+            age = Integer.parseInt(txtAgeStudent.getText());
+            id = setId();
+
+            HolisticStudent holisticStudent = new HolisticStudent(id, age, name, address);
+            HolisticStudentController holisticStudentController;
+            holisticStudentController = new HolisticStudentController();
+            FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
+
+            SearchController searchController = new SearchController();
+
+            if(holisticStudentController.validateStudentData(searchController.getStudent())){
+              holisticStudentController.updateHolisticStudent(searchController.getStudent(), holisticStudent);
+            }else{
+                holisticStudentController.fileWritter(holisticStudent); 
+            }
+            FrmCreateHolisticLegalGuardian frmCreateHolisticLegalGuardian = new FrmCreateHolisticLegalGuardian();
+            frmCreateHolisticLegalGuardian.setVisible(true);
+            this.setVisible(false);
         }
-        FrmCreateHolisticLegalGuardian frmCreateHolisticLegalGuardian = new FrmCreateHolisticLegalGuardian();
-        frmCreateHolisticLegalGuardian.setVisible(true);
-        this.setVisible(false);  
     }//GEN-LAST:event_btnAddLegalGuardianActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -259,6 +275,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+   
     public int setId(){
        HolisticStudentController holisticStudentController;
        holisticStudentController = new HolisticStudentController();
@@ -310,10 +327,6 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
            btnAddLegalGuardian.setText("+ Añadir Tutor Legal");
            lblTItle.setText("Guardar Estudiantes");
        }
-    }
-    
-    public void updateStudentData(){
-        
     }
     /**
      * @param args the command line arguments
@@ -368,6 +381,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblFull;
     private javax.swing.JLabel lblTItle;
     private javax.swing.JTextField txtAdreesStudent;
     private javax.swing.JTextField txtAgeStudent;

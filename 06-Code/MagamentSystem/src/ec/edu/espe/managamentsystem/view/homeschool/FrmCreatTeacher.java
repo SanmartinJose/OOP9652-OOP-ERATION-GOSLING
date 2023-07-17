@@ -9,6 +9,7 @@ import ec.edu.espe.managamentsystem.controller.StudentCourseController;
 import ec.edu.espe.managamentsystem.controller.TeacherController;
 import ec.edu.espe.managmentsystem.model.HomeSchoolStudent;
 import ec.edu.espe.managmentsystem.model.Teacher;
+import ec.edu.espe.managmentsystem.util.Validation;
 import org.bson.Document;
 
 /**
@@ -23,6 +24,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
     public FrmCreatTeacher() {
         initComponents();
         addComoBoxItems();
+        lblFull.setVisible(false);
     }
 
     /**
@@ -49,6 +51,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         cmbTeacherCourse = new javax.swing.JComboBox<>();
+        lblFull = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
@@ -81,6 +84,9 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
 
         jLabel7.setText("Curso Asignado:");
 
+        lblFull.setForeground(new java.awt.Color(255, 0, 0));
+        lblFull.setText("*existen campos sin rellenar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,6 +102,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFull)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtName)
                         .addComponent(txtAge)
@@ -133,7 +140,9 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(cmbTeacherCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFull)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -241,22 +250,31 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
         int courseId;
         String courseName;
         
-        name = txtName.getText();
-        address = txtAdress.getText();
-        email = txtEmail.getText();
-        phoneNumber = txtPhoneNumber.getText();
-        age = Integer.parseInt(txtAge.getText());
-        courseName = cmbTeacherCourse.getSelectedItem().toString();
-        courseId = getCOurseId(courseName);
-        
-        Teacher teacher = new Teacher(age, courseId, name, age, address, email, phoneNumber);
-        TeacherController teacherController= new TeacherController();
-        
-        teacherController.fileWritter(teacher);
-        
-        FrmControlHomeSchoolMenu frmControlHomeSchool = new FrmControlHomeSchoolMenu();
-        frmControlHomeSchool.setVisible(true);
-        this.setVisible(false);
+        if(txtAdress.getText().isEmpty() || txtAge.getText().isEmpty() || txtEmail.getText().isEmpty() || txtName.getText().isEmpty() || txtPhoneNumber.getText().isEmpty()){
+            lblFull.setVisible(true);
+        }else{
+            
+            lblFull.setVisible(false);
+            
+            Validation validation = new Validation();
+
+            name = validation.validateName(txtName);
+            address = txtAdress.getText();
+            email = validation.validateEmail(txtEmail);
+            phoneNumber = validation.validateNumber(txtPhoneNumber);
+            age = Integer.parseInt(txtAge.getText());
+            courseName = cmbTeacherCourse.getSelectedItem().toString();
+            courseId = getCOurseId(courseName);
+
+            Teacher teacher = new Teacher(age, courseId, name, age, address, email, phoneNumber);
+            TeacherController teacherController= new TeacherController();
+
+            teacherController.fileWritter(teacher);
+
+            FrmControlHomeSchoolMenu frmControlHomeSchool = new FrmControlHomeSchoolMenu();
+            frmControlHomeSchool.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     public void addComoBoxItems(){
@@ -340,6 +358,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblFull;
     private javax.swing.JTextField txtAdress;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtEmail;

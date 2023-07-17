@@ -9,6 +9,7 @@ import ec.edu.espe.managamentsystem.controller.HomeSchoolLegalGuardianController
 import ec.edu.espe.managamentsystem.controller.HomeStudentController;
 import ec.edu.espe.managamentsystem.controller.StudentCourseController;
 import ec.edu.espe.managmentsystem.model.HomeSchoolLegalGuardian;
+import ec.edu.espe.managmentsystem.util.Validation;
 import org.bson.Document;
 
 /**
@@ -22,6 +23,7 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
      */
     public FrmCreateLegalGuardian() {
         initComponents();
+        lblFull.setVisible(false);
     }
 
     /**
@@ -45,6 +47,7 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        lblFull = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -68,6 +71,9 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
 
         jLabel6.setText("Cédula:");
 
+        lblFull.setForeground(new java.awt.Color(255, 0, 0));
+        lblFull.setText("*existen campos sin llenar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -81,12 +87,14 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtLegalGuardianName, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                    .addComponent(txtLegalGuardianPhoneNumber)
-                    .addComponent(txtEmail)
-                    .addComponent(txtId)
-                    .addComponent(txtLegalGuardianAge, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFull)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtLegalGuardianName, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                        .addComponent(txtLegalGuardianPhoneNumber)
+                        .addComponent(txtEmail)
+                        .addComponent(txtId)
+                        .addComponent(txtLegalGuardianAge, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(206, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,7 +120,9 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(lblFull)
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 204, 102));
@@ -228,23 +238,31 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
         String email;
         int id;
         
-        name = txtLegalGuardianName.getText();
-        age = Integer.parseInt(txtLegalGuardianAge.getText());
-        phoneNumber = txtLegalGuardianPhoneNumber.getText();
-        email = txtEmail.getText();
-        studentId = getStudentId();
-        id = Integer.parseInt(txtId.getText());
+         if(txtEmail.getText().isEmpty() || txtId.getText().isEmpty()|| txtLegalGuardianAge.getText().isEmpty()||txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()){
+            lblFull.setVisible(true);
+        }else{
+            lblFull.setVisible(false);
         
-        HomeSchoolLegalGuardian homeSchoolLegalGuardian;
-        homeSchoolLegalGuardian = new HomeSchoolLegalGuardian(age, id, studentId, phoneNumber, name, email);
-        
-        HomeSchoolLegalGuardianController homeSchoolLegalGuardianController;
-        homeSchoolLegalGuardianController = new HomeSchoolLegalGuardianController();
-        homeSchoolLegalGuardianController.fileWrite(homeSchoolLegalGuardian);
-        
-        FrmCourse frmCourse = new FrmCourse();
-        frmCourse.setVisible(true);
-        this.setVisible(false);
+            Validation validation = new Validation();
+
+            name = validation.validateName(txtLegalGuardianName);
+            age = Integer.parseInt(txtLegalGuardianAge.getText());
+            phoneNumber = validation.validateNumber(txtLegalGuardianPhoneNumber);
+            email = validation.validateEmail(txtEmail);
+            studentId = getStudentId();
+            id = Integer.parseInt(txtId.getText());
+
+            HomeSchoolLegalGuardian homeSchoolLegalGuardian;
+            homeSchoolLegalGuardian = new HomeSchoolLegalGuardian(age, id, studentId, phoneNumber, name, email);
+
+            HomeSchoolLegalGuardianController homeSchoolLegalGuardianController;
+            homeSchoolLegalGuardianController = new HomeSchoolLegalGuardianController();
+            homeSchoolLegalGuardianController.fileWrite(homeSchoolLegalGuardian);
+
+            FrmCourse frmCourse = new FrmCourse();
+            frmCourse.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
     
     public int getStudentId(){
@@ -310,6 +328,7 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblFull;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtLegalGuardianAge;

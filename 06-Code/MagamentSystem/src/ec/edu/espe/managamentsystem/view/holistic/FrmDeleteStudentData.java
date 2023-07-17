@@ -9,6 +9,7 @@ import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
 import ec.edu.espe.managamentsystem.controller.SearchController;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;
+import ec.edu.espe.managmentsystem.util.Validation;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import org.bson.Document;
@@ -115,26 +116,36 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         
-        name = txtStudentName.getText();
+        Validation validation = new Validation();
         
-        HolisticStudentController holisticStudentController = new HolisticStudentController(); 
-        boolean isFound = holisticStudentController.validateStudentData(name);
-        
-        SearchController searchController = new SearchController();
-        searchController.fileWritter(name);
-       
-        if(isFound){
-            lblFound.setVisible(false);
-            delete();
-            this.setVisible(false);
-        }else{
+        if(txtStudentName.getText().isEmpty()){
+            lblFound.setText("*Campo Obligatorio");
             lblFound.setVisible(true);
+        }else{
+            lblFound.setText("*estudiante no encontrado");
+            lblFound.setVisible(false);
+            
+            name = validation.validateName(txtStudentName);
+            
+            HolisticStudentController holisticStudentController = new HolisticStudentController(); 
+            boolean isFound = holisticStudentController.validateStudentData(name);
+
+            SearchController searchController = new SearchController();
+            searchController.fileWritter(name);
+
+            if(isFound){
+                lblFound.setVisible(false);
+                delete();
+                this.setVisible(false);
+            }else{
+                lblFound.setVisible(true);
+            }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtStudentNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtStudentNameMouseClicked
-    txtStudentName.setText("");
-    txtStudentName.setForeground(Color.BLACK);
+        txtStudentName.setText("");
+        txtStudentName.setForeground(Color.BLACK);
     }//GEN-LAST:event_txtStudentNameMouseClicked
     
     public void delete(){

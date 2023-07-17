@@ -13,6 +13,7 @@ import ec.edu.espe.managamentsystem.controller.SearchController;
 import ec.edu.espe.managamentsystem.view.homeschool.*;
 import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
 import ec.edu.espe.managmentsystem.model.HomeSchoolLegalGuardian;
+import ec.edu.espe.managmentsystem.util.Validation;
 import org.bson.Document;
 
 /**
@@ -27,6 +28,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     public FrmCreateHolisticLegalGuardian() {
         initComponents();
         showGuardianData();
+        lblFull.setVisible(false);
     }
 
     /**
@@ -56,6 +58,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        lblFull = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,6 +147,8 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
             }
         });
 
+        lblFull.setText("*existen campos sin llenar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,6 +163,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFull)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtLegalGuardianName)
                         .addComponent(txtId)
@@ -190,7 +196,9 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFull)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -243,39 +251,47 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         String email;
         int id;
         
-        name = txtLegalGuardianName.getText();
-        age = Integer.parseInt(txtLegalGuardianAge.getText());
-        phoneNumber = txtLegalGuardianPhoneNumber.getText();
-        email = txtEmail.getText();
-        studentId = getStudentId();
-        id= Integer.parseInt(txtId.getText());
-        
-        HolisticStudentController holisticStudentController;
-        holisticStudentController = new HolisticStudentController();
-        SearchController searchController = new SearchController();
-        
-        HolisticLegalGuardianController holisticLegalGuardianController;
-        holisticLegalGuardianController = new HolisticLegalGuardianController();
-        
-        HolisticLegalGuardian holisticLegalGuardian;
-        holisticLegalGuardian = new HolisticLegalGuardian(id, age, studentId, phoneNumber, name, email);
-        
-        if(holisticStudentController.validateStudentData(searchController.getStudent())){
-            holisticLegalGuardianController.updateHolisticLeaglGuardian(holisticStudentController.getStudentId(), holisticLegalGuardian);
+         if(txtEmail.getText().isEmpty() || txtId.getText().isEmpty() || txtLegalGuardianAge.getText().isEmpty() || txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()){
+            lblFull.setVisible(true);
         }else{
-            holisticLegalGuardianController.fileWrite(holisticLegalGuardian);
+             lblFull.setVisible(false);
+            
+        Validation validation = new Validation();
+        
+            name = validation.validateName(txtLegalGuardianName);
+            age = Integer.parseInt(txtLegalGuardianAge.getText());
+            phoneNumber = validation.validateNumber(txtLegalGuardianPhoneNumber);
+            email = validation.validateEmail(txtEmail);
+            studentId = getStudentId();
+            id= Integer.parseInt(txtId.getText());
+
+            HolisticStudentController holisticStudentController;
+            holisticStudentController = new HolisticStudentController();
+            SearchController searchController = new SearchController();
+
+            HolisticLegalGuardianController holisticLegalGuardianController;
+            holisticLegalGuardianController = new HolisticLegalGuardianController();
+
+            HolisticLegalGuardian holisticLegalGuardian;
+            holisticLegalGuardian = new HolisticLegalGuardian(id, age, studentId, phoneNumber, name, email);
+
+            if(holisticStudentController.validateStudentData(searchController.getStudent())){
+                holisticLegalGuardianController.updateHolisticLeaglGuardian(holisticStudentController.getStudentId(), holisticLegalGuardian);
+            }else{
+                holisticLegalGuardianController.fileWrite(holisticLegalGuardian);
+            }
+
+            FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+            frmHolisticStudent.setVisible(true);
+            this.setVisible(false);
         }
-                    
-        FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
-        frmHolisticStudent.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
 
-    public int getStudentId(){
+     public int getStudentId(){
        HolisticStudentController holisticStudentController;
        holisticStudentController = new HolisticStudentController();
        
@@ -375,6 +391,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblFull;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtId;
