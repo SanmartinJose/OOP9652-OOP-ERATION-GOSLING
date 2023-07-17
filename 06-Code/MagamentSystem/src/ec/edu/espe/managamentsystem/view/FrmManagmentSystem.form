@@ -53,11 +53,11 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel1" min="-2" pref="600" max="-2" attributes="0"/>
-              <Component id="paymentPanel" min="-2" pref="175" max="-2" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace min="427" pref="427" max="-2" attributes="0"/>
                   <Component id="usersPanel" min="-2" max="-2" attributes="0"/>
               </Group>
+              <Component id="paymentPanel" min="-2" pref="175" max="-2" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace min="170" pref="170" max="-2" attributes="0"/>
                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
@@ -70,8 +70,8 @@
               <Group type="102" attributes="0">
                   <Component id="jPanel1" min="-2" pref="60" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="paymentPanel" min="-2" max="-2" attributes="0"/>
                       <Component id="usersPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="paymentPanel" min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel2" min="-2" pref="70" max="-2" attributes="0"/>

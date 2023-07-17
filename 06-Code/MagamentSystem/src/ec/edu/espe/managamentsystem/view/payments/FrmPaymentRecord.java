@@ -46,7 +46,6 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
-        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -70,10 +69,8 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
-
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 70));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -110,8 +107,6 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
                 .addContainerGap(79, Short.MAX_VALUE))
         );
 
-        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 290, 380));
-
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         btnBackToMainMenu.setBackground(new java.awt.Color(153, 153, 255));
@@ -140,8 +135,6 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
                 .addComponent(btnBackToMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
-
-        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 290, 80));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -205,7 +198,28 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
                 .addComponent(jSeparator1))
         );
 
-        bg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 310, 370));
+        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
+        bg.setLayout(bgLayout);
+        bgLayout.setHorizontalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        bgLayout.setVerticalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
