@@ -231,54 +231,65 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        int age ;
+
+        validetFiles();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void validetFiles() throws NumberFormatException {
+        if (txtEmail.getText().isEmpty() || txtId.getText().isEmpty() || txtLegalGuardianAge.getText().isEmpty() || txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()) {
+            lblFull.setVisible(true);
+        } else {
+            lblFull.setVisible(false);
+            
+            HomeSchoolLegalGuardian homeSchoolLegalGuardian = readData();
+            HomeSchoolLegalGuardianController homeSchoolLegalGuardianController;
+            homeSchoolLegalGuardianController = new HomeSchoolLegalGuardianController();
+            homeSchoolLegalGuardianController.fileWrite(homeSchoolLegalGuardian);
+            
+            enterToCourse();
+        }
+    }
+
+    private HomeSchoolLegalGuardian readData() throws NumberFormatException {
+        int age;
         int studentId;
         String phoneNumber;
         String name;
         String email;
         int id;
-        
-         if(txtEmail.getText().isEmpty() || txtId.getText().isEmpty()|| txtLegalGuardianAge.getText().isEmpty()||txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()){
-            lblFull.setVisible(true);
-        }else{
-            lblFull.setVisible(false);
-        
-            Validation validation = new Validation();
+        Validation validation = new Validation();
+        name = validation.validateName(txtLegalGuardianName);
+        age = Integer.parseInt(txtLegalGuardianAge.getText());
+        phoneNumber = validation.validateNumber(txtLegalGuardianPhoneNumber);
+        email = validation.validateEmail(txtEmail);
+        studentId = getStudentId();
+        id = Integer.parseInt(txtId.getText());
+        HomeSchoolLegalGuardian homeSchoolLegalGuardian;
+        homeSchoolLegalGuardian = new HomeSchoolLegalGuardian(age, id, studentId, phoneNumber, name, email);
+        return homeSchoolLegalGuardian;
+    }
 
-            name = validation.validateName(txtLegalGuardianName);
-            age = Integer.parseInt(txtLegalGuardianAge.getText());
-            phoneNumber = validation.validateNumber(txtLegalGuardianPhoneNumber);
-            email = validation.validateEmail(txtEmail);
-            studentId = getStudentId();
-            id = Integer.parseInt(txtId.getText());
+    private void enterToCourse() {
+        FrmCourse frmCourse = new FrmCourse();
+        frmCourse.setVisible(true);
+        this.setVisible(false);
+    }
 
-            HomeSchoolLegalGuardian homeSchoolLegalGuardian;
-            homeSchoolLegalGuardian = new HomeSchoolLegalGuardian(age, id, studentId, phoneNumber, name, email);
+    public int getStudentId() {
+        HomeStudentController homeStudentController;
+        homeStudentController = new HomeStudentController();
 
-            HomeSchoolLegalGuardianController homeSchoolLegalGuardianController;
-            homeSchoolLegalGuardianController = new HomeSchoolLegalGuardianController();
-            homeSchoolLegalGuardianController.fileWrite(homeSchoolLegalGuardian);
+        MongoCursor<Document> cursor = homeStudentController.getStudentList().iterator();
 
-            FrmCourse frmCourse = new FrmCourse();
-            frmCourse.setVisible(true);
-            this.setVisible(false);
-        }
-    }//GEN-LAST:event_btnSaveActionPerformed
-    
-    public int getStudentId(){
-       HomeStudentController homeStudentController;
-       homeStudentController = new HomeStudentController();
-       
-       MongoCursor<Document> cursor = homeStudentController.getStudentList().iterator();
-       
-       int id=0;
-       
-       while(cursor.hasNext()){
+        int id = 0;
+
+        while (cursor.hasNext()) {
             Document document = cursor.next();
             id = (int) document.getInteger("_id");
-       }
-       return id;
+        }
+        return id;
     }
+
     /**
      * @param args the command line arguments
      */
