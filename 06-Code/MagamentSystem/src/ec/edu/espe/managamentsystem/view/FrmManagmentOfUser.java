@@ -1,21 +1,12 @@
 
 package ec.edu.espe.managamentsystem.view;
 
-import com.mongodb.MongoException;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Updates;
-import com.mongodb.client.result.DeleteResult;
-import com.mongodb.client.result.UpdateResult;
-import java.awt.HeadlessException;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import org.bson.Document;
-import org.bson.conversions.Bson;
+
+import static ec.edu.espe.managamentsystem.controller.UserManagment.SearchInDataBase;
+import static ec.edu.espe.managamentsystem.controller.UserManagment.editDataBase;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import ec.edu.espe.managamentsystem.controller.UserManagment;
 
 /**
  *
@@ -30,7 +21,8 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
     public FrmManagmentOfUser() {           
         
         initComponents();
-        tbeManagmentOfUser.setModel(addTableData());
+        UserManagment um = new UserManagment();
+        tbeManagmentOfUser.setModel(um.addTableData());
     }
 
     /**
@@ -259,7 +251,12 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-     SearchInDataBase();
+     String userName = txtUserName.getText();
+        String email = txtEmail.getText();
+        String phone = txtPhone.getText();
+        String Id = txtID.getText();
+        JTable newTable = tbeManagmentOfUser;
+        SearchInDataBase(userName, email, phone, Id,newTable);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btmBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBackActionPerformed
@@ -275,17 +272,34 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        editDataBase();    
+        JTable table = tbeManagmentOfUser;
+        int selectedRowIndex = tbeManagmentOfUser.getSelectedRow();
+            JTextField txtId =txtID;
+            JTextField txtUsername =txtUserName;
+            JTextField txtMail =txtEmail;
+            JTextField txtCellphone =txtPhone;
+           editDataBase(selectedRowIndex, table, txtId, txtUsername, txtMail, txtCellphone);    
     }//GEN-LAST:event_btnEditActionPerformed
 
     
-
+UserManagment um = new UserManagment();
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-     deleteDataBase();
+        UserManagment um = new UserManagment();
+        JTable table = tbeManagmentOfUser;
+        int selectedRow = table.getSelectedRow();
+        um.deleteDataBase(selectedRow, table);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        newDataSave();
+        UserManagment um = new UserManagment();
+        String id = txtID.getText();
+        String email = txtEmail.getText();
+        String cellphone = txtPhone.getText();
+        JTextField txtId =txtID;
+        JTextField txtUsername =txtUserName;
+        JTextField txtMail =txtEmail;
+        JTextField txtCellphone =txtPhone;
+        um.newDataSave(id, email, cellphone, txtId, txtUsername, txtMail, txtCellphone);
     }//GEN-LAST:event_btnSaveActionPerformed
 
   
@@ -326,287 +340,9 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
             }
         });
     }
-       private DefaultTableModel addTableData() {
-    String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-    String db = "SchoolManagmentSystem";
-
-    DefaultTableModel tableModel = new DefaultTableModel();
-        
-    tableModel.addColumn("ID");
-    tableModel.addColumn("Full Name");
-    tableModel.addColumn("Cellphone");
-    tableModel.addColumn("Email");
-    tableModel.addColumn("Username");
-    tableModel.addColumn("Password");
-    tableModel.addColumn("Type of User");
-
-    try (final MongoClient mongoClient = MongoClients.create(uri)) {
-        MongoDatabase database = mongoClient.getDatabase(db);
-        MongoCollection<Document> collection = database.getCollection("Users");
-
-        
-        FindIterable<Document> documents = collection.find();
-
-        
-        for (Document document : documents) {
-            String id = document.getString("id");
-            String fullName = document.getString("fullName");
-            String cellphone = document.getString("cellphone");
-            String email = document.getString("email");
-            String username = document.getString("username");
-            String password = document.getString("password");
-            String typeOfUser = document.getString("typeOfUser");
-
-            // Desencriptar la contraseña
-            String descifrada = "";
-            int desplazar = 2;
-            for (int i = 0; i < password.length(); i++) {
-                int codigoLetra = password.codePointAt(i);
-                char letraDesplazada = (char) (codigoLetra - desplazar);
-                descifrada += letraDesplazada;
-            }
-
-            tableModel.addRow(new Object[]{id, fullName, cellphone, email, username, descifrada, typeOfUser});
-        }
-    } catch (MongoException e) {
-        e.printStackTrace();
-    }
-
+      
     
-
-    return tableModel;
-}
-   
-    private boolean updateDataBase(String id, String userName, String email, String phone) {
-        String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-        String db = "SchoolManagmentSystem";
-
-        try (final MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase(db);
-            MongoCollection<Document> collection = database.getCollection("Users");
-
-            
-            Bson filter = Filters.eq("id", id);
-
-           
-            Bson updateFields = Updates.combine(
-                Updates.set("email", email),
-                Updates.set("cellphone", phone)
-            );
-
-           
-            UpdateResult result = collection.updateOne(filter, updateFields);
-
-            // Verificar si la actualización fue exitosa
-            if (result.getModifiedCount() > 0) {
-                return true;
-            }
-        } catch (MongoException e) {
-            e.printStackTrace();
-        }
-
-        return false; // La actualización no fue exitosa
-    }
-
-    private boolean deleteInDataBase(String id) {
-    String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-    String db = "SchoolManagmentSystem";
-
-    try (final MongoClient mongoClient = MongoClients.create(uri)) {
-        MongoDatabase database = mongoClient.getDatabase(db);
-        MongoCollection<Document> collection = database.getCollection("Users");
-
-        
-        Bson filter = Filters.eq("id", id);
-
-       
-        DeleteResult result = collection.deleteOne(filter);
-
-       
-        if (result.getDeletedCount() > 0) {
-            return true;
-        }
-    } catch (MongoException e) {
-        e.printStackTrace();
-    }
-
-    return false; // La eliminación no fue exitosa
-}
-private void SearchInDataBase() {
-        String userName = txtUserName.getText();
-        String email = txtEmail.getText();
-        String phone = txtPhone.getText();
-        String Id = txtID.getText();
-        
-        DefaultTableModel tableModel = (DefaultTableModel) tbeManagmentOfUser.getModel();
-        tableModel.setRowCount(0); // Limpiar el contenido actual de la tabla
-        
-        String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-        String db = "SchoolManagmentSystem";
-        
-        try (final MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase(db);
-            MongoCollection<Document> collection = database.getCollection("Users");
-            
-            
-            Bson filter = null;
-            if (!userName.isEmpty()) {
-                filter = Filters.eq("username", userName);
-            } else if (!email.isEmpty()) {
-                filter = Filters.eq("email", email);
-            } else if (!phone.isEmpty()) {
-                filter = Filters.eq("cellphone", phone);
-            }else if (!Id.isEmpty()) {
-                filter = Filters.eq("id", Id);
-            }
-            
-            
-            FindIterable<Document> documents;
-            if (filter != null) {
-                documents = collection.find(filter);
-            } else {
-                documents = collection.find();
-            }
-            
-            for (Document document : documents) {
-                String id = document.getString("id");
-                String fullName = document.getString("fullName");
-                String cellphone = document.getString("cellphone");
-                String userEmail = document.getString("email");
-                String username = document.getString("username");
-                String password = document.getString("password");
-                String typeOfUser = document.getString("typeOfUser");
-                
-                // Desencriptar la contraseña
-                String descifrada = "";
-                int desplazar = 2;
-                for (int i = 0; i < password.length(); i++) {
-                    int codigoLetra = password.codePointAt(i);
-                    char letraDesplazada = (char) (codigoLetra - desplazar);
-                    descifrada += letraDesplazada;
-                }
-                
-                
-                tableModel.addRow(new Object[]{id, fullName, cellphone, userEmail, username, descifrada, typeOfUser});
-            }
-        } catch (MongoException e) {
-            e.printStackTrace();
-        }
-}
-   private void deleteDataBase() throws HeadlessException {
-        int selectedRow = tbeManagmentOfUser.getSelectedRow();
-        
-        if (selectedRow != -1) {
-            String fullName = tbeManagmentOfUser.getValueAt(selectedRow, 1).toString();
-            String id = tbeManagmentOfUser.getValueAt(selectedRow, 0).toString();
-            
-            
-            int choice = JOptionPane.showOptionDialog(
-                    this,
-                    "¿Estás seguro de que deseas eliminar a este usuario?\n: " + fullName,
-                    "Confirmar eliminación",
-                    JOptionPane.YES_NO_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    new Object[]{"Sí", "No", "Cancelar"},
-                    null
-            );
-            
-            if (choice == JOptionPane.YES_OPTION) {
-                
-                DefaultTableModel tableModel = (DefaultTableModel) tbeManagmentOfUser.getModel();
-                tableModel.removeRow(selectedRow);
-                
-                
-                boolean success = deleteInDataBase(id);
-                
-                if (success) {
-                    JOptionPane.showMessageDialog(this, "El usuario se eliminó correctamente.");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Hubo un error al eliminar el usuario.");
-                }
-            } else if (choice == JOptionPane.NO_OPTION) {
-                JOptionPane.showMessageDialog(this, "La eliminación del usuario ha sido cancelada.");
-            } else if (choice == JOptionPane.CANCEL_OPTION) {
-                // No hacer nada, simplemente cerrar el cuadro de diálogo
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona un usuario para eliminar.");
-        }
-    }
-    private void editDataBase() throws HeadlessException {
-        int selectedRowIndex = tbeManagmentOfUser.getSelectedRow();
-        
-        
-        if (selectedRowIndex >= 0) {
-            // Get the values from the selected row
-            String id = (String) tbeManagmentOfUser.getValueAt(selectedRowIndex, 0);
-            String username = (String) tbeManagmentOfUser.getValueAt(selectedRowIndex, 4);
-            String email = (String) tbeManagmentOfUser.getValueAt(selectedRowIndex, 3);
-            String cellphone = (String) tbeManagmentOfUser.getValueAt(selectedRowIndex, 2);
-            
-            
-            txtID.setText(id);
-            txtUserName.setText(username);
-            txtEmail.setText(email);
-            txtPhone.setText(cellphone);
-            
-            
-            txtUserName.setEnabled(false);
-            txtID.setEnabled(false);
-            
-            
-            txtEmail.setEnabled(true);
-            txtPhone.setEnabled(true);
-        } else {
-            
-            JOptionPane.showMessageDialog(this, "Please select a row to edit.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-      private void newDataSave() throws HeadlessException {
-        String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-        String db = "SchoolManagmentSystem";
-        String id = txtID.getText();
-        String email = txtEmail.getText();
-        String cellphone = txtPhone.getText();
-        
-        try (final MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase(db);
-            MongoCollection<Document> collection = database.getCollection("Users");
-            
-            
-            Bson filter = Filters.eq("id", id);
-            
-            
-            Bson update = Updates.combine(
-                    Updates.set("email", email),
-                    Updates.set("cellphone", cellphone)
-            );
-            
-            
-            UpdateResult updateResult = collection.updateOne(filter, update);
-            
-            if (updateResult.getModifiedCount() > 0) {
-                
-                JOptionPane.showMessageDialog(this, "Usuario Modificado con exito");
-                
-                
-                txtID.setEnabled(true);
-                txtUserName.setEnabled(true);
-                
-                
-                txtID.setText("");
-                txtUserName.setText("");
-                txtEmail.setText("");
-                txtPhone.setText("");
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to save data");
-            }
-        } catch (MongoException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occurred while saving the data");
-        }
-    }
+      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btmBack;
     private javax.swing.JButton btnCreate;

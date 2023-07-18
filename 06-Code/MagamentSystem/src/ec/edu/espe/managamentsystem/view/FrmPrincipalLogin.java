@@ -1,15 +1,12 @@
 
 package ec.edu.espe.managamentsystem.view;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
-import javax.swing.JOptionPane;
+
+import ec.edu.espe.managamentsystem.controller.LoginController;
+
+import javax.swing.JLabel;
+
 import javax.swing.JTextField;
-import org.bson.Document;
-import org.bson.conversions.Bson;
 
 /**
  *
@@ -22,6 +19,7 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
      */
     public FrmPrincipalLogin() {
         initComponents();
+        
         lblAlert1.setVisible(false);
         lblAlert2.setVisible(false);
 
@@ -207,83 +205,18 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnterLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterLoginActionPerformed
-       String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-        String db = "SchoolManagmentSystem";
-        try(MongoClient mongoClient = MongoClients.create(uri)){
-            MongoDatabase database = mongoClient.getDatabase(db);
-            MongoCollection<Document> collection = database.getCollection("Users");               
-        
-        if (txtUser.getText().isEmpty()||txtPassword.getText().isEmpty()){
-            lblAlert1.setVisible(true);
-            lblAlert2.setVisible(true);
-       }
-       else{
-           lblAlert1.setVisible(false);
-           lblAlert2.setVisible(false);
-            stayInLogin();  
-       }
-       
-      if(login(txtUser, txtPassword,"Admin")== true){
-          enterToTheProgramAdmin();        
-        } else if(login(txtUser, txtPassword,"Instructor")== true){
-          enterToTheProgramInstructor();
-        }else {
-          stayInLogin();
-          JOptionPane.showMessageDialog(rootPane, "Intenta de nuevo", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
-          
-      }}
+        LoginController login = new LoginController();
+        JTextField name =txtUser;
+        JTextField code =txtPassword;
+        JLabel msgAlertCheck =lblAlert1;
+        JLabel msgAlertCheck2 =lblAlert2;
+        login.principalLogin(name, code, msgAlertCheck, msgAlertCheck2);
     }//GEN-LAST:event_btnEnterLoginActionPerformed
 
-    private void enterToTheProgramAdmin() {
-        
-        FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
-        frmMagamentSystem.setVisible(true);
-        this.setVisible(false);
-    }
-    private void enterToTheProgramInstructor() {
-        
-        FrmManagmentSystemInstructor frmMagamentSystemInstructor = new FrmManagmentSystemInstructor();
-        frmMagamentSystemInstructor.setVisible(true);
-        this.setVisible(false);
-    }
-    private void stayInLogin() {
-        FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
-        frmMagamentSystem.setVisible(false);
-        this.setVisible(true);
-    }
-    public boolean login(JTextField usernameField, JTextField passwordField, String typeOfUser) {
-    String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-    String db = "SchoolManagmentSystem";
-    try (MongoClient mongoClient = MongoClients.create(uri)) {
-        MongoDatabase database = mongoClient.getDatabase(db);
-        MongoCollection<Document> collection = database.getCollection("Users");
+    
 
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        String cifrada = "";
-
-        int desplazar = 2;
-        for (int i = 0; i < password.length(); i++) {
-            int codigoLetra = password.codePointAt(i);
-            char letraDesplazada = (char) (codigoLetra + desplazar);
-            cifrada = cifrada + letraDesplazada;
-        }
-
-        Bson filter = Filters.and(
-                Filters.eq("username", username),
-                Filters.eq("password", cifrada), 
-                Filters.eq("typeOfUser", typeOfUser) 
-        );
-
-        Document user = collection.find(filter).first();
-
-        if (user != null && user.getString("username").equals(username) && user.getString("password").equals(cifrada)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
+    
+    
 
     /**
      * @param args the command line arguments
