@@ -263,7 +263,6 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         this.setVisible(false);
         
         SearchController searchController = new SearchController();
-        searchController.fileWritter("");
     }//GEN-LAST:event_btnAddStudentActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

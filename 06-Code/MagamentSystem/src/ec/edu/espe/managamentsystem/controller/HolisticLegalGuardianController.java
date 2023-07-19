@@ -14,6 +14,7 @@ import com.mongodb.client.model.Updates;
 
 import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;
+import javax.swing.JOptionPane;
 import org.bson.Document;
 
 /**
@@ -29,8 +30,9 @@ public class HolisticLegalGuardianController {
          try (MongoClient mongoClient = MongoClients.create(uri)) {
             MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection("HolisticLegalGuardian");
-                        
+            
             try {
+                System.out.println("en proceso");
                 Document holisticLegalGuardianDocument = new Document();
                 holisticLegalGuardianDocument.append("_id", holisticLegalGuardian.getId());
                 holisticLegalGuardianDocument.append("name", holisticLegalGuardian.getName());
@@ -40,7 +42,7 @@ public class HolisticLegalGuardianController {
                 holisticLegalGuardianDocument.append("studentId", holisticLegalGuardian.getStudentId());
                 collection.insertOne(holisticLegalGuardianDocument);    
             } catch (MongoException me) {
-                
+                System.out.println("No se pudo porr: "+ me);
             }
         }
     }

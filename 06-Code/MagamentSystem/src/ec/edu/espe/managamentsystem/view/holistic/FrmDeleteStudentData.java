@@ -44,6 +44,7 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
         txtStudentName = new javax.swing.JTextField();
         lblFound = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,18 +73,33 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
             }
         });
 
+        btnCancel.setBackground(new java.awt.Color(255, 102, 102));
+        btnCancel.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSearch)
-                    .addComponent(lblFound)
-                    .addComponent(txtStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFound)
+                            .addComponent(txtStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(btnSearch)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnCancel)))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -96,8 +112,10 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFound)
                 .addGap(18, 18, 18)
-                .addComponent(btnSearch)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearch)
+                    .addComponent(btnCancel))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -137,6 +155,10 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
                 lblFound.setVisible(false);
                 delete();
                 this.setVisible(false);
+                FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+                frmHolisticStudent.setVisible(false); 
+                FrmHolisticStudent frmHolisticStudentDeleted = new FrmHolisticStudent();
+                frmHolisticStudentDeleted.setVisible(true);
             }else{
                 lblFound.setVisible(true);
             }
@@ -147,22 +169,22 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
         txtStudentName.setText("");
         txtStudentName.setForeground(Color.BLACK);
     }//GEN-LAST:event_txtStudentNameMouseClicked
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
     
     public void delete(){
         
         HolisticStudentController holisticStudentController = new HolisticStudentController();
         HolisticLegalGuardianController holisticLegalGuardianController = new HolisticLegalGuardianController();
-        
-        FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
-        
+       
         int opc = JOptionPane.showConfirmDialog(rootPane, "Seguro que desea eliminar a " + name);
        
         if(opc == 0){
             holisticStudentController.deleteHolisticStudent(holisticStudentController.getStudentId());
             holisticLegalGuardianController.deleteHolisticLegalGuardian(holisticStudentController.getStudentId()+1);
             JOptionPane.showMessageDialog(rootPane, "Usuario "+ name+ " borrado con exito");
-            frmHolisticStudent.setVisible(false);
-            frmHolisticStudent.setVisible(true);
         }
     }
     /**
@@ -204,6 +226,7 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

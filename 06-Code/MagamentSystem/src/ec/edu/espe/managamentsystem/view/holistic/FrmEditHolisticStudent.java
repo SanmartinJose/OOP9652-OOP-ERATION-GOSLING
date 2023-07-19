@@ -18,13 +18,14 @@ import org.bson.Document;
  *
  * @author PabloEZurita
  */
-public class FrmCreateHolisticStudent extends javax.swing.JFrame {
+public class FrmEditHolisticStudent extends javax.swing.JFrame {
     
     /**
      * Creates new form FrmCreatStudent
      */
-    public FrmCreateHolisticStudent() {
+    public FrmEditHolisticStudent() {
         initComponents();
+        showStudentData();
         lblFull.setVisible(false);
     }
 
@@ -253,11 +254,15 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
             HolisticStudent holisticStudent = new HolisticStudent(id, age, name, address);
             HolisticStudentController holisticStudentController;
             holisticStudentController = new HolisticStudentController();
-          
-            holisticStudentController.fileWritter(holisticStudent); 
-            
-            FrmCreateHolisticLegalGuardian frmCreateHolisticLegalGuardian = new FrmCreateHolisticLegalGuardian();
-            frmCreateHolisticLegalGuardian.setVisible(true);
+            FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
+
+            SearchController searchController = new SearchController();
+
+           
+            holisticStudentController.updateHolisticStudent(searchController.getStudent(), holisticStudent);
+
+            FrmEditHolisticLegalGuardian frmEditHolisticLegalGuardian = new FrmEditHolisticLegalGuardian();
+            frmEditHolisticLegalGuardian.setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_btnAddLegalGuardianActionPerformed
@@ -285,7 +290,33 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
        return id;
     }
     
-   
+    public void showStudentData(){
+       HolisticStudentController holistiStudentController = new HolisticStudentController(); 
+       FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
+       
+       SearchController searchController = new SearchController();
+      
+        MongoCursor<Document> cursor = holistiStudentController.getStudent(searchController.getStudent());
+           
+           
+           
+           String name = null;
+           String age = null;
+           String address = null;
+           
+           while(cursor.hasNext()){
+                Document document = cursor.next();
+                name = document.get("name").toString();
+                age = document.get("age").toString();
+                address = document.get("address").toString();
+           }
+           
+           txtNameStudent.setText(name );
+           txtAgeStudent.setText(age);
+           txtAdreesStudent.setText(address);
+           btnAddLegalGuardian.setText("Aplicar Cambios");
+           lblTItle.setText("Editar Estudiante");
+    }
     /**
      * @param args the command line arguments
      */
@@ -306,21 +337,23 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCreateHolisticStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditHolisticStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCreateHolisticStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditHolisticStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCreateHolisticStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditHolisticStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCreateHolisticStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditHolisticStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCreateHolisticStudent().setVisible(true);
+                new FrmEditHolisticStudent().setVisible(true);
             }
         });
     }

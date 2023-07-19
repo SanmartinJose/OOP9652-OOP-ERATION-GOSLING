@@ -133,11 +133,12 @@ public class HolisticStudentController {
         
         while(cursor.hasNext()){
             Document document = cursor.next();
-            if(name.equals("")){
-               isFound = false; 
+            if(document.get("name").equals(name)){
+                isFound = true;
+                return isFound;
             }else{
-                isFound = document.get("name").equals(name); 
-            }    
+            isFound = document.get("name").equals(name);
+            }
         }
         return isFound;
     }

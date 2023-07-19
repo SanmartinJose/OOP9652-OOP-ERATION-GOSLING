@@ -20,13 +20,14 @@ import org.bson.Document;
  *
  * @author PabloEZurita
  */
-public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
+public class FrmEditHolisticLegalGuardian extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmCreateLegalGuardian
      */
-    public FrmCreateHolisticLegalGuardian() {
+    public FrmEditHolisticLegalGuardian() {
         initComponents();
+        showGuardianData();
         lblFull.setVisible(false);
     }
 
@@ -253,7 +254,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
          if(txtEmail.getText().isEmpty() || txtId.getText().isEmpty() || txtLegalGuardianAge.getText().isEmpty() || txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()){
             lblFull.setVisible(true);
         }else{
-            lblFull.setVisible(false);
+             lblFull.setVisible(false);
             
             Validation validation = new Validation();
         
@@ -264,11 +265,18 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
             studentId = getStudentId();
             id= Integer.parseInt(txtId.getText());
 
-            HolisticLegalGuardian holisticLegalGuardian = new HolisticLegalGuardian(id, age, studentId, phoneNumber, name, email);
-            
-            HolisticLegalGuardianController holisticLegalGuardianController = new HolisticLegalGuardianController();
-            holisticLegalGuardianController.fileWrite(holisticLegalGuardian);
-            
+            HolisticStudentController holisticStudentController;
+            holisticStudentController = new HolisticStudentController();
+            SearchController searchController = new SearchController();
+
+            HolisticLegalGuardianController holisticLegalGuardianController;
+            holisticLegalGuardianController = new HolisticLegalGuardianController();
+
+            HolisticLegalGuardian holisticLegalGuardian;
+            holisticLegalGuardian = new HolisticLegalGuardian(id, age, studentId, phoneNumber, name, email);
+
+            holisticLegalGuardianController.updateHolisticLeaglGuardian(holisticStudentController.getStudentId(), holisticLegalGuardian);
+     
             FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
             frmHolisticStudent.setVisible(true);
             this.setVisible(false);
@@ -294,6 +302,41 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
        return id;
     }
     
+    public void showGuardianData(){
+       HolisticStudentController holistiStudentController = new HolisticStudentController(); 
+              
+       HolisticLegalGuardianController holisticLegalGuardianController = new HolisticLegalGuardianController();
+       
+       
+       SearchController searchController = new SearchController();         
+           String name = null;
+           String age = null;
+           String email = null;
+           String phoneNumber = null;
+           String cedula =null;
+           
+           int id = holistiStudentController.getStudentId();
+           MongoCursor<Document> LegalGuardiaCursor = holisticLegalGuardianController.getLegalGuardian(id);
+           while(LegalGuardiaCursor.hasNext()){
+                Document document = LegalGuardiaCursor.next();
+                name = document.get("name").toString();
+                email = document.get("email").toString();
+                phoneNumber = document.get("phoneNumber").toString();
+                age =  document.get("age").toString();
+                cedula = document.get("_id").toString();
+                
+           }
+            txtLegalGuardianName.setText(name );
+            txtLegalGuardianAge.setText(age);
+            txtLegalGuardianPhoneNumber.setText(phoneNumber);
+            txtEmail.setText(phoneNumber);
+            txtId.setText(cedula);
+            btnSave.setText("Aplicar Cambios");
+            lblTitle.setText("Editar Tutor Legal");
+  
+     
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -311,21 +354,23 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCreateHolisticLegalGuardian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditHolisticLegalGuardian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCreateHolisticLegalGuardian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditHolisticLegalGuardian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCreateHolisticLegalGuardian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditHolisticLegalGuardian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCreateHolisticLegalGuardian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditHolisticLegalGuardian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCreateHolisticLegalGuardian().setVisible(true);
+                new FrmEditHolisticLegalGuardian().setVisible(true);
             }
         });
     }
