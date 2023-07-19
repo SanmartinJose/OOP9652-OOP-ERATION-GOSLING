@@ -16,6 +16,7 @@ import org.bson.Document;
  */
 public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
 
+    private Class<?> claseOrigen;
     /**
      * Creates new form ControlHomeSchoolMenu
      */
@@ -29,6 +30,10 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
             btnEnterToTheCourse.setVisible(false);
             txtCourse.setVisible(true);
         }
+    }
+    
+    public void setClaseOrigen(Class<?> claseOrigen) {
+        this.claseOrigen = claseOrigen;
     }
 
     /**
@@ -228,9 +233,15 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddCourseActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
-        frmMagamentSystem.setVisible(true);
-        this.setVisible(false);
+        try {
+            Object instance = claseOrigen.newInstance();
+            if (instance instanceof javax.swing.JFrame) {
+                javax.swing.JFrame frame = (javax.swing.JFrame) instance;
+                frame.setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (InstantiationException | IllegalAccessException ex) {
+        }
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnEnterToTheCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterToTheCourseActionPerformed

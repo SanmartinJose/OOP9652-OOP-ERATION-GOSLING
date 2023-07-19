@@ -19,6 +19,7 @@ import org.bson.Document;
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class FrmHolisticStudent extends javax.swing.JFrame {
+    private Class<?> claseOrigen;
 
     DefaultTableModel dtm = new DefaultTableModel();
     
@@ -31,6 +32,10 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         dtm.setColumnIdentifiers(title);
         tbeHolisticStudents.setModel(dtm);
         addTableData();
+    }
+    
+    public void setClaseOrigen(Class<?> claseOrigen) {
+        this.claseOrigen = claseOrigen;
     }
 
     /**
@@ -235,7 +240,15 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturn1ActionPerformed
-        returnToMagamentSystem();
+        try {
+            Object instance = claseOrigen.newInstance();
+            if (instance instanceof javax.swing.JFrame) {
+                javax.swing.JFrame frame = (javax.swing.JFrame) instance;
+                frame.setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (InstantiationException | IllegalAccessException ex) {
+        }
     }//GEN-LAST:event_btnReturn1ActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed

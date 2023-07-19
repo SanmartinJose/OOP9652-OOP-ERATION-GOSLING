@@ -299,13 +299,15 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
 
     private void btnHolisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHolisticActionPerformed
        FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+       frmHolisticStudent.setClaseOrigen(FrmManagmentSystem.class);
        frmHolisticStudent.setVisible(true);
-       this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_btnHolisticActionPerformed
 
     private void btnHomeSchoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeSchoolActionPerformed
-        FrmControlHomeSchoolMenu frmcontrolHomeSchoolMenu = new FrmControlHomeSchoolMenu();
-        frmcontrolHomeSchoolMenu.setVisible(true);
+        FrmControlHomeSchoolMenu frmControlHomeSchoolMenu = new FrmControlHomeSchoolMenu();
+        frmControlHomeSchoolMenu.setClaseOrigen(FrmManagmentSystem.class);
+        frmControlHomeSchoolMenu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnHomeSchoolActionPerformed
 
