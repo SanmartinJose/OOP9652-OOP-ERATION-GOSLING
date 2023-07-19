@@ -28,6 +28,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     public FrmCreateHolisticLegalGuardian() {
         initComponents();
         lblFull.setVisible(false);
+        btnBack.setVisible(false);
     }
 
     /**
