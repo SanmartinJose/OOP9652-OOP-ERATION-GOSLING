@@ -20,8 +20,8 @@ import org.bson.conversions.Bson;
  * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
 public class LoginController {
-    public void principalLogin(JTextField txtUsername,JTextField txtCode,JLabel lblAlert,JLabel lblAlert1)  {            
-        FrmPrincipalLogin frmPrincipalLogin= new FrmPrincipalLogin();    
+    public void principalLogin(JTextField txtUsername,JTextField txtCode,JLabel lblAlert,JLabel lblAlert1, FrmPrincipalLogin frmPrincipalLogin)  {            
+            
         String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
         String db = "SchoolManagmentSystem";
         try(MongoClient mongoClient = MongoClients.create(uri)){
@@ -51,22 +51,20 @@ public class LoginController {
     private void enterToTheProgramAdmin() {
         
         FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
-        FrmPrincipalLogin frmPrincipalLogin= new FrmPrincipalLogin();
+        
         frmMagamentSystem.setVisible(true);
-        frmPrincipalLogin.setVisible(false);
+        
     }
     private void enterToTheProgramInstructor() {
         
         FrmManagmentSystemInstructor frmMagamentSystemInstructor = new FrmManagmentSystemInstructor();
-        FrmPrincipalLogin frmPrincipalLogin= new FrmPrincipalLogin();
+        
         frmMagamentSystemInstructor.setVisible(true);
-        frmPrincipalLogin.setVisible(false);
+        
     }
     private void stayInLogin() {
         FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
-        FrmPrincipalLogin frmPrincipalLogin= new FrmPrincipalLogin();
         frmMagamentSystem.setVisible(false);
-        frmPrincipalLogin.setVisible(true);
     }
     public boolean login(JTextField usernameField, JTextField passwordField, String typeOfUser) {
     String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";

@@ -211,6 +211,7 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
     private void btnEnterLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterLoginActionPerformed
         LoginController login = new LoginController();
         readData(login);
+        this.setVisible(false);
     }//GEN-LAST:event_btnEnterLoginActionPerformed
 
     private void readData(LoginController login) {
@@ -218,7 +219,7 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
         JTextField code =txtPassword;
         JLabel msgAlertCheck =lblAlert1;
         JLabel msgAlertCheck2 =lblAlert2;
-        login.principalLogin(name, code, msgAlertCheck, msgAlertCheck2);
+        login.principalLogin(name, code,msgAlertCheck, msgAlertCheck2, this);
     }
 
     
