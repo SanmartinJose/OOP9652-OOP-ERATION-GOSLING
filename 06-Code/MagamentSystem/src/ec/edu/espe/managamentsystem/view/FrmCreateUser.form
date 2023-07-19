@@ -133,7 +133,7 @@
                           <Component id="btnBack" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="brnRegister" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="11" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -180,13 +180,13 @@
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtCreatFullName" max="32767" attributes="0"/>
+                          <Component id="txtCreateFullName" max="32767" attributes="0"/>
                           <Component id="txtCreatePhoneNumber" max="32767" attributes="0"/>
                           <Component id="txtCreateCedula" max="32767" attributes="0"/>
                           <Component id="txtCreateEmail" max="32767" attributes="0"/>
                           <Component id="txtCreateUsername" alignment="0" max="32767" attributes="0"/>
                           <Component id="cmbCharge" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtCreatPassword" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="txtCreatePassword" min="-2" pref="135" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -216,7 +216,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCreatFullName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCreateFullName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -245,7 +245,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCreatPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCreatePassword" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblpass" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="81" max="32767" attributes="0"/>
@@ -274,7 +274,7 @@
                 <Property name="text" type="java.lang.String" value="Correo electr&#xf3;nico:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCreatFullName">
+            <Component class="javax.swing.JTextField" name="txtCreateFullName">
             </Component>
             <Component class="javax.swing.JTextField" name="txtCreatePhoneNumber">
             </Component>
@@ -312,7 +312,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtCreateUsername">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCreatPassword">
+            <Component class="javax.swing.JTextField" name="txtCreatePassword">
             </Component>
             <Component class="javax.swing.JLabel" name="lblAlertID">
               <Properties>

@@ -1,17 +1,11 @@
 
 package ec.edu.espe.managamentsystem.view;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import static com.mongodb.client.model.Filters.eq;
-import ec.edu.espe.managmentsystem.model.User;
+import static ec.edu.espe.managamentsystem.controller.UserCreation.registerAnUser;
 import ec.edu.espe.managmentsystem.util.MongoDBConnection;
-import ec.edu.espe.managmentsystem.util.Validation;
-import java.awt.HeadlessException;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import org.bson.Document;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Labs-DCCO
@@ -55,7 +49,7 @@ MongoDBConnection db = new MongoDBConnection();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtCreatFullName = new javax.swing.JTextField();
+        txtCreateFullName = new javax.swing.JTextField();
         txtCreatePhoneNumber = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtCreateCedula = new javax.swing.JTextField();
@@ -64,7 +58,7 @@ MongoDBConnection db = new MongoDBConnection();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtCreateUsername = new javax.swing.JTextField();
-        txtCreatPassword = new javax.swing.JTextField();
+        txtCreatePassword = new javax.swing.JTextField();
         lblAlertID = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblphone = new javax.swing.JLabel();
@@ -134,7 +128,7 @@ MongoDBConnection db = new MongoDBConnection();
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(brnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -189,13 +183,13 @@ MongoDBConnection db = new MongoDBConnection();
                     .addComponent(jLabel8))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtCreatFullName)
+                    .addComponent(txtCreateFullName)
                     .addComponent(txtCreatePhoneNumber)
                     .addComponent(txtCreateCedula)
                     .addComponent(txtCreateEmail)
                     .addComponent(txtCreateUsername)
                     .addComponent(cmbCharge, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCreatPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCreatePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -219,7 +213,7 @@ MongoDBConnection db = new MongoDBConnection();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtCreatFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCreateFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -243,7 +237,7 @@ MongoDBConnection db = new MongoDBConnection();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtCreatPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCreatePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblpass))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
@@ -283,78 +277,24 @@ MongoDBConnection db = new MongoDBConnection();
     }// </editor-fold>//GEN-END:initComponents
 
     private void brnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnRegisterActionPerformed
-        if (registerAnUser()) {
-            return;
-        }
-        
+    JTextField identification = txtCreateCedula;    
+    JTextField name = txtCreateFullName; 
+    JTextField code = txtCreatePassword; 
+    JTextField mail = txtCreateEmail; 
+    JTextField userName = txtCreateUsername; 
+    JTextField phone = txtCreatePhoneNumber; 
+    JComboBox typeUser = cmbCharge;
+    JLabel alertId = lblAlertID;
+    JLabel alertName = lblName;
+    JLabel alertEmail = lblemail;
+    JLabel alertPassword = lblpass;
+    JLabel alertPhone = lblphone;
+    JLabel alertUser = lbluser;
+    registerAnUser(identification, name, code, mail, userName, phone, typeUser, alertId, alertName, alertEmail, alertPassword, alertPhone, alertUser);                
     }//GEN-LAST:event_brnRegisterActionPerformed
 
-    private boolean registerAnUser() throws HeadlessException {
-        Validation v = new Validation();
-        String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-        String db = "SchoolManagmentSystem";
-        try (final MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase(db);
-            MongoCollection<Document> collection = database.getCollection("Users");
-            User user;
-            String id;
-            String fullName;
-            String cellphone;
-            String email;
-            String typeOfUser;
-            String username;
-            String password = null;
-            String cadena;
-            if(txtCreateCedula.getText().isEmpty()||txtCreatFullName.getText().isEmpty()
-                    ||txtCreatPassword.getText().isEmpty()||txtCreateEmail.getText().isEmpty()||
-                    txtCreateUsername.getText().isEmpty()||txtCreatePhoneNumber.getText().isEmpty()){
-                lblAlertID.setVisible(true);
-                lblName.setVisible(true);
-                lblemail.setVisible(true);
-                lblpass.setVisible(true);
-                lblphone.setVisible(true);
-                lbluser.setVisible(true);
-                
-            }else{
-                setAlertsOff();
-            }   id = v.validateNumber(txtCreateCedula);
-            fullName=v.validateName(txtCreatFullName);
-            cellphone=v.validateNumber(txtCreatePhoneNumber);
-            email=v.validateEmail(txtCreateEmail);
-            typeOfUser=cmbCharge.getSelectedItem().toString();
-            username = txtCreateUsername.getText();
-            // Verificar si ya existe un usuario con ese username en la base de datos
-            Document existingUser = collection.find(eq("username", username)).first();
-            if (existingUser != null) {
-                // El username ya existe, mostrar un mensaje de error o realizar alguna acción
-                JOptionPane.showMessageDialog(rootPane, "El nombre de usuario ya existe");
-                return true; // Terminar el proceso de registro
-            }
-            cadena = txtCreatPassword.getText();
-            String cifrada = "";
-            int desplazar = 2;
-            for (int i = 0; i < cadena.length(); i++) {
-                // Obtenemos el código ASCII de las letras de la cadena
-                int codigoLetra = cadena.codePointAt(i);
-                // Sumamos el desplazamiento al código y convertimos en char el resultado
-                char letraDesplazada = (char)(codigoLetra + desplazar);
-                // Concatenamos la letra obtenida a la cadena donde vamos cifrando
-                cifrada = cifrada + letraDesplazada;
-            }       Document document = new Document("id", id)
-                    .append("fullName", fullName)
-                    .append("cellphone", cellphone)
-                    .append("email", email)
-                    .append("typeOfUser", typeOfUser)
-                    .append("username", username)
-                    .append("password", cifrada);
-            collection.insertOne(document);            
-            mongoClient.close();
-        }catch (Exception e) {
-            e.printStackTrace();
-        }   JOptionPane.showMessageDialog(rootPane, "Usuario Guardado con Exito");
-        emptyField();
-        return false;
-    }
+  
+
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         FrmManagmentSystem frmManagmentSystem;
@@ -366,9 +306,9 @@ MongoDBConnection db = new MongoDBConnection();
     /**
      * @param args the command line arguments
      */
-    private void emptyField() {
-        txtCreatFullName.setText(" ");
-        txtCreatPassword.setText("");
+    public void emptyField() {
+        txtCreateFullName.setText(" ");
+        txtCreatePassword.setText("");
         txtCreateCedula.setText("");
         txtCreateEmail.setText("");
         txtCreatePhoneNumber.setText("");
@@ -430,10 +370,10 @@ MongoDBConnection db = new MongoDBConnection();
     private javax.swing.JLabel lblpass;
     private javax.swing.JLabel lblphone;
     private javax.swing.JLabel lbluser;
-    private javax.swing.JTextField txtCreatFullName;
-    private javax.swing.JTextField txtCreatPassword;
     private javax.swing.JTextField txtCreateCedula;
     private javax.swing.JTextField txtCreateEmail;
+    private javax.swing.JTextField txtCreateFullName;
+    private javax.swing.JTextField txtCreatePassword;
     private javax.swing.JTextField txtCreatePhoneNumber;
     private javax.swing.JTextField txtCreateUsername;
     // End of variables declaration//GEN-END:variables

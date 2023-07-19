@@ -106,9 +106,7 @@ public class Validation {
             return cadena;
         } else {
             textField.setText(""); 
-            return "";
-        }
-    
-    
-    }
+            return null;
+        }       
+
 }
