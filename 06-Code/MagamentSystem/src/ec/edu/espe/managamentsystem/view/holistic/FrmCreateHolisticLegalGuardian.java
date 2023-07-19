@@ -243,6 +243,14 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        getData();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+    
+    private void getData() throws NumberFormatException {
         int age ;
         int studentId;
         String phoneNumber;
@@ -250,20 +258,20 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         String email;
         int id;
         
-         if(txtEmail.getText().isEmpty() || txtId.getText().isEmpty() || txtLegalGuardianAge.getText().isEmpty() || txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()){
+        if(txtEmail.getText().isEmpty() || txtId.getText().isEmpty() || txtLegalGuardianAge.getText().isEmpty() || txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()){
             lblFull.setVisible(true);
         }else{
             lblFull.setVisible(false);
             
             Validation validation = new Validation();
-        
+            
             name = validation.validateName(txtLegalGuardianName);
             age = Integer.parseInt(txtLegalGuardianAge.getText());
             phoneNumber = validation.validateNumber(txtLegalGuardianPhoneNumber);
             email = validation.validateEmail(txtEmail);
             studentId = getStudentId();
             id= Integer.parseInt(txtId.getText());
-
+            
             HolisticLegalGuardian holisticLegalGuardian = new HolisticLegalGuardian(id, age, studentId, phoneNumber, name, email);
             
             HolisticLegalGuardianController holisticLegalGuardianController = new HolisticLegalGuardianController();
@@ -273,13 +281,9 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
             frmHolisticStudent.setVisible(true);
             this.setVisible(false);
         }
-    }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
-
-     public int getStudentId(){
+    }
+    
+    public int getStudentId(){
        HolisticStudentController holisticStudentController;
        holisticStudentController = new HolisticStudentController();
        

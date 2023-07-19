@@ -14,9 +14,18 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
+import ec.edu.espe.managamentsystem.view.holistic.FrmEditHolisticStudent;
+import ec.edu.espe.managamentsystem.view.holistic.FrmHolisticStudent;
 
 import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;
+import ec.edu.espe.managmentsystem.util.Validation;
+import javax.swing.FocusManager;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
 /**
@@ -141,5 +150,68 @@ public class HolisticStudentController {
             }
         }
         return isFound;
+    }
+    
+    public void addTableData(JTable tbeHolisticStudents){
+        DefaultTableModel dtm = new DefaultTableModel();
+            
+        String[] title = new String[]{"N", "Name","Age","Legal Guardian"};
+        dtm.setColumnIdentifiers(title);
+        tbeHolisticStudents.setModel(dtm);
+        
+       HolisticStudentController holisticStudentController;
+       holisticStudentController = new HolisticStudentController();
+       
+       HolisticLegalGuardianController holisticLegalGuardianController;
+       holisticLegalGuardianController = new HolisticLegalGuardianController();
+       
+       MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
+       
+       
+       while(cursor.hasNext()){
+            Document document = cursor.next();
+            int id = (int) document.get("_id");
+            dtm.addRow(new Object[]{
+               document.get("_id"),
+                document.get("name"),
+                document.get("age"),
+                holisticLegalGuardianController.getHolisticLegalGuardianList(id)
+            });
+       }
+    }
+    
+    public boolean getData(JTextField txtStudentName, JLabel lblFound) {
+        Validation validation = new Validation();
+        String name;
+        
+        if(txtStudentName.getText().isEmpty()){
+            lblFound.setText("*Campo Obligatorio");
+            lblFound.setVisible(true);
+            return false;
+        }else{
+            
+            lblFound.setText("*estudiante no encontrado");
+            lblFound.setVisible(false);
+            
+            name = validation.validateName(txtStudentName);
+            
+            HolisticStudentController holisticStudentController = new HolisticStudentController();
+            boolean isFound = holisticStudentController.validateStudentData(name);
+            
+            SearchController searchController = new SearchController();
+            searchController.fileWritter(name);
+            
+            if(isFound){
+                lblFound.setVisible(false);
+                FrmEditHolisticStudent frmEditHolisticStudent = new FrmEditHolisticStudent();
+                frmEditHolisticStudent.setVisible(true);
+                
+                FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+                frmHolisticStudent.setVisible(false);
+            }else{
+                lblFound.setVisible(true);
+            }
+            return isFound;
+        }
     }
 }

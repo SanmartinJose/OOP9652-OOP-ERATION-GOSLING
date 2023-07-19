@@ -21,17 +21,15 @@ import org.bson.Document;
 public class FrmHolisticStudent extends javax.swing.JFrame {
     private Class<?> claseOrigen;
 
-    DefaultTableModel dtm = new DefaultTableModel();
+
     
     /**
      * Creates new form FrmHolisticStudent
      */
     public FrmHolisticStudent() {
         initComponents();
-        String[] title = new String[]{"N", "Name","Age","Legal Guardian"};
-        dtm.setColumnIdentifiers(title);
-        tbeHolisticStudents.setModel(dtm);
-        addTableData();
+        HolisticStudentController holisticStudentController = new HolisticStudentController(); 
+        holisticStudentController.addTableData(tbeHolisticStudents);
     }
     
     public void setClaseOrigen(Class<?> claseOrigen) {
@@ -261,8 +259,6 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         FrmCreateHolisticStudent frmCreateHolistStudent = new FrmCreateHolisticStudent();
         frmCreateHolistStudent.setVisible(true);
         this.setVisible(false);
-        
-        SearchController searchController = new SearchController();
     }//GEN-LAST:event_btnAddStudentActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -281,31 +277,6 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         this.setVisible(false);
     }
     
-    private void addTableData(){
-        
-       HolisticStudentController holisticStudentController;
-       holisticStudentController = new HolisticStudentController();
-       
-       HolisticLegalGuardianController holisticLegalGuardianController;
-       holisticLegalGuardianController = new HolisticLegalGuardianController();
-       
-       MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
-       
-       
-       while(cursor.hasNext()){
-            Document document = cursor.next();
-            int id = (int) document.get("_id");
-            dtm.addRow(new Object[]{
-               document.get("_id"),
-                document.get("name"),
-                document.get("age"),
-                holisticLegalGuardianController.getHolisticLegalGuardianList(id)
-            });
-       }
-    }
-    
-
-
     /**
      * @param args the command line arguments
      */

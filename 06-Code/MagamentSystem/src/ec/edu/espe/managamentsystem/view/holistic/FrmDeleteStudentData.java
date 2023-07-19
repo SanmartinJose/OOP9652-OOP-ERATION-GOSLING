@@ -133,7 +133,19 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        
+        getData();
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtStudentNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtStudentNameMouseClicked
+        txtStudentName.setText("");
+        txtStudentName.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtStudentNameMouseClicked
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
+    
+    private void getData() {
         Validation validation = new Validation();
         
         if(txtStudentName.getText().isEmpty()){
@@ -145,34 +157,21 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
             
             name = validation.validateName(txtStudentName);
             
-            HolisticStudentController holisticStudentController = new HolisticStudentController(); 
+            HolisticStudentController holisticStudentController = new HolisticStudentController();
             boolean isFound = holisticStudentController.validateStudentData(name);
-
+            
             SearchController searchController = new SearchController();
             searchController.fileWritter(name);
-
+            
             if(isFound){
                 lblFound.setVisible(false);
                 delete();
                 this.setVisible(false);
-                FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
-                frmHolisticStudent.setVisible(false); 
-                FrmHolisticStudent frmHolisticStudentDeleted = new FrmHolisticStudent();
-                frmHolisticStudentDeleted.setVisible(true);
             }else{
                 lblFound.setVisible(true);
             }
         }
-    }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void txtStudentNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtStudentNameMouseClicked
-        txtStudentName.setText("");
-        txtStudentName.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txtStudentNameMouseClicked
-
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btnCancelActionPerformed
+    }
     
     public void delete(){
         
@@ -185,6 +184,8 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
             holisticStudentController.deleteHolisticStudent(holisticStudentController.getStudentId());
             holisticLegalGuardianController.deleteHolisticLegalGuardian(holisticStudentController.getStudentId()+1);
             JOptionPane.showMessageDialog(rootPane, "Usuario "+ name+ " borrado con exito");
+            FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+            frmHolisticStudent.setVisible(true);
         }
     }
     /**

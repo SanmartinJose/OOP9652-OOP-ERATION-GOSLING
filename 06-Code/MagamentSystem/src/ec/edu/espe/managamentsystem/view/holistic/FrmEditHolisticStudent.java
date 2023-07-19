@@ -233,38 +233,7 @@ public class FrmEditHolisticStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAdreesStudentActionPerformed
 
     private void btnAddLegalGuardianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLegalGuardianActionPerformed
-        
-        int id;
-        int age;
-        String name;
-        String address;
-        
-         if(txtAdreesStudent.getText().isEmpty() || txtAgeStudent.getText().isEmpty() || txtNameStudent.getText().isEmpty()){
-            lblFull.setVisible(true);
-        }else{
-            lblFull.setVisible(false);
-        
-            Validation validation = new Validation();
-
-            name = validation.validateName(txtNameStudent);
-            address = validation.validateName(txtAdreesStudent);
-            age = Integer.parseInt(txtAgeStudent.getText());
-            id = setId();
-
-            HolisticStudent holisticStudent = new HolisticStudent(id, age, name, address);
-            HolisticStudentController holisticStudentController;
-            holisticStudentController = new HolisticStudentController();
-            FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
-
-            SearchController searchController = new SearchController();
-
-           
-            holisticStudentController.updateHolisticStudent(searchController.getStudent(), holisticStudent);
-
-            FrmEditHolisticLegalGuardian frmEditHolisticLegalGuardian = new FrmEditHolisticLegalGuardian();
-            frmEditHolisticLegalGuardian.setVisible(true);
-            this.setVisible(false);
-        }
+        getData();
     }//GEN-LAST:event_btnAddLegalGuardianActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -272,7 +241,40 @@ public class FrmEditHolisticStudent extends javax.swing.JFrame {
         frmHolisticStudent.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
-
+    
+        private void getData() throws NumberFormatException {
+        int id;
+        int age;
+        String name;
+        String address;
+        
+        if(txtAdreesStudent.getText().isEmpty() || txtAgeStudent.getText().isEmpty() || txtNameStudent.getText().isEmpty()){
+            lblFull.setVisible(true);
+        }else{
+            lblFull.setVisible(false);
+            
+            Validation validation = new Validation();
+            
+            name = validation.validateName(txtNameStudent);
+            address = validation.validateName(txtAdreesStudent);
+            age = Integer.parseInt(txtAgeStudent.getText());
+            id = setId();
+            
+            HolisticStudent holisticStudent = new HolisticStudent(id, age, name, address);
+            HolisticStudentController holisticStudentController;
+            holisticStudentController = new HolisticStudentController();
+            FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
+            
+            SearchController searchController = new SearchController();
+            
+            
+            holisticStudentController.updateHolisticStudent(searchController.getStudent(), holisticStudent);
+            
+            FrmEditHolisticLegalGuardian frmEditHolisticLegalGuardian = new FrmEditHolisticLegalGuardian();
+            frmEditHolisticLegalGuardian.setVisible(true);
+            this.setVisible(false);
+        }
+    }
    
     public int setId(){
        HolisticStudentController holisticStudentController;
