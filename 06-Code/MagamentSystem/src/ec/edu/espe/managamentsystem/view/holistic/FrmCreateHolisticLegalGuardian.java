@@ -256,7 +256,7 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
         }else{
              lblFull.setVisible(false);
             
-        Validation validation = new Validation();
+            Validation validation = new Validation();
         
             name = validation.validateName(txtLegalGuardianName);
             age = Integer.parseInt(txtLegalGuardianAge.getText());
