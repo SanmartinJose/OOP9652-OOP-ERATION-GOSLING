@@ -136,37 +136,16 @@ public class FrmEditStudentData extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         
-         Validation validation = new Validation();
-        
-        if(txtStudentName.getText().isEmpty()){
-            lblFound.setText("*Campo Obligatorio");
-            lblFound.setVisible(true);
-        }else{
-        
-            lblFound.setText("*estudiante no encontrado");
-            lblFound.setVisible(false);
-            
-            name = validation.validateName(txtStudentName);
-
-            HolisticStudentController holisticStudentController = new HolisticStudentController(); 
-            boolean isFound = holisticStudentController.validateStudentData(name);
-
-            SearchController searchController = new SearchController();
-            searchController.fileWritter(name);
-
-            if(isFound){
-                lblFound.setVisible(false);
-                FrmEditHolisticStudent frmEditHolisticStudent = new FrmEditHolisticStudent();
-                frmEditHolisticStudent.setVisible(true);
-
-                FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
-                frmHolisticStudent.setVisible(false);  
-                this.setVisible(false);
-            }else{
-                lblFound.setVisible(true);
-            }
-        }
+       getData();
     }//GEN-LAST:event_btnSearchActionPerformed
+    
+    private void getData(){
+         HolisticStudentController holisticStudentController = new HolisticStudentController();
+        if(holisticStudentController.getData(txtStudentName, lblFound)){
+            this.setVisible(false);
+        }
+    }
+   
 
     private void txtStudentNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtStudentNameMouseClicked
         txtStudentName.setText("");
