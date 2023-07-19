@@ -20,12 +20,16 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
     public FrmPrincipalLogin() {
         initComponents();
         
-        lblAlert1.setVisible(false);
-        lblAlert2.setVisible(false);
+        setAlertsFalse();
 
         
         
         
+    }
+
+    private void setAlertsFalse() {
+        lblAlert1.setVisible(false);
+        lblAlert2.setVisible(false);
     }
 
     /**
@@ -206,12 +210,16 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
 
     private void btnEnterLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterLoginActionPerformed
         LoginController login = new LoginController();
+        readData(login);
+    }//GEN-LAST:event_btnEnterLoginActionPerformed
+
+    private void readData(LoginController login) {
         JTextField name =txtUser;
         JTextField code =txtPassword;
         JLabel msgAlertCheck =lblAlert1;
         JLabel msgAlertCheck2 =lblAlert2;
         login.principalLogin(name, code, msgAlertCheck, msgAlertCheck2);
-    }//GEN-LAST:event_btnEnterLoginActionPerformed
+    }
 
     
 

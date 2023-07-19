@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static ec.edu.espe.managmentsystem.util.Validation.validId;
 import java.awt.Color;
+import java.awt.HeadlessException;
 
 
 /**
@@ -25,6 +26,10 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
      */
     public FrmUpdatePaymentStudent() {
         initComponents();
+        setAlertsInFalse();
+    }
+
+    private void setAlertsInFalse() {
         lblAlert1.setVisible(false);
         lblAlert2.setVisible(false);
     }
@@ -244,18 +249,22 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         String id = txtIdStudent.getText().trim();
         String idValid = validId(id);
 
+        setAlertsTrue(idValid, valuePaidValid);
+    }//GEN-LAST:event_btnUpdatePaidActionPerformed
+
+    private void setAlertsTrue(String idValid, Double valuePaidValid) throws HeadlessException {
         if (idValid != null && valuePaidValid != null) {
             // Realiza la acción cuando los valores son válidos
             PaymentRecord paymentRecord = new PaymentRecord();
             paymentRecord.updatePayment(idValid, valuePaidValid);
             JOptionPane.showMessageDialog(rootPane, "Datos enviados correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             emptyFields();
-         } else {
+        } else {
             lblAlert2.setVisible(true);
             lblAlert1.setVisible(true);
             JOptionPane.showMessageDialog(rootPane, "Ingrese valores válidos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
-         }
-    }//GEN-LAST:event_btnUpdatePaidActionPerformed
+        }
+    }
     private void emptyFields() {
             txtIdStudent.setText("");
             txtValuePaid.setText("");
@@ -266,8 +275,7 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValuePaidActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-       FrmPaymentRecord frmPaymentRecord;
-       frmPaymentRecord = new FrmPaymentRecord();
+       FrmPaymentRecord frmPaymentRecord = new FrmPaymentRecord();
        frmPaymentRecord.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -275,15 +283,19 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         
         String id = txtIdStudent.getText().trim();
         String idValid = validId(id);
+        showAlert(idValid, id);
+    }//GEN-LAST:event_btnDeletePaidActionPerformed
+
+    private void showAlert(String idValid, String id) throws HeadlessException {
         if (idValid != null) {
             PaymentRecord paymentRecord = new PaymentRecord();
             paymentRecord.deletePaid(id);
             emptyFields();
         }else{
             JOptionPane.showMessageDialog(rootPane, "Ingrese valores válidos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
-        
+            
         }
-    }//GEN-LAST:event_btnDeletePaidActionPerformed
+    }
 
     private void txtIdStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdStudentActionPerformed
         Validation validation = new Validation();

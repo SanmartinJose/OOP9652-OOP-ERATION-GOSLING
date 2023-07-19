@@ -23,6 +23,10 @@ MongoDBConnection db = new MongoDBConnection();
      */
     public FrmCreateUser() {
         initComponents();
+        setAlertsOff();
+    }
+
+    private void setAlertsOff() {
         lblAlertID.setVisible(false);
         lblName.setVisible(false);
         lblemail.setVisible(false);
@@ -312,12 +316,7 @@ MongoDBConnection db = new MongoDBConnection();
                 lbluser.setVisible(true);
                 
             }else{
-                lblAlertID.setVisible(false);
-                lblName.setVisible(false);
-                lblemail.setVisible(false);
-                lblpass.setVisible(false);
-                lblphone.setVisible(false);
-                lbluser.setVisible(false);
+                setAlertsOff();
             }   id = v.validateNumber(txtCreateCedula);
             fullName=v.validateName(txtCreatFullName);
             cellphone=v.validateNumber(txtCreatePhoneNumber);

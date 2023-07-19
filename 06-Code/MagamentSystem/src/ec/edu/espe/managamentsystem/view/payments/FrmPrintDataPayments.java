@@ -39,6 +39,10 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
             model.removeRow(0);
         }
 
+        InsertDataOnTable(mongoConnection, model);
+    }
+
+    private void InsertDataOnTable(MongoDBConnectionOptional mongoConnection, DefaultTableModel model) {
         MongoCollection<Document> collection = mongoConnection.getCollection();
         FindIterable<Document> documents = collection.find();
 
@@ -46,11 +50,11 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
             Object[] rowData = new Object[6];
             int index = 0;
             for (String key : doc.keySet()) {
-                    Object value = doc.get(key);
-                    if (index >= 2) {
-                        value = "$" + value;
-                    }
-                    rowData[index++] = value;
+                Object value = doc.get(key);
+                if (index >= 2) {
+                    value = "$" + value;
+                }
+                rowData[index++] = value;
             }
             model.addRow(rowData);
         }

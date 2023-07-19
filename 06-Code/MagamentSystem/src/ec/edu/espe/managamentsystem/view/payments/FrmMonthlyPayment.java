@@ -9,6 +9,7 @@ package ec.edu.espe.managamentsystem.view.payments;
 import ec.edu.espe.managamentsystem.controller.PaymentRecord;
 import ec.edu.espe.managmentsystem.model.Payment;
 import ec.edu.espe.managmentsystem.util.Validation;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 /**
  *
@@ -21,6 +22,10 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
      */
     public FrmMonthlyPayment() {
         initComponents();
+        setAlertsFalse();
+    }
+
+    private void setAlertsFalse() {
         lblAlert1.setVisible(false);
         lblAlert2.setVisible(false);
     }
@@ -232,10 +237,14 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
         Double valuePaidValid = Validation.validValue(validValueIs);
         String id = txtId.getText().trim();
 
+        setAlertsTrue(id, valuePaidValid);
+    }//GEN-LAST:event_btnAddPaymentActionPerformed
+
+    private void setAlertsTrue(String id, Double valuePaidValid) throws HeadlessException {
         if (isValidId(id) && valuePaidValid != null) {
             PaymentRecord paymentRecord = new PaymentRecord();
             paymentRecord.monthlyValue(valuePaidValid, id);
-
+            
             JOptionPane.showMessageDialog(rootPane, "Datos guardados", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             emptyFields();
             
@@ -245,7 +254,7 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Ingrese valores válidos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
             emptyFields();
         }
-    }//GEN-LAST:event_btnAddPaymentActionPerformed
+    }
 
     private boolean isValidId(String id) {
         if (id.isEmpty()) {
@@ -260,12 +269,11 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
     }
     private void emptyFields() {
         txtId.setText("");
-        txtId.setText("");
+        txtNewValue.setText("");
     }
     
     private void btmBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBackActionPerformed
-       FrmPaymentRecord frmPaymentRecord;
-       frmPaymentRecord = new FrmPaymentRecord();
+       FrmPaymentRecord frmPaymentRecord = new FrmPaymentRecord();
        frmPaymentRecord.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btmBackActionPerformed
