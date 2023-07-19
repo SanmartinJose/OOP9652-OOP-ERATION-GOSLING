@@ -10,7 +10,7 @@ import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
  * @author PabloEZurita
  */
 public class FrmManagmentSystem extends javax.swing.JFrame {
-
+public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStudent();
    
 
     /**
@@ -298,11 +298,15 @@ public class FrmManagmentSystem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHolisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHolisticActionPerformed
-       FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
-       frmHolisticStudent.setClaseOrigen(FrmManagmentSystem.class);
-       frmHolisticStudent.setVisible(true);
-        this.setVisible(false);
+        createTheHolisticScreen(frmHolisticStudentOriginal);
     }//GEN-LAST:event_btnHolisticActionPerformed
+
+    private void createTheHolisticScreen(FrmHolisticStudent frmHolisticStudent) {
+        
+        frmHolisticStudent.setClaseOrigen(FrmManagmentSystem.class);
+        frmHolisticStudent.setVisible(true);
+        this.setVisible(false);
+    }
 
     private void btnHomeSchoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeSchoolActionPerformed
         FrmControlHomeSchoolMenu frmControlHomeSchoolMenu = new FrmControlHomeSchoolMenu();

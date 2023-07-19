@@ -8,6 +8,7 @@ import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
 import ec.edu.espe.managamentsystem.controller.SearchController;
+import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;
 import ec.edu.espe.managmentsystem.util.Validation;
 import java.awt.Color;
@@ -21,6 +22,18 @@ import org.bson.Document;
 public class FrmDeleteStudentData extends javax.swing.JFrame {
     
     String name;
+    FrmHolisticStudent frmHolisticStudentOrigin;
+
+    public FrmHolisticStudent getFrmHolisticStudentOrigin() {
+        return frmHolisticStudentOrigin;
+    }
+
+    public void setFrmHolisticStudentOrigin(FrmHolisticStudent frmHolisticStudentOrigin) {
+        this.frmHolisticStudentOrigin = frmHolisticStudentOrigin;
+    }
+
+    
+    
 
     /**
      * Creates new form FrmGetStudentData
@@ -167,6 +180,8 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
                 lblFound.setVisible(false);
                 delete();
                 this.setVisible(false);
+                frmHolisticStudentOrigin.setVisible(false);
+                
             }else{
                 lblFound.setVisible(true);
             }
@@ -184,8 +199,12 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
             holisticStudentController.deleteHolisticStudent(holisticStudentController.getStudentId());
             holisticLegalGuardianController.deleteHolisticLegalGuardian(holisticStudentController.getStudentId()+1);
             JOptionPane.showMessageDialog(rootPane, "Usuario "+ name+ " borrado con exito");
+           
             FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+            
             frmHolisticStudent.setVisible(true);
+            
+            
         }
     }
     /**
