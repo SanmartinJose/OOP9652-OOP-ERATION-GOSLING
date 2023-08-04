@@ -28,51 +28,20 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
      */
     public FrmPrintDataPayments() {
         initComponents();
-
-        MongoDBConnectionOptional mongoConnection = new MongoDBConnectionOptional();
-        mongoConnection.connection("Payments");
+        String collectionName = "Payments"; // Nombre de la colección que deseas mostrar
+        String[] fieldsToDisplay = {"_id", "name", "monthlyPayment", "valuePaid", "remainingValue"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String[] columnTitles = {"Id", "Nombre Completo", "Pago Mensual", "Valor Pagado", "Valor a Pagar"};
         model.setColumnIdentifiers(columnTitles);
-        
         while (model.getRowCount() > 0) {
             model.removeRow(0);
         }
-
-        InsertDataOnTable(mongoConnection, model);
-    }
-
-    private void InsertDataOnTable(MongoDBConnectionOptional mongoConnection, DefaultTableModel model) {
-        MongoCollection<Document> collection = mongoConnection.getCollection();
-        FindIterable<Document> documents = collection.find();
-
-        for (Document doc : documents) {
-            Object[] rowData = new Object[6];
-            int index = 0;
-            for (String key : doc.keySet()) {
-                Object value = doc.get(key);
-                if (index >= 2) {
-                    value = "$" + value;
-                }
-                rowData[index++] = value;
-            }
+        Object[][] tableData = MongoDBConnectionOptional.generateTableData(collectionName, fieldsToDisplay);
+        for (Object[] rowData : tableData) {
             model.addRow(rowData);
         }
-
-        // Obtener el ancho máximo del contenido de la columna 2
-        TableColumn column2 = jTable1.getColumnModel().getColumn(1);
-        int maxWidth = 0;
-        
-        for (int row = 0; row < jTable1.getRowCount(); row++) {
-            TableCellRenderer renderer = jTable1.getCellRenderer(row, 1);
-            Component component = jTable1.prepareRenderer(renderer, row, 1);
-            int width = component.getPreferredSize().width;
-            maxWidth = Math.max(maxWidth, width);
-        }
-        // Establecer el ancho máximo de la columna 2
-        column2.setPreferredWidth(maxWidth);
+        MongoDBConnectionOptional.adjustColumnWidth(jTable1, 1);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

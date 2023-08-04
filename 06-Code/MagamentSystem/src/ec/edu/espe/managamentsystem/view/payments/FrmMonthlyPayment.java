@@ -31,19 +31,17 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
         setAlertsFalse();
         String collectionName = "Payments"; // Nombre de la colección que deseas mostrar
         String[] fieldsToDisplay = {"_id", "name", "monthlyPayment", "valuePaid", "remainingValue"};
-
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String[] columnTitles = {"Id", "Nombre Completo", "Pago Mensual", "Valor Pagado", "Valor a Pagar"};
         model.setColumnIdentifiers(columnTitles);
-
         while (model.getRowCount() > 0) {
             model.removeRow(0);
         }
-
         Object[][] tableData = MongoDBConnectionOptional.generateTableData(collectionName, fieldsToDisplay);
         for (Object[] rowData : tableData) {
             model.addRow(rowData);
         }
+        MongoDBConnectionOptional.adjustColumnWidth(jTable1, 1);
     }
 
     private void setAlertsFalse() {

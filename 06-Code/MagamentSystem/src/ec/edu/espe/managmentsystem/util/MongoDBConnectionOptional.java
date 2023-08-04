@@ -54,18 +54,16 @@ public class MongoDBConnectionOptional {
         return data;
     }
      
-     public static void adjustColumnWidth(JTable table, int columnIndex) {
+    public static void adjustColumnWidth(JTable table, int columnIndex) {
         TableColumn column = table.getColumnModel().getColumn(columnIndex);
         int maxWidth = 0;
-
         for (int row = 0; row < table.getRowCount(); row++) {
+            Object value = table.getValueAt(row, columnIndex);
             TableCellRenderer renderer = table.getCellRenderer(row, columnIndex);
-            Component component = table.prepareRenderer(renderer, row, columnIndex);
+            Component component = renderer.getTableCellRendererComponent(table, value, false, false, row, columnIndex);
             int width = component.getPreferredSize().width;
             maxWidth = Math.max(maxWidth, width);
         }
-        
-        // Establecer el ancho máximo de la columna
         column.setPreferredWidth(maxWidth);
     }
 
