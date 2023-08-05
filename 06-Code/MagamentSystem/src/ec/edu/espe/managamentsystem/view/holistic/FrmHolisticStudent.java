@@ -6,13 +6,8 @@ package ec.edu.espe.managamentsystem.view.holistic;
 
 
 import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
-
-import com.mongodb.client.MongoCursor;
-import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
-import ec.edu.espe.managamentsystem.controller.SearchController;
-import javax.swing.table.DefaultTableModel;
-import org.bson.Document;
+
 
 /**
  *
@@ -20,9 +15,6 @@ import org.bson.Document;
  */
 public class FrmHolisticStudent extends javax.swing.JFrame {
     private Class<?> claseOrigen;
-
-
-    
     /**
      * Creates new form FrmHolisticStudent
      */
@@ -30,6 +22,7 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         initComponents();
         HolisticStudentController holisticStudentController = new HolisticStudentController(); 
         holisticStudentController.addTableData(tbeHolisticStudents);
+        setLocationRelativeTo(null);
     }
     
     public void setClaseOrigen(Class<?> claseOrigen) {

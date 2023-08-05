@@ -2,7 +2,6 @@
 package ec.edu.espe.managamentsystem.view;
 
 import ec.edu.espe.managamentsystem.view.holistic.FrmHolisticStudent;
-import ec.edu.espe.managamentsystem.view.payments.FrmPaymentRecord;
 import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
 
 /**
@@ -18,9 +17,7 @@ public class FrmManagmentSystemInstructor extends javax.swing.JFrame {
      */
     public FrmManagmentSystemInstructor() {
         initComponents();
-        
-        
-        
+        setLocationRelativeTo(null);
     }
 
     /**

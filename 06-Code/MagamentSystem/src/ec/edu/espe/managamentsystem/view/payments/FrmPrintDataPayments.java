@@ -4,18 +4,10 @@
  */
 package ec.edu.espe.managamentsystem.view.payments;
 
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
 import ec.edu.espe.managmentsystem.util.MongoDBConnectionOptional;
-import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-import ec.edu.espe.managmentsystem.util.Printer;
 import java.awt.print.PrinterException;
-import org.bson.Document;
 
 /**
  *

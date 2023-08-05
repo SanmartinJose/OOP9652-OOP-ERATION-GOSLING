@@ -18,6 +18,7 @@ public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStu
      */
     public FrmManagmentSystem() {
         initComponents();
+        setLocationRelativeTo(null);
         
     }
 
@@ -302,8 +303,11 @@ public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStu
     }//GEN-LAST:event_btnHolisticActionPerformed
 
     private void createTheHolisticScreen(FrmHolisticStudent frmHolisticStudent) {
+
+        if (frmHolisticStudent.isVisible()) {
+            frmHolisticStudent.dispose();
+        }
         
-        frmHolisticStudent.setClaseOrigen(FrmManagmentSystem.class);
         frmHolisticStudent.setVisible(true);
         this.setVisible(false);
     }
