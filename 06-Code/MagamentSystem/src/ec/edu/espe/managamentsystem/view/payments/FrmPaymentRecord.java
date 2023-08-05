@@ -17,6 +17,8 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
      */
     public FrmPaymentRecord() {
         initComponents();
+        setLocationRelativeTo(null);
+        
     }
 
     /**

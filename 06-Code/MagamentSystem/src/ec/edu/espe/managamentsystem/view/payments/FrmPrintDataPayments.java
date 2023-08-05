@@ -28,7 +28,7 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
      */
     public FrmPrintDataPayments() {
         initComponents();
-        String collectionName = "Payments"; // Nombre de la colección que deseas mostrar
+        String collectionName = "Payments";
         String[] fieldsToDisplay = {"_id", "name", "monthlyPayment", "valuePaid", "remainingValue"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String[] columnTitles = {"Id", "Nombre Completo", "Pago Mensual", "Valor Pagado", "Valor a Pagar"};
@@ -41,6 +41,7 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
             model.addRow(rowData);
         }
         MongoDBConnectionOptional.adjustColumnWidth(jTable1, 1);
+        setLocationRelativeTo(null);
     }
     /**
      * This method is called from within the constructor to initialize the form.

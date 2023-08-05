@@ -31,13 +31,13 @@ public class MongoDBConnectionOptional {
         collection = database.getCollection(collections);
     }
      
-     public static Object[][] generateTableData(String collectionName, String[] fields) {
+    public static Object[][] generateTableData(String collectionName, String[] fields) {
         List<Object[]> dataList = new ArrayList<>();
         try (MongoClient mongoClient = MongoClients.create("mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority")) {
-            MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem"); // Reemplaza "miBaseDeDatos" por el nombre de tu base de datos
+            MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection(collectionName);
             FindIterable<Document> result = collection.find();
-            
+
             for (Document document : result) {
                 Object[] rowData = new Object[fields.length];
                 for (int i = 0; i < fields.length; i++) {
@@ -47,7 +47,7 @@ public class MongoDBConnectionOptional {
             }
         }
         Object[][] data = new Object[dataList.size()][fields.length];
-        
+
         for (int i = 0; i < dataList.size(); i++) {
             data[i] = dataList.get(i);
         }

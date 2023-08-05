@@ -22,17 +22,16 @@ import javax.swing.table.TableColumn;
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class FrmMonthlyPayment extends javax.swing.JFrame {
-    Payment payment;
     /**
      * Creates new form FrmMonthlyPayment
      */
     public FrmMonthlyPayment() {
         initComponents();
         setAlertsFalse();
-        String collectionName = "Payments"; // Nombre de la colección que deseas mostrar
-        String[] fieldsToDisplay = {"_id", "name", "monthlyPayment", "valuePaid", "remainingValue"};
+        String collectionName = "Payments";
+        String[] fieldsToDisplay = {"_id", "name", "monthlyPayment"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        String[] columnTitles = {"Id", "Nombre Completo", "Pago Mensual", "Valor Pagado", "Valor a Pagar"};
+        String[] columnTitles = {"Id", "Nombre Completo", "Pago Mensual"};
         model.setColumnIdentifiers(columnTitles);
         while (model.getRowCount() > 0) {
             model.removeRow(0);
@@ -42,6 +41,7 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
             model.addRow(rowData);
         }
         MongoDBConnectionOptional.adjustColumnWidth(jTable1, 1);
+        setLocationRelativeTo(null);
     }
 
     private void setAlertsFalse() {
@@ -85,23 +85,24 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Actualizar Pago");
+        jLabel3.setText("Actualizar Pago Mensual");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
