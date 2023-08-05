@@ -23,7 +23,7 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
         String collectionName = "Payments";
         String[] fieldsToDisplay = {"_id", "name", "monthlyPayment", "valuePaid", "remainingValue"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        String[] columnTitles = {"Id", "Nombre Completo", "Pago Mensual", "Valor Pagado", "Valor a Pagar"};
+        String[] columnTitles = {"Id", "Nombre", "Pago Mensual", "Valor Pagado", "Valor a Pagar"};
         model.setColumnIdentifiers(columnTitles);
         while (model.getRowCount() > 0) {
             model.removeRow(0);

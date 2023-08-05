@@ -20,8 +20,14 @@ import org.bson.conversions.Bson;
  * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
 public class LoginController {
+    private boolean loginExitoso = false;
+    private FrmPrincipalLogin frmPrincipalLogin; 
+
+    public LoginController(FrmPrincipalLogin frmPrincipalLogin) {
+        this.frmPrincipalLogin = frmPrincipalLogin;
+    }
+    
     public void principalLogin(JTextField txtUsername,JTextField txtCode,JLabel lblAlert,JLabel lblAlert1, FrmPrincipalLogin frmPrincipalLogin)  {            
-            
         String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
         String db = "SchoolManagmentSystem";
         try(MongoClient mongoClient = MongoClients.create(uri)){
@@ -50,23 +56,25 @@ public class LoginController {
     }
     private void enterToTheProgramAdmin() {
         
-        FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
-        
+        FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();      
         frmMagamentSystem.setVisible(true);
+        frmPrincipalLogin.dispose();
         
     }
     private void enterToTheProgramInstructor() {
         
         FrmManagmentSystemInstructor frmMagamentSystemInstructor = new FrmManagmentSystemInstructor();
-        
         frmMagamentSystemInstructor.setVisible(true);
-        
+        frmPrincipalLogin.dispose();
     }
+    
     private void stayInLogin() {
         FrmManagmentSystem frmMagamentSystem = new FrmManagmentSystem();
         frmMagamentSystem.setVisible(false);
     }
+    
     public boolean login(JTextField usernameField, JTextField passwordField, String typeOfUser) {
+        
     String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
     String db = "SchoolManagmentSystem";
     try (MongoClient mongoClient = MongoClients.create(uri)) {

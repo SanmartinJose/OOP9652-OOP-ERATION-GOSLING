@@ -31,7 +31,7 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
         String collectionName = "Payments";
         String[] fieldsToDisplay = {"_id", "name", "monthlyPayment"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        String[] columnTitles = {"Id", "Nombre Completo", "Pago Mensual"};
+        String[] columnTitles = {"Id", "Nombre", "Pago Mensual"};
         model.setColumnIdentifiers(columnTitles);
         while (model.getRowCount() > 0) {
             model.removeRow(0);

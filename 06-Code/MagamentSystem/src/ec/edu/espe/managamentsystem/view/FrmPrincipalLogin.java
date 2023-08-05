@@ -5,7 +5,6 @@ package ec.edu.espe.managamentsystem.view;
 import ec.edu.espe.managamentsystem.controller.LoginController;
 
 import javax.swing.JLabel;
-
 import javax.swing.JTextField;
 
 /**
@@ -13,18 +12,14 @@ import javax.swing.JTextField;
  * @author Labs-DCCO
  */
 public class FrmPrincipalLogin extends javax.swing.JFrame {
-
+    private boolean loginExitoso = false;
     /**
      * Creates new form FrmPrincipalLogin
      */
     public FrmPrincipalLogin() {
-        initComponents();
-        
+        initComponents();  
         setAlertsFalse();
-
-        
-        
-        
+        setLocationRelativeTo(null);
     }
 
     private void setAlertsFalse() {
@@ -209,9 +204,8 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnterLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterLoginActionPerformed
-        LoginController login = new LoginController();
+        LoginController login = new LoginController(this);
         readData(login);
-        this.setVisible(false);
     }//GEN-LAST:event_btnEnterLoginActionPerformed
 
     private void readData(LoginController login) {
@@ -221,12 +215,6 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
         JLabel msgAlertCheck2 =lblAlert2;
         login.principalLogin(name, code,msgAlertCheck, msgAlertCheck2, this);
     }
-
-    
-
-    
-    
-
     /**
      * @param args the command line arguments
      */
