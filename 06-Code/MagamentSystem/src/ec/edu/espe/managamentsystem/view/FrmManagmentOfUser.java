@@ -23,6 +23,7 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
         initComponents();
         UserManagment um = new UserManagment();
         tbeManagmentOfUser.setModel(um.addTableData());
+        setLocationRelativeTo(null);
     }
 
     /**

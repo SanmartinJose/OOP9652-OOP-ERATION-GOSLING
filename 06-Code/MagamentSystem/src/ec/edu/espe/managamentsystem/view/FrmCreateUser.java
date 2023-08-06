@@ -18,6 +18,7 @@ MongoDBConnection db = new MongoDBConnection();
     public FrmCreateUser() {
         initComponents();
         setAlertsOff();
+        setLocationRelativeTo(null);
     }
 
     private void setAlertsOff() {

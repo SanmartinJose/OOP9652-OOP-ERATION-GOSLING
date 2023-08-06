@@ -26,6 +26,7 @@ public class FrmCreateHolisticStudent extends javax.swing.JFrame {
     public FrmCreateHolisticStudent() {
         initComponents();
         lblFull.setVisible(false);
+        setLocationRelativeTo(null);
     }
 
     /**

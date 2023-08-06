@@ -30,6 +30,7 @@ public class FrmEditHolisticLegalGuardian extends javax.swing.JFrame {
         showGuardianData();
         lblFull.setVisible(false);
         btnBack.setVisible(false);
+        setLocationRelativeTo(null);
     }
 
     /**

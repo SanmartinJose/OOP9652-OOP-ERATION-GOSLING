@@ -26,6 +26,7 @@ public class FrmPrintData extends javax.swing.JFrame {
      */
     public FrmPrintData() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

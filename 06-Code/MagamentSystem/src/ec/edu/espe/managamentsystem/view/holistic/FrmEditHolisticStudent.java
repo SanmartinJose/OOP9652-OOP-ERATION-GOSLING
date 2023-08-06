@@ -27,6 +27,7 @@ public class FrmEditHolisticStudent extends javax.swing.JFrame {
         initComponents();
         showStudentData();
         lblFull.setVisible(false);
+        setLocationRelativeTo(null);
     }
 
     /**

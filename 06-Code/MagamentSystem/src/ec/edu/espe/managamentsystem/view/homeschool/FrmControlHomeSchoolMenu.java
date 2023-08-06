@@ -30,6 +30,7 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
             btnEnterToTheCourse.setVisible(false);
             txtCourse.setVisible(true);
         }
+        setLocationRelativeTo(null);
     }
     
     public void setClaseOrigen(Class<?> claseOrigen) {

@@ -41,6 +41,7 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
     public FrmDeleteStudentData() {
         initComponents();
         lblFound.setVisible(false);
+        setLocationRelativeTo(null);
     }
 
     /**

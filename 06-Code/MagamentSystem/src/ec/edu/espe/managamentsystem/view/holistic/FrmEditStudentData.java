@@ -4,29 +4,22 @@
  */
 package ec.edu.espe.managamentsystem.view.holistic;
 
-import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
-import ec.edu.espe.managamentsystem.controller.SearchController;
-import ec.edu.espe.managmentsystem.model.HolisticStudent;
 import ec.edu.espe.managmentsystem.util.Validation;
 import java.awt.Color;
-import javax.swing.JOptionPane;
-import org.bson.Document;
 
 /**
  *
  * @author Oswaldo Tipan
  */
 public class FrmEditStudentData extends javax.swing.JFrame {
-    
-    String name;
-
     /**
      * Creates new form FrmGetStudentData
      */
     public FrmEditStudentData() {
         initComponents();
         lblFound.setVisible(false);
+        setLocationRelativeTo(null);
     }
 
     /**
