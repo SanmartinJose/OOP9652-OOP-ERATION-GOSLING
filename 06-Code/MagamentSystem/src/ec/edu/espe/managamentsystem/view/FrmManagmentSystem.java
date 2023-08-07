@@ -50,6 +50,7 @@ public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStu
         IconLearn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         setSize(new java.awt.Dimension(600, 450));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -149,7 +150,7 @@ public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStu
             .addGroup(paymentPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(btnPayments)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(paymentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(IconPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,7 +197,7 @@ public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStu
             .addGroup(usersPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(btmManageUser)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(usersPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(IconUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
