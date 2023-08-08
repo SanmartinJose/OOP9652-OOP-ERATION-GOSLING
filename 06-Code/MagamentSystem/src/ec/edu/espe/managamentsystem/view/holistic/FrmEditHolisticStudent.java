@@ -70,6 +70,7 @@ public class FrmEditHolisticStudent extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -122,6 +123,8 @@ public class FrmEditHolisticStudent extends javax.swing.JFrame {
             }
         });
 
+        lblFull.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblFull.setForeground(new java.awt.Color(255, 0, 0));
         lblFull.setText("*existen campos sin llenar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -161,9 +164,9 @@ public class FrmEditHolisticStudent extends javax.swing.JFrame {
                     .addComponent(txtAdreesStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFull)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAddLegalGuardian)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
