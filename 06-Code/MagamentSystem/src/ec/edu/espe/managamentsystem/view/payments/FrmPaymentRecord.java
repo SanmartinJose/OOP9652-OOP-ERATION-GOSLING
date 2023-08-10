@@ -47,6 +47,7 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
 

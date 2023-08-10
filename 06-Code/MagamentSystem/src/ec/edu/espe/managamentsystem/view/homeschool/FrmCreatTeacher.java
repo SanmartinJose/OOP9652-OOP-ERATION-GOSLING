@@ -59,6 +59,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -84,6 +85,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
 
         jLabel7.setText("Curso Asignado:");
 
+        lblFull.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         lblFull.setForeground(new java.awt.Color(255, 0, 0));
         lblFull.setText("*existen campos sin rellenar");
 
@@ -142,9 +144,9 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
                     .addComponent(cmbTeacherCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFull)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));

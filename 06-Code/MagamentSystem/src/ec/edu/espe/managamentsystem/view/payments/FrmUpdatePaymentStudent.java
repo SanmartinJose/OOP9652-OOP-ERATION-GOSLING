@@ -76,6 +76,7 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         btnDeletePaid = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -86,7 +87,7 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         jLabel2.setText("Ingrese el Valor Cancelado:");
 
         txtIdStudent.setForeground(new java.awt.Color(204, 204, 204));
-        txtIdStudent.setText("Ingrese el Id del Tutor Legal del Estudiante");
+        txtIdStudent.setText("Ingrese el Id del Tutor Legal");
         txtIdStudent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtIdStudentMouseClicked(evt);
@@ -104,9 +105,11 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
             }
         });
 
+        lblAlert1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         lblAlert1.setForeground(new java.awt.Color(255, 51, 51));
         lblAlert1.setText("*Ingrese un Id valido");
 
+        lblAlert2.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         lblAlert2.setForeground(new java.awt.Color(255, 51, 51));
         lblAlert2.setText("*Ingrese un valor valido");
 
@@ -123,9 +126,9 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAlert2)
                     .addComponent(lblAlert1)
-                    .addComponent(txtIdStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtValuePaid, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addComponent(txtValuePaid, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,9 +145,9 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
                         .addComponent(lblAlert1)
                         .addGap(24, 24, 24)
                         .addComponent(txtValuePaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlert2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 255));
@@ -212,13 +215,13 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addComponent(btnDeletePaid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdatePaid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(39, 39, 39)
+                .addGap(111, 111, 111)
                 .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(40, 40, 40))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

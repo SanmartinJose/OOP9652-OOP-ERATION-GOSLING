@@ -63,6 +63,7 @@ public class FrmCreatStudent extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -125,6 +126,7 @@ public class FrmCreatStudent extends javax.swing.JFrame {
             }
         });
 
+        lblFull.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         lblFull.setForeground(new java.awt.Color(255, 0, 0));
         lblFull.setText("*existen campos sin llenar");
 
@@ -152,7 +154,7 @@ public class FrmCreatStudent extends javax.swing.JFrame {
                                 .addComponent(txtNameStudent, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(257, 257, 257)
+                        .addGap(256, 256, 256)
                         .addComponent(btnAddLegalGuardian)))
                 .addContainerGap(207, Short.MAX_VALUE))
         );
@@ -183,9 +185,9 @@ public class FrmCreatStudent extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(3, 3, 3)
                 .addComponent(lblFull)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAddLegalGuardian)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -242,7 +244,7 @@ public class FrmCreatStudent extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
