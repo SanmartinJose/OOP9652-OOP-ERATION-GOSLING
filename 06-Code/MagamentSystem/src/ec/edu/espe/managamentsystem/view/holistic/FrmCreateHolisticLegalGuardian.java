@@ -13,6 +13,13 @@ import org.bson.Document;
  */
 public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
 
+    int age;
+    int studentId;
+    String phoneNumber;
+    String name;
+    String email;
+    int id;
+
     /**
      * Creates new form FrmCreateLegalGuardian
      */
@@ -247,36 +254,28 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void getData() throws NumberFormatException {
-        int age;
-        int studentId;
-        String phoneNumber;
-        String name;
-        String email;
-        int id;
-
         if (txtEmail.getText().isEmpty() || txtId.getText().isEmpty() || txtLegalGuardianAge.getText().isEmpty() || txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()) {
             lblFull.setVisible(true);
         } else {
-            lblFull.setVisible(false);
-
-            Validation validation = new Validation();
-
-            name = validation.validateName(txtLegalGuardianName);
-            age = Integer.parseInt(txtLegalGuardianAge.getText());
-            phoneNumber = validation.validateNumber(txtLegalGuardianPhoneNumber);
-            email = validation.validateEmail(txtEmail);
-            studentId = getStudentId();
-            id = Integer.parseInt(txtId.getText());
-
-            HolisticLegalGuardian holisticLegalGuardian = new HolisticLegalGuardian(id, age, studentId, phoneNumber, name, email);
-
-            HolisticLegalGuardianController holisticLegalGuardianController = new HolisticLegalGuardianController();
-            holisticLegalGuardianController.fileWrite(holisticLegalGuardian);
-
-            FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
-            frmHolisticStudent.setVisible(true);
-            this.setVisible(false);
+            SaveData();
         }
+    }
+
+    private void SaveData() throws NumberFormatException {
+        lblFull.setVisible(false);
+        Validation validation = new Validation();
+        name = validation.validateName(txtLegalGuardianName);
+        age = Integer.parseInt(txtLegalGuardianAge.getText());
+        phoneNumber = validation.validateNumber(txtLegalGuardianPhoneNumber);
+        email = validation.validateEmail(txtEmail);
+        studentId = getStudentId();
+        id = Integer.parseInt(txtId.getText());
+        HolisticLegalGuardian holisticLegalGuardian = new HolisticLegalGuardian(id, age, studentId, phoneNumber, name, email);
+        HolisticLegalGuardianController holisticLegalGuardianController = new HolisticLegalGuardianController();
+        holisticLegalGuardianController.fileWrite(holisticLegalGuardian);
+        FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+        frmHolisticStudent.setVisible(true);
+        this.setVisible(false);
     }
 
     public int getStudentId() {
