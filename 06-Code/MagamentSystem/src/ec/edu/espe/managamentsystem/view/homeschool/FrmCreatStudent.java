@@ -1,20 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HomeStudentController;
 import ec.edu.espe.managamentsystem.controller.StudentCourseController;
-import ec.edu.espe.managmentsystem.model.HomeSchoolLegalGuardian;
 import ec.edu.espe.managmentsystem.model.HomeSchoolStudent;
 import ec.edu.espe.managmentsystem.util.Validation;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
-import javax.swing.JOptionPane;
 import org.bson.Document;
 
 /**
@@ -259,35 +249,34 @@ public class FrmCreatStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAdreesStudentActionPerformed
 
     private void btnAddLegalGuardianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLegalGuardianActionPerformed
-        
+
         int age;
         int courseId;
         String name;
         String typeOfStudy;
-        String address; 
+        String address;
         String courseName;
-        
-        if(txtAdreesStudent.getText().isEmpty() || txtAgeStudent.getText().isEmpty()|| txtNameStudent.getText().isEmpty() || txtTypeOfStudy.getText().isEmpty()|| cmbCourseName.getSelectedItem().toString().isEmpty()){
+
+        if (txtAdreesStudent.getText().isEmpty() || txtAgeStudent.getText().isEmpty() || txtNameStudent.getText().isEmpty() || txtTypeOfStudy.getText().isEmpty() || cmbCourseName.getSelectedItem().toString().isEmpty()) {
             lblFull.setVisible(true);
-        }else{
-        
+        } else {
+
             lblFull.setVisible(false);
-            
+
             Validation validation = new Validation();
 
-            age = Integer.parseInt(txtAgeStudent.getText()); 
+            age = Integer.parseInt(txtAgeStudent.getText());
             name = validation.validateName(txtNameStudent);
             typeOfStudy = txtTypeOfStudy.getText();
             address = txtAdreesStudent.getText();
             courseName = cmbCourseName.getSelectedItem().toString();
             courseId = getCOurseId(courseName);
 
-            HomeSchoolStudent homeSchoolStudent; 
+            HomeSchoolStudent homeSchoolStudent;
             homeSchoolStudent = new HomeSchoolStudent(age, courseId, name, typeOfStudy, address);
 
             HomeStudentController homeSchoolController = new HomeStudentController();
             homeSchoolController.writeHomeStudent(homeSchoolStudent);
-
 
             FrmCreateLegalGuardian frmCreateLegalGuardian = new FrmCreateLegalGuardian();
             frmCreateLegalGuardian.setVisible(true);
@@ -302,46 +291,42 @@ public class FrmCreatStudent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void cmbCourseNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCourseNameActionPerformed
-  
+
     }//GEN-LAST:event_cmbCourseNameActionPerformed
 
-    
-    public void addComboBox(){
-       StudentCourseController studentCourseController;
-       studentCourseController = new StudentCourseController();
-       
-       MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
-       
-       while(cursor.hasNext()){
-            Document document = cursor.next();
-            String item = document.getString("name");
-            cmbCourseName.addItem(item);   
-       }
-    }
-    
-    public int getCOurseId(String name){
+    public void addComboBox() {
         StudentCourseController studentCourseController;
         studentCourseController = new StudentCourseController();
-       
+
         MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
-       
-       int id=0;
-       
-       while(cursor.hasNext()){
+
+        while (cursor.hasNext()) {
             Document document = cursor.next();
-            if(document.get("name") == name){
-              id = (int) document.get("_id");
-            }
-       }
-       return id;
+            String item = document.getString("name");
+            cmbCourseName.addItem(item);
+        }
     }
-    
+
+    public int getCOurseId(String name) {
+        StudentCourseController studentCourseController;
+        studentCourseController = new StudentCourseController();
+
+        MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
+
+        int id = 0;
+
+        while (cursor.hasNext()) {
+            Document document = cursor.next();
+            if (document.get("name") == name) {
+                id = (int) document.get("_id");
+            }
+        }
+        return id;
+    }
+
     /**
      * @param args the command line arguments
      */
-    
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

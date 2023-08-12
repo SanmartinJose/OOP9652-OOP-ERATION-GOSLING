@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.StudentCourseController;
-import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
-import javax.swing.JComboBox;
 import org.bson.Document;
 
 /**
@@ -17,6 +11,7 @@ import org.bson.Document;
 public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
 
     private Class<?> claseOrigen;
+
     /**
      * Creates new form ControlHomeSchoolMenu
      */
@@ -24,7 +19,7 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
         initComponents();
         addComboBox();
         txtCourse.setVisible(false);
-        if (cmbCourse.getItemCount()==0) {
+        if (cmbCourse.getItemCount() == 0) {
             cmbCourse.setVisible(false);
             lblChooseCourse.setVisible(false);
             btnEnterToTheCourse.setVisible(false);
@@ -32,7 +27,7 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
         }
         setLocationRelativeTo(null);
     }
-    
+
     public void setClaseOrigen(Class<?> claseOrigen) {
         this.claseOrigen = claseOrigen;
     }
@@ -220,12 +215,11 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    
+
+
     private void cmbCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCourseActionPerformed
-        
-        
+
+
     }//GEN-LAST:event_cmbCourseActionPerformed
 
     private void btnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCourseActionPerformed
@@ -251,20 +245,20 @@ public class FrmControlHomeSchoolMenu extends javax.swing.JFrame {
         frmCourseInside.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEnterToTheCourseActionPerformed
-    
-     public void addComboBox(){
-       StudentCourseController studentCourseController;
-       studentCourseController = new StudentCourseController();
-       
-       MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
-       
-       while(cursor.hasNext()){
+
+    public void addComboBox() {
+        StudentCourseController studentCourseController;
+        studentCourseController = new StudentCourseController();
+
+        MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
+
+        while (cursor.hasNext()) {
             Document document = cursor.next();
             String item = document.getString("name");
-            cmbCourse.addItem(item);   
-       }
+            cmbCourse.addItem(item);
+        }
     }
-    
+
     /**
      * @param args the command line arguments
      */

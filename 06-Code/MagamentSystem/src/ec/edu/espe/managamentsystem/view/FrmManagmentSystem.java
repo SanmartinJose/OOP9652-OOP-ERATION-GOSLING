@@ -1,4 +1,3 @@
-
 package ec.edu.espe.managamentsystem.view;
 
 import ec.edu.espe.managamentsystem.view.holistic.FrmHolisticStudent;
@@ -10,8 +9,8 @@ import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
  * @author PabloEZurita
  */
 public class FrmManagmentSystem extends javax.swing.JFrame {
-public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStudent();
-   
+
+    public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStudent();
 
     /**
      * Creates new form MagamentSystem
@@ -19,7 +18,7 @@ public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStu
     public FrmManagmentSystem() {
         initComponents();
         setLocationRelativeTo(null);
-        
+
     }
 
     /**
@@ -308,7 +307,7 @@ public static FrmHolisticStudent frmHolisticStudentOriginal = new FrmHolisticStu
         if (frmHolisticStudent.isVisible()) {
             frmHolisticStudent.dispose();
         }
-        
+
         frmHolisticStudent.setVisible(true);
         this.setVisible(false);
     }

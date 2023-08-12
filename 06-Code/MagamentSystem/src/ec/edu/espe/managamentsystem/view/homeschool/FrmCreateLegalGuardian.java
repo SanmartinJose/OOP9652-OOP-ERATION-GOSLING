@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HomeSchoolLegalGuardianController;
 import ec.edu.espe.managamentsystem.controller.HomeStudentController;
-import ec.edu.espe.managamentsystem.controller.StudentCourseController;
 import ec.edu.espe.managmentsystem.model.HomeSchoolLegalGuardian;
 import ec.edu.espe.managmentsystem.util.Validation;
 import org.bson.Document;
@@ -241,12 +236,12 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
             lblFull.setVisible(true);
         } else {
             lblFull.setVisible(false);
-            
+
             HomeSchoolLegalGuardian homeSchoolLegalGuardian = readData();
             HomeSchoolLegalGuardianController homeSchoolLegalGuardianController;
             homeSchoolLegalGuardianController = new HomeSchoolLegalGuardianController();
             homeSchoolLegalGuardianController.fileWrite(homeSchoolLegalGuardian);
-            
+
             enterToCourse();
         }
     }

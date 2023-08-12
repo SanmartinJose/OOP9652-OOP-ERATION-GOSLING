@@ -1,5 +1,5 @@
-
 package ec.edu.espe.managamentsystem.view;
+
 import static ec.edu.espe.managamentsystem.controller.UserCreation.registerAnUser;
 import ec.edu.espe.managmentsystem.util.MongoDBConnection;
 import javax.swing.JComboBox;
@@ -11,7 +11,9 @@ import javax.swing.JTextField;
  * @author Labs-DCCO
  */
 public class FrmCreateUser extends javax.swing.JFrame {
-MongoDBConnection db = new MongoDBConnection();
+
+    MongoDBConnection db = new MongoDBConnection();
+
     /**
      * Creates new form FrmCreatUser
      */
@@ -279,23 +281,21 @@ MongoDBConnection db = new MongoDBConnection();
     }// </editor-fold>//GEN-END:initComponents
 
     private void brnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnRegisterActionPerformed
-    JTextField identification = txtCreateCedula;    
-    JTextField name = txtCreateFullName; 
-    JTextField code = txtCreatePassword; 
-    JTextField mail = txtCreateEmail; 
-    JTextField userName = txtCreateUsername; 
-    JTextField phone = txtCreatePhoneNumber; 
-    JComboBox typeUser = cmbCharge;
-    JLabel alertId = lblAlertID;
-    JLabel alertName = lblName;
-    JLabel alertEmail = lblemail;
-    JLabel alertPassword = lblpass;
-    JLabel alertPhone = lblphone;
-    JLabel alertUser = lbluser;
-    registerAnUser(identification, name, code, mail, userName, phone, typeUser, alertId, alertName, alertEmail, alertPassword, alertPhone, alertUser);                
+        JTextField identification = txtCreateCedula;
+        JTextField name = txtCreateFullName;
+        JTextField code = txtCreatePassword;
+        JTextField mail = txtCreateEmail;
+        JTextField userName = txtCreateUsername;
+        JTextField phone = txtCreatePhoneNumber;
+        JComboBox typeUser = cmbCharge;
+        JLabel alertId = lblAlertID;
+        JLabel alertName = lblName;
+        JLabel alertEmail = lblemail;
+        JLabel alertPassword = lblpass;
+        JLabel alertPhone = lblphone;
+        JLabel alertUser = lbluser;
+        registerAnUser(identification, name, code, mail, userName, phone, typeUser, alertId, alertName, alertEmail, alertPassword, alertPhone, alertUser);
     }//GEN-LAST:event_brnRegisterActionPerformed
-
-  
 
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -315,8 +315,9 @@ MongoDBConnection db = new MongoDBConnection();
         txtCreateEmail.setText("");
         txtCreatePhoneNumber.setText("");
         txtCreateUsername.setText("");
-        
+
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

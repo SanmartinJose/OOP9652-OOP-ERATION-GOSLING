@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.payments;
 
-
 import ec.edu.espe.managamentsystem.controller.PaymentRecord;
-import ec.edu.espe.managmentsystem.model.Payment;
+
 import ec.edu.espe.managmentsystem.util.MongoDBConnectionOptional;
 import ec.edu.espe.managmentsystem.util.Validation;
 import javax.swing.JOptionPane;
@@ -15,12 +10,12 @@ import java.awt.Color;
 import java.awt.HeadlessException;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
+
     /**
      * Creates new form FrmUpdatePaymentStudent
      */
@@ -301,22 +296,23 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Ingrese valores válidos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private void emptyFields() {
-            txtIdStudent.setText("");
-            txtValuePaid.setText("");
-        }
-    
+        txtIdStudent.setText("");
+        txtValuePaid.setText("");
+    }
+
     private void txtValuePaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValuePaidActionPerformed
 
     }//GEN-LAST:event_txtValuePaidActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-       FrmPaymentRecord frmPaymentRecord = new FrmPaymentRecord();
-       frmPaymentRecord.setVisible(true);
-       this.setVisible(false);
+        FrmPaymentRecord frmPaymentRecord = new FrmPaymentRecord();
+        frmPaymentRecord.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
     private void btnDeletePaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePaidActionPerformed
-        
+
         String id = txtIdStudent.getText().trim();
         String idValid = validId(id);
         showAlert(idValid, id);
@@ -327,9 +323,9 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
             PaymentRecord paymentRecord = new PaymentRecord();
             paymentRecord.deletePaid(id);
             emptyFields();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Ingrese valores válidos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
-            
+
         }
     }
 

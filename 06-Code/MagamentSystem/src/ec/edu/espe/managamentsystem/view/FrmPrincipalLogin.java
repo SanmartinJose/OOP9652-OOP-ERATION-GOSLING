@@ -1,6 +1,4 @@
-
 package ec.edu.espe.managamentsystem.view;
-
 
 import ec.edu.espe.managamentsystem.controller.LoginController;
 import java.awt.Color;
@@ -13,12 +11,14 @@ import javax.swing.JTextField;
  * @author Labs-DCCO
  */
 public class FrmPrincipalLogin extends javax.swing.JFrame {
+
     private boolean loginExitoso = false;
+
     /**
      * Creates new form FrmPrincipalLogin
      */
     public FrmPrincipalLogin() {
-        initComponents();  
+        initComponents();
         setAlertsFalse();
         setLocationRelativeTo(null);
     }
@@ -232,24 +232,25 @@ public class FrmPrincipalLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnterLoginActionPerformed
 
     private void CloseButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CloseButtonMouseEntered
-     CloseButton.setForeground(Color.red);
+        CloseButton.setForeground(Color.red);
     }//GEN-LAST:event_CloseButtonMouseEntered
 
     private void CloseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CloseButtonMouseClicked
-     System.exit(1);
+        System.exit(1);
     }//GEN-LAST:event_CloseButtonMouseClicked
 
     private void CloseButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CloseButtonMouseExited
-     CloseButton.setForeground(Color.black);
+        CloseButton.setForeground(Color.black);
     }//GEN-LAST:event_CloseButtonMouseExited
 
     private void readData(LoginController login) {
-        JTextField name =txtUser;
-        JTextField code =txtPassword;
-        JLabel msgAlertCheck =lblAlert1;
-        JLabel msgAlertCheck2 =lblAlert2;
-        login.principalLogin(name, code,msgAlertCheck, msgAlertCheck2, this);
+        JTextField name = txtUser;
+        JTextField code = txtPassword;
+        JLabel msgAlertCheck = lblAlert1;
+        JLabel msgAlertCheck2 = lblAlert2;
+        login.principalLogin(name, code, msgAlertCheck, msgAlertCheck2, this);
     }
+
     /**
      * @param args the command line arguments
      */

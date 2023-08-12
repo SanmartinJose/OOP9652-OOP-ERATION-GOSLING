@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.payments;
 
 import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
@@ -18,7 +14,7 @@ public class FrmPaymentRecord extends javax.swing.JFrame {
     public FrmPaymentRecord() {
         initComponents();
         setLocationRelativeTo(null);
-        
+
     }
 
     /**

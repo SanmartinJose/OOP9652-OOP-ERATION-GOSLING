@@ -1,27 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.payments;
 
-
-
 import ec.edu.espe.managamentsystem.controller.PaymentRecord;
-import ec.edu.espe.managmentsystem.model.Payment;
 import ec.edu.espe.managmentsystem.util.MongoDBConnectionOptional;
 import ec.edu.espe.managmentsystem.util.Validation;
-import java.awt.Component;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
+
 /**
  *
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class FrmMonthlyPayment extends javax.swing.JFrame {
+
     /**
      * Creates new form FrmMonthlyPayment
      */
@@ -277,7 +268,7 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnAddPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPaymentActionPerformed
-       String validValueIs = txtId.getText().trim();
+        String validValueIs = txtId.getText().trim();
         Double valuePaidValid = Validation.validValue(validValueIs);
         String id = txtId.getText().trim();
 
@@ -288,10 +279,10 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
         if (isValidId(id) && valuePaidValid != null) {
             PaymentRecord paymentRecord = new PaymentRecord();
             paymentRecord.monthlyValue(valuePaidValid, id);
-            
+
             JOptionPane.showMessageDialog(rootPane, "Datos guardados", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             emptyFields();
-            
+
         } else {
             lblAlert1.setVisible(true);
             lblAlert2.setVisible(true);
@@ -311,15 +302,16 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
             return false;
         }
     }
+
     private void emptyFields() {
         txtId.setText("");
         txtNewValue.setText("");
     }
-    
+
     private void btmBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBackActionPerformed
-       FrmPaymentRecord frmPaymentRecord = new FrmPaymentRecord();
-       frmPaymentRecord.setVisible(true);
-       this.setVisible(false);
+        FrmPaymentRecord frmPaymentRecord = new FrmPaymentRecord();
+        frmPaymentRecord.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btmBackActionPerformed
 
     private void txtNewValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewValueActionPerformed

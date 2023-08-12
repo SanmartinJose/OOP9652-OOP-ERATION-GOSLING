@@ -9,6 +9,7 @@ import java.awt.print.PrinterJob;
 import javax.swing.JTable;
 
 public class Printer implements Printable {
+
     private JTable table;
 
     public Printer(JTable table) {

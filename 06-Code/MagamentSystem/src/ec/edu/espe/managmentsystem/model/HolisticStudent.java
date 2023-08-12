@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ec.edu.espe.managmentsystem.model;
 
 /**
@@ -9,54 +5,55 @@ package ec.edu.espe.managmentsystem.model;
  * @author PabloEZurita
  */
 public class HolisticStudent {
+
     int id;
     int age;
     String name;
     String address;
-    
-    HolisticLegalGuardian holisticLegalGuardian;  
-    
-    public HolisticStudent(int id, int age, String name, String address){
-        this.id =id;
+
+    HolisticLegalGuardian holisticLegalGuardian;
+
+    public HolisticStudent(int id, int age, String name, String address) {
+        this.id = id;
         this.age = age;
         this.name = name;
         this.address = address;
     }
-    
-    public int getId(){
+
+    public int getId() {
         return id;
     }
-    
-    public void setId(int id){
+
+    public void setId(int id) {
         this.id = id;
     }
-    
-    public int getAge(){
+
+    public int getAge() {
         return age;
     }
-    
-    public void setAge(int age){
+
+    public void setAge(int age) {
         this.age = age;
     }
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    
-    public void setName(String name){
+
+    public void setName(String name) {
         this.name = name;
     }
-    
-    public String getAddress(){
+
+    public String getAddress() {
         return address;
     }
-    
-    public void setAddress(String address){
+
+    public void setAddress(String address) {
         this.address = address;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "HolisticStudent{" + "id=" + id + "age=" + age + "name=" + name + "address=" + address + "}";
     }
 }

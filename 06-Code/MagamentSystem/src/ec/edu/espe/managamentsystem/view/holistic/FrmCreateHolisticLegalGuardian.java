@@ -1,18 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.holistic;
 
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
-import ec.edu.espe.managamentsystem.controller.HomeSchoolLegalGuardianController;
-import ec.edu.espe.managamentsystem.controller.HomeStudentController;
-import ec.edu.espe.managamentsystem.controller.SearchController;
-import ec.edu.espe.managamentsystem.view.homeschool.*;
 import ec.edu.espe.managmentsystem.model.HolisticLegalGuardian;
-import ec.edu.espe.managmentsystem.model.HomeSchoolLegalGuardian;
 import ec.edu.espe.managmentsystem.util.Validation;
 import org.bson.Document;
 
@@ -254,55 +245,55 @@ public class FrmCreateHolisticLegalGuardian extends javax.swing.JFrame {
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
-    
+
     private void getData() throws NumberFormatException {
-        int age ;
+        int age;
         int studentId;
         String phoneNumber;
         String name;
         String email;
         int id;
-        
-        if(txtEmail.getText().isEmpty() || txtId.getText().isEmpty() || txtLegalGuardianAge.getText().isEmpty() || txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()){
+
+        if (txtEmail.getText().isEmpty() || txtId.getText().isEmpty() || txtLegalGuardianAge.getText().isEmpty() || txtLegalGuardianName.getText().isEmpty() || txtLegalGuardianPhoneNumber.getText().isEmpty()) {
             lblFull.setVisible(true);
-        }else{
+        } else {
             lblFull.setVisible(false);
-            
+
             Validation validation = new Validation();
-            
+
             name = validation.validateName(txtLegalGuardianName);
             age = Integer.parseInt(txtLegalGuardianAge.getText());
             phoneNumber = validation.validateNumber(txtLegalGuardianPhoneNumber);
             email = validation.validateEmail(txtEmail);
             studentId = getStudentId();
-            id= Integer.parseInt(txtId.getText());
-            
+            id = Integer.parseInt(txtId.getText());
+
             HolisticLegalGuardian holisticLegalGuardian = new HolisticLegalGuardian(id, age, studentId, phoneNumber, name, email);
-            
+
             HolisticLegalGuardianController holisticLegalGuardianController = new HolisticLegalGuardianController();
             holisticLegalGuardianController.fileWrite(holisticLegalGuardian);
-            
+
             FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
             frmHolisticStudent.setVisible(true);
             this.setVisible(false);
         }
     }
-    
-    public int getStudentId(){
-       HolisticStudentController holisticStudentController;
-       holisticStudentController = new HolisticStudentController();
-       
-       MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
-       
-       int id=0;
-       
-       while(cursor.hasNext()){
+
+    public int getStudentId() {
+        HolisticStudentController holisticStudentController;
+        holisticStudentController = new HolisticStudentController();
+
+        MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
+
+        int id = 0;
+
+        while (cursor.hasNext()) {
             Document document = cursor.next();
             id = (int) document.getInteger("_id");
-       }
-       return id;
+        }
+        return id;
     }
-    
+
     /**
      * @param args the command line arguments
      */

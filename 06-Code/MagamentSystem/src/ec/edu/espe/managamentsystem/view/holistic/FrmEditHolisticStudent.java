@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.holistic;
 
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
 import ec.edu.espe.managamentsystem.controller.SearchController;
-import ec.edu.espe.managamentsystem.controller.StudentCourseController;
-import ec.edu.espe.managamentsystem.view.homeschool.*;
 import ec.edu.espe.managmentsystem.model.HolisticStudent;
 import ec.edu.espe.managmentsystem.util.Validation;
 import org.bson.Document;
@@ -19,7 +12,7 @@ import org.bson.Document;
  * @author PabloEZurita
  */
 public class FrmEditHolisticStudent extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form FrmCreatStudent
      */
@@ -245,90 +238,86 @@ public class FrmEditHolisticStudent extends javax.swing.JFrame {
         frmHolisticStudent.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
-    
-        private void getData() throws NumberFormatException {
+
+    private void getData() throws NumberFormatException {
         int id;
         int age;
         String name;
         String address;
-        
-        if(txtAdreesStudent.getText().isEmpty() || txtAgeStudent.getText().isEmpty() || txtNameStudent.getText().isEmpty()){
+
+        if (txtAdreesStudent.getText().isEmpty() || txtAgeStudent.getText().isEmpty() || txtNameStudent.getText().isEmpty()) {
             lblFull.setVisible(true);
-        }else{
+        } else {
             lblFull.setVisible(false);
-            
+
             Validation validation = new Validation();
-            
+
             name = validation.validateName(txtNameStudent);
             address = validation.validateName(txtAdreesStudent);
             age = Integer.parseInt(txtAgeStudent.getText());
             id = setId();
-            
+
             HolisticStudent holisticStudent = new HolisticStudent(id, age, name, address);
             HolisticStudentController holisticStudentController;
             holisticStudentController = new HolisticStudentController();
             FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
-            
+
             SearchController searchController = new SearchController();
-            
-            
+
             holisticStudentController.updateHolisticStudent(searchController.getStudent(), holisticStudent);
-            
+
             FrmEditHolisticLegalGuardian frmEditHolisticLegalGuardian = new FrmEditHolisticLegalGuardian();
             frmEditHolisticLegalGuardian.setVisible(true);
             this.setVisible(false);
         }
     }
-   
-    public int setId(){
-       HolisticStudentController holisticStudentController;
-       holisticStudentController = new HolisticStudentController();
-       
-       MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
-       
-       int id=0;
-       
-        while(cursor.hasNext()){
+
+    public int setId() {
+        HolisticStudentController holisticStudentController;
+        holisticStudentController = new HolisticStudentController();
+
+        MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
+
+        int id = 0;
+
+        while (cursor.hasNext()) {
             Document document = cursor.next();
             int item = (int) document.getInteger("_id");
-            id = item+1;
+            id = item + 1;
         }
-       return id;
+        return id;
     }
-    
-    public void showStudentData(){
-       HolisticStudentController holistiStudentController = new HolisticStudentController(); 
-       FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
-       
-       SearchController searchController = new SearchController();
-      
+
+    public void showStudentData() {
+        HolisticStudentController holistiStudentController = new HolisticStudentController();
+        FrmEditStudentData frmGetStudentData = new FrmEditStudentData();
+
+        SearchController searchController = new SearchController();
+
         MongoCursor<Document> cursor = holistiStudentController.getStudent(searchController.getStudent());
-           
-           
-           
-           String name = null;
-           String age = null;
-           String address = null;
-           
-           while(cursor.hasNext()){
-                Document document = cursor.next();
-                name = document.get("name").toString();
-                age = document.get("age").toString();
-                address = document.get("address").toString();
-           }
-           
-           txtNameStudent.setText(name );
-           txtAgeStudent.setText(age);
-           txtAdreesStudent.setText(address);
-           btnAddLegalGuardian.setText("Aplicar Cambios");
-           lblTItle.setText("Editar Estudiante");
+
+        String name = null;
+        String age = null;
+        String address = null;
+
+        while (cursor.hasNext()) {
+            Document document = cursor.next();
+            name = document.get("name").toString();
+            age = document.get("age").toString();
+            address = document.get("address").toString();
+        }
+
+        txtNameStudent.setText(name);
+        txtAgeStudent.setText(age);
+        txtAdreesStudent.setText(address);
+        btnAddLegalGuardian.setText("Aplicar Cambios");
+        lblTItle.setText("Editar Estudiante");
     }
+
     /**
      * @param args the command line arguments
      */
-    
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

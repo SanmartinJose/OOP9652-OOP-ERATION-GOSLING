@@ -1,4 +1,3 @@
-
 package ec.edu.espe.managmentsystem.model;
 
 /**
@@ -6,6 +5,7 @@ package ec.edu.espe.managmentsystem.model;
  * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
 public class User {
+
     private int id;
     private String fullName;
     private String cellphone;
@@ -23,8 +23,7 @@ public class User {
         this.username = username;
         this.password = password;
     }
-    
-    
+
     /**
      * @return the id
      */
@@ -122,5 +121,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 }

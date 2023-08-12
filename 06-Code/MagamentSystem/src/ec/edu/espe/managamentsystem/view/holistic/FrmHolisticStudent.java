@@ -1,30 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.holistic;
-
 
 import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
-
 
 /**
  *
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class FrmHolisticStudent extends javax.swing.JFrame {
+
     private Class<?> claseOrigen;
+
     /**
      * Creates new form FrmHolisticStudent
      */
     public FrmHolisticStudent() {
         initComponents();
-        HolisticStudentController holisticStudentController = new HolisticStudentController(); 
+        HolisticStudentController holisticStudentController = new HolisticStudentController();
         holisticStudentController.addTableData(tbeHolisticStudents);
         setLocationRelativeTo(null);
     }
-    
+
     public void setClaseOrigen(Class<?> claseOrigen) {
         this.claseOrigen = claseOrigen;
     }
@@ -241,9 +237,9 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         this.setVisible(false);
     }
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-       FrmPrintData frmPrintData;
-       frmPrintData = new FrmPrintData();
-       frmPrintData.setVisible(true);
+        FrmPrintData frmPrintData;
+        frmPrintData = new FrmPrintData();
+        frmPrintData.setVisible(true);
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnAddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentActionPerformed
@@ -268,13 +264,12 @@ public class FrmHolisticStudent extends javax.swing.JFrame {
         frmMagamentSystem.setVisible(true);
         this.setVisible(false);
     }
-    public FrmHolisticStudent getOriginalScreen(){
-        
-        
-        
+
+    public FrmHolisticStudent getOriginalScreen() {
+
         return this;
     }
-    
+
     /**
      * @param args the command line arguments
      */

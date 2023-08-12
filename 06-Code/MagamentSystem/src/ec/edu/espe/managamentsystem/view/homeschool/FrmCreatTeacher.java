@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.homeschool;
 
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.StudentCourseController;
 import ec.edu.espe.managamentsystem.controller.TeacherController;
-import ec.edu.espe.managmentsystem.model.HomeSchoolStudent;
 import ec.edu.espe.managmentsystem.model.Teacher;
 import ec.edu.espe.managmentsystem.util.Validation;
 import org.bson.Document;
@@ -243,7 +238,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-          
+
         String name;
         int age;
         String address;
@@ -251,13 +246,13 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
         String phoneNumber;
         int courseId;
         String courseName;
-        
-        if(txtAdress.getText().isEmpty() || txtAge.getText().isEmpty() || txtEmail.getText().isEmpty() || txtName.getText().isEmpty() || txtPhoneNumber.getText().isEmpty()){
+
+        if (txtAdress.getText().isEmpty() || txtAge.getText().isEmpty() || txtEmail.getText().isEmpty() || txtName.getText().isEmpty() || txtPhoneNumber.getText().isEmpty()) {
             lblFull.setVisible(true);
-        }else{
-            
+        } else {
+
             lblFull.setVisible(false);
-            
+
             Validation validation = new Validation();
 
             name = validation.validateName(txtName);
@@ -269,7 +264,7 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
             courseId = getCOurseId(courseName);
 
             Teacher teacher = new Teacher(age, courseId, name, age, address, email, phoneNumber);
-            TeacherController teacherController= new TeacherController();
+            TeacherController teacherController = new TeacherController();
 
             teacherController.fileWritter(teacher);
 
@@ -279,36 +274,37 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    public void addComoBoxItems(){
-        
-       StudentCourseController studentCourseController;
-       studentCourseController = new StudentCourseController();
-       
-       MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
-       
-       while(cursor.hasNext()){
-            Document document = cursor.next();
-            String item = document.getString("name");
-            cmbTeacherCourse.addItem(item);   
-       }
-    }
-    
-     public int getCOurseId(String name){
+    public void addComoBoxItems() {
+
         StudentCourseController studentCourseController;
         studentCourseController = new StudentCourseController();
-       
+
         MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
-       
-       int id=0;
-       
-       while(cursor.hasNext()){
+
+        while (cursor.hasNext()) {
             Document document = cursor.next();
-            if(document.get("name").equals(name)){
-              id = (int) document.get("_id");
-            }
-       }
-       return id;
+            String item = document.getString("name");
+            cmbTeacherCourse.addItem(item);
+        }
     }
+
+    public int getCOurseId(String name) {
+        StudentCourseController studentCourseController;
+        studentCourseController = new StudentCourseController();
+
+        MongoCursor<Document> cursor = studentCourseController.getStudentCourse().iterator();
+
+        int id = 0;
+
+        while (cursor.hasNext()) {
+            Document document = cursor.next();
+            if (document.get("name").equals(name)) {
+                id = (int) document.get("_id");
+            }
+        }
+        return id;
+    }
+
     /**
      * @param args the command line arguments
      */

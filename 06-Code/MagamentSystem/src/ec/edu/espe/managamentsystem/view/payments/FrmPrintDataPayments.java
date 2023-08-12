@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.payments;
 
 import ec.edu.espe.managmentsystem.util.MongoDBConnectionOptional;
@@ -35,6 +31,7 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
         MongoDBConnectionOptional.adjustColumnWidth(jTable1, 1);
         setLocationRelativeTo(null);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,10 +162,10 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btmBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBackActionPerformed
-       FrmPaymentRecord frmPaymentRecord;
-       frmPaymentRecord = new FrmPaymentRecord();
-       frmPaymentRecord.setVisible(true);
-       this.setVisible(false);
+        FrmPaymentRecord frmPaymentRecord;
+        frmPaymentRecord = new FrmPaymentRecord();
+        frmPaymentRecord.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btmBackActionPerformed
 
     private void printTable(JTable table) {
@@ -181,7 +178,7 @@ public class FrmPrintDataPayments extends javax.swing.JFrame {
             System.err.println("Error al imprimir la tabla: " + pe.getMessage());
         }
     }
-    
+
     private void btmPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmPrintActionPerformed
         printTable(jTable1);
     }//GEN-LAST:event_btmPrintActionPerformed

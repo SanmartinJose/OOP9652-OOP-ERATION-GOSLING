@@ -1,13 +1,14 @@
-
 package ec.edu.espe.managmentsystem.model;
 
 import org.json.JSONObject;
+
 /**
  *
  * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
 
 public class Debt {
+
     private double value;
     private double paid;
     private double difference;

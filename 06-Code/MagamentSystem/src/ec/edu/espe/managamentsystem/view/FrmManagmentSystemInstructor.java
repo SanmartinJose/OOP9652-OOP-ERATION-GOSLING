@@ -1,4 +1,3 @@
-
 package ec.edu.espe.managamentsystem.view;
 
 import ec.edu.espe.managamentsystem.view.holistic.FrmHolisticStudent;
@@ -9,8 +8,6 @@ import ec.edu.espe.managamentsystem.view.homeschool.FrmControlHomeSchoolMenu;
  * @author PabloEZurita
  */
 public class FrmManagmentSystemInstructor extends javax.swing.JFrame {
-
-   
 
     /**
      * Creates new form MagamentSystem
@@ -211,10 +208,10 @@ public class FrmManagmentSystemInstructor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHolisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHolisticActionPerformed
-       FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
-       frmHolisticStudent.setClaseOrigen(FrmManagmentSystemInstructor.class);
-       frmHolisticStudent.setVisible(true);
-       this.setVisible(false);
+        FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
+        frmHolisticStudent.setClaseOrigen(FrmManagmentSystemInstructor.class);
+        frmHolisticStudent.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnHolisticActionPerformed
 
     private void btnHomeSchoolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeSchoolActionPerformed

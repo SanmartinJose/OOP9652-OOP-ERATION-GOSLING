@@ -1,4 +1,3 @@
-
 package ec.edu.espe.managmentsystem.model;
 
 import java.util.Date;
@@ -9,16 +8,15 @@ import java.util.Scanner;
  * @author Oswaldo Tipan
  */
 public class HomeSchoolStudent {
+
     private int id;
     private int age;
     private int courseId;
     private String name;
     private String typeOfStudy;
-    private String address; 
-    
+    private String address;
 
-    
-    public HomeSchoolStudent(int id,int courseId, String name, String typeOfStudy, String address) {
+    public HomeSchoolStudent(int id, int courseId, String name, String typeOfStudy, String address) {
         this.id = id;
         this.courseId = courseId;
         this.name = name;
@@ -29,8 +27,8 @@ public class HomeSchoolStudent {
     public int getId() {
         return id;
     }
-    
-    public int getCourseId(){
+
+    public int getCourseId() {
         return courseId;
     }
 
@@ -72,7 +70,7 @@ public class HomeSchoolStudent {
 
     @Override
     public String toString() {
-        return "HomeSchoolStudent{" + "id=" + id + ", age=" + age + ", name=" + name + ", typeOfStudy=" + typeOfStudy + ", address=" + address +'}';
+        return "HomeSchoolStudent{" + "id=" + id + ", age=" + age + ", name=" + name + ", typeOfStudy=" + typeOfStudy + ", address=" + address + '}';
     }
-    
+
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.holistic;
 
 import com.mongodb.client.MongoCursor;
@@ -20,10 +16,12 @@ import org.bson.Document;
  * @author Oswaldo Tipan
  */
 public class Impresión extends javax.swing.JPanel implements Printable {
+
     DefaultTableModel dtm = new DefaultTableModel();
+
     public Impresión() {
         initComponents();
-        String[] title = new String[]{"N", "Name","Age","Legal Guardian"};
+        String[] title = new String[]{"N", "Name", "Age", "Legal Guardian"};
         dtm.setColumnIdentifiers(title);
         tbeHolisticStudents.setModel(dtm);
         addTableData();
@@ -176,8 +174,7 @@ public class Impresión extends javax.swing.JPanel implements Printable {
         frmHolisticStudent.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -192,38 +189,37 @@ public class Impresión extends javax.swing.JPanel implements Printable {
 
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-        if(pageIndex==0){
+        if (pageIndex == 0) {
             Graphics2D graphcis2d = (Graphics2D) graphics;
             graphcis2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
             printAll(graphcis2d);
             return PAGE_EXISTS;
-        }else{
+        } else {
             return NO_SUCH_PAGE;
         }
     }
-    
-     private void addTableData(){
-        
-       HolisticStudentController holisticStudentController;
-       holisticStudentController = new HolisticStudentController();
-       
-       HolisticLegalGuardianController holisticLegalGuardianController;
-       holisticLegalGuardianController = new HolisticLegalGuardianController();
-       
-       MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
-       
-       
-       while(cursor.hasNext()){
+
+    private void addTableData() {
+
+        HolisticStudentController holisticStudentController;
+        holisticStudentController = new HolisticStudentController();
+
+        HolisticLegalGuardianController holisticLegalGuardianController;
+        holisticLegalGuardianController = new HolisticLegalGuardianController();
+
+        MongoCursor<Document> cursor = holisticStudentController.getStudentList().iterator();
+
+        while (cursor.hasNext()) {
             Document document = cursor.next();
-            
+
             int id = (int) document.get("_id");
-            
+
             dtm.addRow(new Object[]{
-               document.get("_id"),
+                document.get("_id"),
                 document.get("name"),
-                document.get("age"), 
+                document.get("age"),
                 holisticLegalGuardianController.getHolisticLegalGuardianList(id)
             });
-       }
+        }
     }
 }

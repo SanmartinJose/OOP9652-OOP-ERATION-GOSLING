@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ec.edu.espe.managmentsystem.model;
 
 /**
@@ -9,16 +5,17 @@ package ec.edu.espe.managmentsystem.model;
  * @author PabloEZurita
  */
 public class HomeSchoolLegalGuardian {
-    int age ;
+
+    int age;
     int id;
     int studentId;
     String phoneNumber;
     String name;
     String email;
 
-    public HomeSchoolLegalGuardian(int age,int id, int studentId, String phoneNumber, String name, String email) {
+    public HomeSchoolLegalGuardian(int age, int id, int studentId, String phoneNumber, String name, String email) {
         this.age = age;
-        this.id=id;
+        this.id = id;
         this.studentId = studentId;
         this.phoneNumber = phoneNumber;
         this.name = name;
@@ -28,7 +25,7 @@ public class HomeSchoolLegalGuardian {
     public int getId() {
         return id;
     }
-    
+
     public int getAge() {
         return age;
     }
@@ -48,6 +45,5 @@ public class HomeSchoolLegalGuardian {
     public String getEmail() {
         return email;
     }
-    
-    
+
 }

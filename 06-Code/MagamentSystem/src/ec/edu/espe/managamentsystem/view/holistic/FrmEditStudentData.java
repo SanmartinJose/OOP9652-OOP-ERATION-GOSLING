@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.holistic;
 
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
-import ec.edu.espe.managmentsystem.util.Validation;
 import java.awt.Color;
 
 /**
@@ -13,6 +8,7 @@ import java.awt.Color;
  * @author Oswaldo Tipan
  */
 public class FrmEditStudentData extends javax.swing.JFrame {
+
     /**
      * Creates new form FrmGetStudentData
      */
@@ -129,17 +125,17 @@ public class FrmEditStudentData extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        
-       getData();
+
+        getData();
     }//GEN-LAST:event_btnSearchActionPerformed
-    
-    private void getData(){
-         HolisticStudentController holisticStudentController = new HolisticStudentController();
-        if(holisticStudentController.getData(txtStudentName, lblFound)){
+
+    private void getData() {
+        HolisticStudentController holisticStudentController = new HolisticStudentController();
+        if (holisticStudentController.getData(txtStudentName, lblFound)) {
             this.setVisible(false);
         }
     }
-   
+
 
     private void txtStudentNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtStudentNameMouseClicked
         txtStudentName.setText("");
@@ -147,7 +143,7 @@ public class FrmEditStudentData extends javax.swing.JFrame {
     }//GEN-LAST:event_txtStudentNameMouseClicked
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-       this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
@@ -185,7 +181,7 @@ public class FrmEditStudentData extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSearch;

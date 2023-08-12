@@ -1,21 +1,18 @@
-
 package ec.edu.espe.managmentsystem.model;
-
-import java.util.Scanner;
 
 /**
  *
  * @author Oswaldo Tipan
  */
 public class Admin {
-    
-        private int id;
-        private String name;
-        private String phoneNumber;
-        private String email;
-        private String charge;
-        private String userName;
-        private String password;
+
+    private int id;
+    private String name;
+    private String phoneNumber;
+    private String email;
+    private String charge;
+    private String userName;
+    private String password;
 
     public Admin(int id, String name, String phoneNumber, String email, String charge, String userName, String password) {
         this.id = id;
@@ -54,6 +51,5 @@ public class Admin {
     public String getPassword() {
         return password;
     }
-        
-        
+
 }

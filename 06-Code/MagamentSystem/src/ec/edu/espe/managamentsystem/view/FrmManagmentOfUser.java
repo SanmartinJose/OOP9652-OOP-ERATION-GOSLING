@@ -1,6 +1,4 @@
-
 package ec.edu.espe.managamentsystem.view;
-
 
 import static ec.edu.espe.managamentsystem.controller.UserManagment.SearchInDataBase;
 import static ec.edu.espe.managamentsystem.controller.UserManagment.editDataBase;
@@ -14,12 +12,11 @@ import ec.edu.espe.managamentsystem.controller.UserManagment;
  */
 public class FrmManagmentOfUser extends javax.swing.JFrame {
 
-    
     /**
      * Creates new form FrmRecoverUser
      */
-    public FrmManagmentOfUser() {           
-        
+    public FrmManagmentOfUser() {
+
         initComponents();
         UserManagment um = new UserManagment();
         tbeManagmentOfUser.setModel(um.addTableData());
@@ -253,12 +250,12 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-     String userName = txtUserName.getText();
+        String userName = txtUserName.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
         String Id = txtID.getText();
         JTable newTable = tbeManagmentOfUser;
-        SearchInDataBase(userName, email, phone, Id,newTable);
+        SearchInDataBase(userName, email, phone, Id, newTable);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btmBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBackActionPerformed
@@ -268,23 +265,22 @@ public class FrmManagmentOfUser extends javax.swing.JFrame {
     }//GEN-LAST:event_btmBackActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-       FrmCreateUser frmCreateUser = new FrmCreateUser();
-       frmCreateUser.setVisible(true);
-       this.setVisible(false);
+        FrmCreateUser frmCreateUser = new FrmCreateUser();
+        frmCreateUser.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         JTable table = tbeManagmentOfUser;
         int selectedRowIndex = tbeManagmentOfUser.getSelectedRow();
-            JTextField txtId =txtID;
-            JTextField txtUsername =txtUserName;
-            JTextField txtMail =txtEmail;
-            JTextField txtCellphone =txtPhone;
-           editDataBase(selectedRowIndex, table, txtId, txtUsername, txtMail, txtCellphone);    
+        JTextField txtId = txtID;
+        JTextField txtUsername = txtUserName;
+        JTextField txtMail = txtEmail;
+        JTextField txtCellphone = txtPhone;
+        editDataBase(selectedRowIndex, table, txtId, txtUsername, txtMail, txtCellphone);
     }//GEN-LAST:event_btnEditActionPerformed
 
-    
-UserManagment um = new UserManagment();
+    UserManagment um = new UserManagment();
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         UserManagment um = new UserManagment();
         JTable table = tbeManagmentOfUser;
@@ -297,16 +293,13 @@ UserManagment um = new UserManagment();
         String id = txtID.getText();
         String email = txtEmail.getText();
         String cellphone = txtPhone.getText();
-        JTextField txtId =txtID;
-        JTextField txtUsername =txtUserName;
-        JTextField txtMail =txtEmail;
-        JTextField txtCellphone =txtPhone;
+        JTextField txtId = txtID;
+        JTextField txtUsername = txtUserName;
+        JTextField txtMail = txtEmail;
+        JTextField txtCellphone = txtPhone;
         um.newDataSave(id, email, cellphone, txtId, txtUsername, txtMail, txtCellphone);
     }//GEN-LAST:event_btnSaveActionPerformed
 
-  
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -342,9 +335,8 @@ UserManagment um = new UserManagment();
             }
         });
     }
-      
-    
-      
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btmBack;
     private javax.swing.JButton btnCreate;

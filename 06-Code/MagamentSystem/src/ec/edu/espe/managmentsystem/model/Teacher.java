@@ -1,19 +1,11 @@
-
 package ec.edu.espe.managmentsystem.model;
-
-
-import ec.edu.espe.managamentsystem.controller.CreateMenu;
-import ec.edu.espe.managamentsystem.controller.HomeStudentController;
-import ec.edu.espe.managamentsystem.controller.StudentCourseController;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
  * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
 public class Teacher {
-   
+
     private int id;
     private int courseId;
     private String name;
@@ -22,9 +14,9 @@ public class Teacher {
     private String email;
     private String phoneNumber;
 
-    public Teacher(int id,int courseId, String name, int age, String address, String email, String phoneNumber) {
+    public Teacher(int id, int courseId, String name, int age, String address, String email, String phoneNumber) {
         this.id = id;
-        this.courseId= courseId;
+        this.courseId = courseId;
         this.name = name;
         this.age = age;
         this.address = address;
@@ -35,8 +27,8 @@ public class Teacher {
     public int getId() {
         return id;
     }
-    
-      public int getCourseId() {
+
+    public int getCourseId() {
         return courseId;
     }
 

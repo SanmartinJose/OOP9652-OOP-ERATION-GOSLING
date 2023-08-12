@@ -1,26 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.managamentsystem.view.holistic;
 
-import com.mongodb.client.MongoCursor;
 import ec.edu.espe.managamentsystem.controller.HolisticLegalGuardianController;
 import ec.edu.espe.managamentsystem.controller.HolisticStudentController;
 import ec.edu.espe.managamentsystem.controller.SearchController;
-import ec.edu.espe.managamentsystem.view.FrmManagmentSystem;
-import ec.edu.espe.managmentsystem.model.HolisticStudent;
 import ec.edu.espe.managmentsystem.util.Validation;
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import org.bson.Document;
 
 /**
  *
  * @author Oswaldo Tipan
  */
 public class FrmDeleteStudentData extends javax.swing.JFrame {
-    
+
     String name;
     FrmHolisticStudent frmHolisticStudentOrigin;
 
@@ -31,9 +23,6 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
     public void setFrmHolisticStudentOrigin(FrmHolisticStudent frmHolisticStudentOrigin) {
         this.frmHolisticStudentOrigin = frmHolisticStudentOrigin;
     }
-
-    
-    
 
     /**
      * Creates new form FrmGetStudentData
@@ -159,56 +148,56 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
-    
+
     private void getData() {
         Validation validation = new Validation();
-        
-        if(txtStudentName.getText().isEmpty()){
+
+        if (txtStudentName.getText().isEmpty()) {
             lblFound.setText("*Campo Obligatorio");
             lblFound.setVisible(true);
-        }else{
+        } else {
             lblFound.setText("*estudiante no encontrado");
             lblFound.setVisible(false);
-            
+
             name = validation.validateName(txtStudentName);
-            
+
             HolisticStudentController holisticStudentController = new HolisticStudentController();
             boolean isFound = holisticStudentController.validateStudentData(name);
-            
+
             SearchController searchController = new SearchController();
             searchController.fileWritter(name);
-            
-            if(isFound){
+
+            if (isFound) {
                 lblFound.setVisible(false);
                 delete();
                 this.setVisible(false);
                 frmHolisticStudentOrigin.setVisible(false);
-                
-            }else{
+
+            } else {
                 lblFound.setVisible(true);
             }
         }
     }
-    
-    public void delete(){
-        
+
+    public void delete() {
+
         HolisticStudentController holisticStudentController = new HolisticStudentController();
         HolisticLegalGuardianController holisticLegalGuardianController = new HolisticLegalGuardianController();
-       
+
         int opc = JOptionPane.showConfirmDialog(rootPane, "Seguro que desea eliminar a " + name);
-       
-        if(opc == 0){
+
+        if (opc == 0) {
             holisticStudentController.deleteHolisticStudent(holisticStudentController.getStudentId());
-            holisticLegalGuardianController.deleteHolisticLegalGuardian(holisticStudentController.getStudentId()+1);
-            JOptionPane.showMessageDialog(rootPane, "Usuario "+ name+ " borrado con exito");
-           
+            holisticLegalGuardianController.deleteHolisticLegalGuardian(holisticStudentController.getStudentId() + 1);
+            JOptionPane.showMessageDialog(rootPane, "Usuario " + name + " borrado con exito");
+
             FrmHolisticStudent frmHolisticStudent = new FrmHolisticStudent();
-            
+
             frmHolisticStudent.setVisible(true);
-            
-            
+
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -246,7 +235,7 @@ public class FrmDeleteStudentData extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSearch;

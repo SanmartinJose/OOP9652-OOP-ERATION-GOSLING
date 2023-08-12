@@ -1,4 +1,3 @@
-
 package ec.edu.espe.managmentsystem.model;
 
 import ec.edu.espe.managamentsystem.controller.PaymentRecord;
@@ -8,6 +7,7 @@ import ec.edu.espe.managamentsystem.controller.PaymentRecord;
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class Payment {
+
     public String id;
     private String nombre;
     private double pagoMensual;
@@ -17,14 +17,12 @@ public class Payment {
     public Payment(double pagoMensual) {
         this.pagoMensual = pagoMensual;
     }
-    
+
     public Payment(String id, double valorPagado) {
         this.id = id;
         this.valorPagado = valorPagado;
     }
-    
-    
-    
+
     /**
      * @return the id
      */
@@ -94,5 +92,5 @@ public class Payment {
     public void setValorRestante(double valorRestante) {
         this.valorRestante = valorRestante;
     }
-    
+
 }

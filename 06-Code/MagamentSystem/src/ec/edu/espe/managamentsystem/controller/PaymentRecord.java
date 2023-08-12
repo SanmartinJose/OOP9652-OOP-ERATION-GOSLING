@@ -1,23 +1,15 @@
-
 package ec.edu.espe.managamentsystem.controller;
-
 
 import com.mongodb.client.MongoCollection;
 import ec.edu.espe.managmentsystem.util.MongoDBConnectionOptional;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Scanner;
 import org.bson.Document;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  *
  * @author Michael Simbana, POO-ERATION-GOSLING, DCCO-ESPE
  */
 public class PaymentRecord {
+
     private String students;
     private String debts;
     private MongoDBConnectionOptional mdb;
@@ -26,7 +18,7 @@ public class PaymentRecord {
         mdb = new MongoDBConnectionOptional();
         mdb.connection("Payments");
     }
-    
+
     public void monthlyValue(Double payment, String studentId) {
         MongoDBConnectionOptional db = new MongoDBConnectionOptional();
         db.connection("HomeSchoolLegalGuardian");
@@ -63,8 +55,8 @@ public class PaymentRecord {
                     .append("name", "") // Asegúrate de proporcionar el nombre correcto aquí
                     .append("monthlyPayment", payment);
             paymentCollection.insertOne(paymentDocument);
+        }
     }
-}
 
     public void updatePayment(String studentId, Double valuePaid) {
         Document existingPayment = mdb.getCollection().find(new Document("_id", studentId)).first();
@@ -115,6 +107,7 @@ public class PaymentRecord {
             PaymentCollection.updateOne(filter, update);
         }
     }
+
     public String getStudents() {
         return students;
     }

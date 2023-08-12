@@ -1,4 +1,3 @@
-
 package ec.edu.espe.managmentsystem.util;
 
 import com.mongodb.client.FindIterable;
@@ -19,7 +18,8 @@ import java.awt.Component;
  * @author Sanmertin Jose, OOP-ERATION-GOSLING,DCC-ESPE
  */
 public class MongoDBConnectionOptional {
-   private MongoClient mongoClient;
+
+    private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection<Document> collection;
 
@@ -30,10 +30,10 @@ public class MongoDBConnectionOptional {
         database = mongoClient.getDatabase(db);
         collection = database.getCollection(collections);
     }
-     
+
     public static Object[][] generateTableData(String collectionName, String[] fields) {
         List<Object[]> dataList = new ArrayList<>();
-        try (MongoClient mongoClient = MongoClients.create("mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority")) {
+        try ( MongoClient mongoClient = MongoClients.create("mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority")) {
             MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection(collectionName);
             FindIterable<Document> result = collection.find();
@@ -53,7 +53,7 @@ public class MongoDBConnectionOptional {
         }
         return data;
     }
-     
+
     public static void adjustColumnWidth(JTable table, int columnIndex) {
         TableColumn column = table.getColumnModel().getColumn(columnIndex);
         int maxWidth = 0;
@@ -75,5 +75,3 @@ public class MongoDBConnectionOptional {
         return collection;
     }
 }
-    
-
