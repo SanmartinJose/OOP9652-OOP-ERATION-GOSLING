@@ -20,6 +20,8 @@ public class FrmCreatTeacher extends javax.swing.JFrame {
         initComponents();
         addComoBoxItems();
         lblFull.setVisible(false);
+        setLocationRelativeTo(null);
+        pack();
     }
 
     /**

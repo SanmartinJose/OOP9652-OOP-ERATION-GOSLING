@@ -10,8 +10,6 @@ import org.bson.Document;
  */
 public class PaymentRecord {
 
-    private String students;
-    private String debts;
     private MongoDBConnectionOptional mdb;
 
     public PaymentRecord() {
@@ -106,21 +104,5 @@ public class PaymentRecord {
 
             PaymentCollection.updateOne(filter, update);
         }
-    }
-
-    public String getStudents() {
-        return students;
-    }
-
-    public void setStudents(String students) {
-        this.students = students;
-    }
-
-    public String getDebts() {
-        return debts;
-    }
-
-    public void setDebts(String debts) {
-        this.debts = debts;
     }
 }

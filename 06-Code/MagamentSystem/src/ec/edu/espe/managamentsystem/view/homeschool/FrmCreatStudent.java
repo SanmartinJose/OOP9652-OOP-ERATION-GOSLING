@@ -20,6 +20,8 @@ public class FrmCreatStudent extends javax.swing.JFrame {
         initComponents();
         addComboBox();
         lblFull.setVisible(false);
+        setLocationRelativeTo(null);
+        pack();
     }
 
     /**

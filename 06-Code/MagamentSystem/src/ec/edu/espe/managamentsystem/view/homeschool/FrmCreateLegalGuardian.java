@@ -19,6 +19,8 @@ public class FrmCreateLegalGuardian extends javax.swing.JFrame {
     public FrmCreateLegalGuardian() {
         initComponents();
         lblFull.setVisible(false);
+        setLocationRelativeTo(null);
+        pack();
     }
 
     /**

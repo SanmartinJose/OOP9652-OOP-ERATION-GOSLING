@@ -15,6 +15,7 @@ public class FrmCourseInside extends javax.swing.JFrame {
      */
     public FrmCourseInside() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

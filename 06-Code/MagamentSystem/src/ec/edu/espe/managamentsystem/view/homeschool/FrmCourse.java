@@ -21,6 +21,8 @@ public class FrmCourse extends javax.swing.JFrame {
         btnAddStudent.setVisible(false);
         btnAddSchedule.setVisible(false);
         btnAddTeacher.setVisible(false);
+        setLocationRelativeTo(null);
+        pack();
 
     }
 
