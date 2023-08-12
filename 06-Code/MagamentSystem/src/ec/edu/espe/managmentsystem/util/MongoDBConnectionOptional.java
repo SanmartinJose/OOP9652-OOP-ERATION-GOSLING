@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.Component;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,21 +20,37 @@ import java.awt.Component;
  */
 public class MongoDBConnectionOptional {
 
+    private static MongoDBConnectionOptional instance;
     private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection<Document> collection;
 
-    public void connection(String collections) {
+    private MongoDBConnectionOptional() {
         String uri = "mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority";
-        String db = "SchoolManagmentSystem";
+        String dbName = "SchoolManagmentSystem";
         mongoClient = MongoClients.create(uri);
-        database = mongoClient.getDatabase(db);
-        collection = database.getCollection(collections);
+        database = mongoClient.getDatabase(dbName);
+    }
+
+    public static synchronized MongoDBConnectionOptional getInstance() {
+        if (instance == null) {
+            instance = new MongoDBConnectionOptional();
+        }
+        return instance;
+    }
+
+    public void setCollection(String collectionName) {
+        collection = database.getCollection(collectionName);
+    }
+
+    public MongoCollection<Document> getCollection(String collectionName) {
+        return database.getCollection(collectionName);
+
     }
 
     public static Object[][] generateTableData(String collectionName, String[] fields) {
         List<Object[]> dataList = new ArrayList<>();
-        try ( MongoClient mongoClient = MongoClients.create("mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority")) {
+        try (MongoClient mongoClient = MongoClients.create("mongodb+srv://jmsanmartin:12345@managmentsystem.kklzuz1.mongodb.net/?retryWrites=true&w=majority")) {
             MongoDatabase database = mongoClient.getDatabase("SchoolManagmentSystem");
             MongoCollection<Document> collection = database.getCollection(collectionName);
             FindIterable<Document> result = collection.find();
@@ -67,11 +84,13 @@ public class MongoDBConnectionOptional {
         column.setPreferredWidth(maxWidth);
     }
 
-    public MongoDatabase getDatabase() {
-        return database;
-    }
+    public static void updateTable(JTable table, String collectionName, String[] fieldsToDisplay) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
 
-    public MongoCollection<Document> getCollection() {
-        return collection;
+        Object[][] tableData = MongoDBConnectionOptional.generateTableData(collectionName, fieldsToDisplay);
+        for (Object[] rowData : tableData) {
+            model.addRow(rowData);
+        }
     }
 }

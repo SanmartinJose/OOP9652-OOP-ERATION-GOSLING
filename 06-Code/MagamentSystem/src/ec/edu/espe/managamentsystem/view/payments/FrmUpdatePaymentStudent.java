@@ -77,7 +77,7 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Tutor Legal del Estudiante:");
+        jLabel1.setText("Id Tutor Legal del Estudiante:");
 
         jLabel2.setText("Ingrese el Valor Cancelado:");
 
@@ -142,7 +142,7 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
                         .addComponent(txtValuePaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlert2)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 255));
@@ -275,13 +275,18 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdatePaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePaidActionPerformed
-
         String validValueIs = txtValuePaid.getText().trim();
         Double valuePaidValid = Validation.validValue(validValueIs);
         String id = txtIdStudent.getText().trim();
         String idValid = validId(id);
 
         setAlertsTrue(idValid, valuePaidValid);
+
+        if (idValid != null && valuePaidValid != null) {
+            PaymentRecord paymentRecord = new PaymentRecord();
+            paymentRecord.updatePayment(idValid, valuePaidValid);
+            MongoDBConnectionOptional.updateTable(jTable1, "Payments", new String[]{"_id", "name", "monthlyPayment", "valuePaid", "remainingValue"});
+        }
     }//GEN-LAST:event_btnUpdatePaidActionPerformed
 
     private void setAlertsTrue(String idValid, Double valuePaidValid) throws HeadlessException {
