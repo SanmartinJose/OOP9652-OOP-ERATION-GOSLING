@@ -1,6 +1,6 @@
 package ec.edu.espe.managmentsystem.model;
 
-import org.json.JSONObject;
+
 
 /**
  *
@@ -45,17 +45,6 @@ public class Debt {
         this.difference = value - paid;
     }
 
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("value", value);
-        json.put("paid", paid);
-        json.put("difference", difference);
-        return json;
-    }
-
-    public static Debt fromJson(JSONObject json) {
-        double value = json.optDouble("value", 0.0);
-        double paid = json.optDouble("paid", 0.0);
-        return new Debt(value, paid);
-    }
+    
+    
 }
