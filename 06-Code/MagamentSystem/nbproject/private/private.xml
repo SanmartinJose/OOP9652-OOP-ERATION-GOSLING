@@ -2,6 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/GradesMenu.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/view/payments/FrmMonthlyPayment.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/Payment.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/util/MongoDBConnectionOptional.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/CreateMenu.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/model/HomeSchoolStudent.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/view/payments/FrmPrintDataPayments.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/util/Validation.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/view/payments/FrmUpdatePaymentStudent.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/PaymentRecord.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managmentsystem/util/MongoDBConnection.java</file>
+            <file>file:/C:/Users/micha/OneDrive/Escritorio/Espe/Tercer%20Parcial%20POO/Actualizaciones%20Finales%20Proyecto/OOP9652-OOP-ERATION-GOSLING/06-Code/MagamentSystem/src/ec/edu/espe/managamentsystem/controller/AdminController.java</file>
+        </group>
     </open-files>
 </project-private>

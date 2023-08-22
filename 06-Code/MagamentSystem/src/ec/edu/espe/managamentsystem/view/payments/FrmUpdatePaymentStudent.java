@@ -283,16 +283,18 @@ public class FrmUpdatePaymentStudent extends javax.swing.JFrame {
         setAlertsTrue(idValid, valuePaidValid);
 
         if (idValid != null && valuePaidValid != null) {
+            int _id = Integer.parseInt(idValid);
             PaymentRecord paymentRecord = new PaymentRecord();
-            paymentRecord.updatePayment(idValid, valuePaidValid);
+            paymentRecord.updatePayment(_id, valuePaidValid);
             MongoDBConnectionOptional.updateTable(jTable1, "Payments", new String[]{"_id", "name", "monthlyPayment", "valuePaid", "remainingValue"});
         }
     }//GEN-LAST:event_btnUpdatePaidActionPerformed
 
     private void setAlertsTrue(String idValid, Double valuePaidValid) throws HeadlessException {
         if (idValid != null && valuePaidValid != null) {
+            int _id = Integer.parseInt(idValid);
             PaymentRecord paymentRecord = new PaymentRecord();
-            paymentRecord.updatePayment(idValid, valuePaidValid);
+            paymentRecord.updatePayment(_id, valuePaidValid);
             JOptionPane.showMessageDialog(rootPane, "Datos enviados correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             emptyFields();
         } else {

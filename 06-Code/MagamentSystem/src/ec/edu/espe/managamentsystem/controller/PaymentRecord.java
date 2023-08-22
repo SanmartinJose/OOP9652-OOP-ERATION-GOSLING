@@ -16,42 +16,19 @@ public class PaymentRecord {
         mdb = MongoDBConnectionOptional.getInstance();
     }
 
-    public void monthlyValue(Double payment, String studentId) {
-        // Para HomeSchoolLegalGuardian
-        mdb.setCollection("HomeSchoolLegalGuardian");
+    public void monthlyValue(Double payment, int studentId) {
+        mdb.setCollection("Payments");
         MongoCollection<Document> paymentCollection = mdb.getCollection("Payments");
         Document existingPayment = paymentCollection.find(new Document("_id", studentId)).first();
 
         if (existingPayment != null) {
-            resetRemainingValue(studentId);
             paymentCollection.updateOne(new Document("_id", studentId),
                     new Document("$set", new Document("monthlyPayment", payment)));
-        } else {
-            Document paymentDocument = new Document("_id", studentId)
-                    .append("name", "")
-                    .append("monthlyPayment", payment);
-            paymentCollection.insertOne(paymentDocument);
         }
-
-        // Para HolisticLegalGuardian
-        mdb.setCollection("HolisticLegalGuardian");
-        paymentCollection = mdb.getCollection("Payments");
-
-        existingPayment = paymentCollection.find(new Document("_id", studentId)).first();
-
-        if (existingPayment != null) {
-            resetRemainingValue(studentId);
-            paymentCollection.updateOne(new Document("_id", studentId),
-                    new Document("$set", new Document("monthlyPayment", payment)));
-        } else {
-            Document paymentDocument = new Document("_id", studentId)
-                    .append("name", "")
-                    .append("monthlyPayment", payment);
-            paymentCollection.insertOne(paymentDocument);
-        }
+        resetRemainingValue(studentId);
     }
-
-    public void updatePayment(String studentId, Double valuePaid) {
+    
+    public void updatePayment(int studentId, Double valuePaid) {
         MongoCollection<Document> paymentCollection = mdb.getCollection("Payments");
         Document existingPayment = paymentCollection.find(new Document("_id", studentId)).first();
 
@@ -59,10 +36,8 @@ public class PaymentRecord {
             Document update = new Document("$set", new Document("valuePaid", valuePaid));
             paymentCollection.updateOne(new Document("_id", studentId), update);
 
-            // Recalculate remaining value
             resetRemainingValue(studentId);
         } else {
-            // If there is no payment record for the student, create a new one
             Document student = paymentCollection.find(new Document("_id", studentId)).first();
             if (student != null) {
                 String name = student.getString("name");
@@ -95,7 +70,7 @@ public class PaymentRecord {
         }
     }
 
-    private void resetRemainingValue(String studentId) {
+    private void resetRemainingValue(int studentId) {
         MongoCollection<Document> paymentCollection = mdb.getCollection("Payments");
         Document student = paymentCollection.find(new Document("_id", studentId)).first();
 
@@ -103,11 +78,22 @@ public class PaymentRecord {
             Number monthlyPaymentNumber = (Number) student.get("monthlyPayment");
             Double monthlyPayment = monthlyPaymentNumber.doubleValue();
             Double valuePaid = student.getDouble("valuePaid");
+
+            if (valuePaid == null) {
+                valuePaid = 0.0;
+            }
             Double remainingValue = monthlyPayment - valuePaid;
+            System.out.println("Remaining Value Before Update: " + remainingValue);
 
             Document update = new Document("$set", new Document("remainingValue", remainingValue));
 
             paymentCollection.updateOne(new Document("_id", studentId), update);
+
+            Document updatedStudent = paymentCollection.find(new Document("_id", studentId)).first();
+            if (updatedStudent != null) {
+                Double updatedRemainingValue = updatedStudent.getDouble("remainingValue");
+                System.out.println("Remaining Value After Update: " + updatedRemainingValue);
+            }
         }
     }
 }

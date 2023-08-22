@@ -4,6 +4,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,38 @@ public class MongoDBConnectionOptional {
     public MongoCollection<Document> getCollection(String collectionName) {
         return database.getCollection(collectionName);
 
+    }
+
+    public void addStudentToPaymentsIfValid() {
+        MongoCollection<Document> paymentsCollection = database.getCollection("Payments");
+        MongoCollection<Document> holisticLegalGuardianCollection = database.getCollection("HolisticLegalGuardian");
+        MongoCollection<Document> homeSchoolLegalGuardianCollection = database.getCollection("HomeSchoolLegalGuardian");
+
+        try (MongoCursor<Document> cursor = holisticLegalGuardianCollection.find().iterator()) {
+            while (cursor.hasNext()) {
+                Document holisticDocument = cursor.next();
+                int studentId = holisticDocument.getInteger("_id");
+
+                Document query = new Document("_id", studentId);
+                boolean existsInPayments = paymentsCollection.countDocuments(query) > 0;
+
+                if (!existsInPayments) {
+                    Document homeSchoolDocument = homeSchoolLegalGuardianCollection.find(query).first();
+
+                    String name = (holisticDocument != null) ? holisticDocument.getString("name") : homeSchoolDocument.getString("name");
+
+                    System.out.println("Adding student to Payments: " + name);
+
+                    Document newPayment = new Document("_id", studentId)
+                            .append("name", name)
+                            .append("monthlyPayment", 0.0)
+                            .append("valuePaid", 0.0)
+                            .append("remainingValue", 0.0);
+                    paymentsCollection.insertOne(newPayment);
+                    System.out.println("Student added to Payments successfully.");
+                }
+            }
+        }
     }
 
     public static Object[][] generateTableData(String collectionName, String[] fields) {

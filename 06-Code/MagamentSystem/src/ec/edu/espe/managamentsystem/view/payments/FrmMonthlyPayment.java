@@ -19,6 +19,12 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
     public FrmMonthlyPayment() {
         initComponents();
         setAlertsFalse();
+        addValidStudentsToPayments();
+        setTable();
+        setLocationRelativeTo(null);
+    }
+
+    public void setTable() {
         String collectionName = "Payments";
         String[] fieldsToDisplay = {"_id", "name", "monthlyPayment"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -32,12 +38,15 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
             model.addRow(rowData);
         }
         MongoDBConnectionOptional.adjustColumnWidth(jTable1, 1);
-        setLocationRelativeTo(null);
     }
 
     private void setAlertsFalse() {
         lblAlert1.setVisible(false);
         lblAlert2.setVisible(false);
+    }
+     private void addValidStudentsToPayments() {
+        MongoDBConnectionOptional connection = MongoDBConnectionOptional.getInstance();
+        connection.addStudentToPaymentsIfValid();
     }
 
     /**
@@ -288,8 +297,9 @@ public class FrmMonthlyPayment extends javax.swing.JFrame {
 
     private void setAlertsTrue(String id, Double valuePaidValid) throws HeadlessException {
         if (isValidId(id) && valuePaidValid != null) {
+            int _id = Integer.parseInt(id);
             PaymentRecord paymentRecord = new PaymentRecord();
-            paymentRecord.monthlyValue(valuePaidValid, id);
+            paymentRecord.monthlyValue(valuePaidValid, _id);
 
             JOptionPane.showMessageDialog(rootPane, "Datos guardados", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             emptyFields();
